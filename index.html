@@ -539,7 +539,7 @@ when writing new condition modules.
 //  Add new modules here. Do not put UI logic in this block.
 // ════════════════════════════════════════════════════════════════════════════
 // ── Version ──────────────────────────────────────────────────────────────────
-var VERSION = '2.4.72';  // Major.Minor.Patch — bump on every deploy
+var VERSION = '2.4.73';  // Major.Minor.Patch — bump on every deploy
 
 function calcAgeMonths(dob) {
   var d = new Date(dob), n = new Date();
@@ -648,7 +648,8 @@ function formatQuestionText(step, text) {
         'Immunocompromised',
         'Diabetes Type 1 or Type 2',
         'Urinary catheter in situ',
-        'Renal disease (CKD, impaired renal function, or dialysis)'
+        'Renal disease (CKD, impaired renal function, or dialysis)',
+        'New onset urinary incontinence is only symptom'
       ]
     },
     cauda_equina: {
@@ -976,20 +977,20 @@ uti: {
     {id:'skin_changes_or_retention_or_severe_or_breathing',section:'Emergency checks',type:'single',progress:25,q:'Are any of the following present: skin changes (pain, redness, swelling, rash, discharge, mottling, or blistering), unable to pass urine all day, severe symptoms getting worse quickly, or difficulty breathing?',opts:['No','Yes']},
     {id:'blood_clots_not_menstruation',section:'Emergency checks',type:'single',progress:30,q:'Are there blood clots in the urine not explained by menstruation?',opts:['No','Yes']},
 
-    {id:'immuno_diabetes_catheter_renal',section:'Urgent checks',type:'single',progress:38,q:'Is the individual immunocompromised, or do they have diabetes Type 1 or Type 2, a urinary catheter in situ, Chronic Kidney Disease (CKD), renal impairment, impaired renal function, or are they on dialysis?',opts:['No','Yes']},
+    {id:'immuno_diabetes_catheter_renal',section:'Urgent checks',type:'single',progress:38,q:'Is the individual immunocompromised, or do they have diabetes Type 1 or Type 2, a urinary catheter in situ, Chronic Kidney Disease (CKD), renal impairment, impaired renal function, or are they on dialysis? Is new onset urinary incontinence the only symptom?',opts:['No','Yes']},
     {id:'pregnant_or_suspected',section:'Urgent checks',type:'single',progress:46,femaleOnly:true,q:'Is the individual pregnant or suspected pregnant?',opts:['No','Yes']},
-    {id:'new_incontinence_only',section:'Urgent checks',type:'single',progress:54,q:'Is new onset urinary incontinence the only symptom?',opts:['No','Yes']},
+
     {id:'cauda_equina',section:'Urgent checks',isDifferentialDiagnosis:true,type:'single',progress:62,q:'Is cauda equina syndrome suspected?',sub:'',opts:['No','Yes']},
     {id:'acute_pyelonephritis',section:'Urgent checks',isDifferentialDiagnosis:true,type:'single',progress:70,q:'Is acute pyelonephritis suspected?',sub:'',opts:['No','Yes']},
 
     {id:'care_or_hospitalisation',section:'Non-urgent checks',type:'single',progress:78,q:'Is the individual a nursing or residential care resident, hospitalised in Ireland for more than 7 days in the last 6 months, or hospitalised abroad in the last 3 months?',opts:['No','Yes']},
-    {id:'recurrent_uti',section:'Non-urgent checks',type:'single',progress:82,q:'Is there recurrent UTI, meaning 1 or more UTI in the last 6 months OR 2 or more UTI in the last 12 months?',opts:['No','Yes']},
+    {id:'recurrent_uti',section:'Non-urgent checks',type:'single',progress:82,q:'Has the patient had 2 or more UTIs in the past 12 months, or at least 1 in the past 6 months?',opts:['No','Yes']},
     {id:'urethritis',section:'Non-urgent checks',isDifferentialDiagnosis:true,type:'single',progress:86,q:'Is urethritis suspected, with discomfort on urination and pruritus or urethral discharge?',opts:['No','Yes']},
     {id:'gsm',section:'Non-urgent checks',isDifferentialDiagnosis:true,type:'single',progress:90,q:'Is genitourinary syndrome of menopause (vulvovaginal atrophy) suspected?',sub:'',opts:['No','Yes']},
     {id:'sti_risk',section:'Non-urgent checks',isDifferentialDiagnosis:true,type:'single',progress:93,q:'Is the individual concerned they might be at risk of a sexually transmitted infection from unprotected sexual intercourse?',opts:['No','Yes']},
     {id:'medication_or_response_exclusion',section:'Non-urgent checks',type:'single',progress:96,q:'Are any of the following present: known resistance to previous UTI treatments, already on prophylactic antibiotics, contraindication to Nitrofurantoin or Trimethoprim, known hypersensitivity or adverse reaction to Nitrofurantoin or Trimethoprim, unable to swallow or absorb oral medications, or failure to respond to treatment for this episode of UTI or deterioration in symptoms?',opts:['No','Yes']},
     {id:'structural_abnormality',section:'Non-urgent checks',type:'single',progress:98,q:'Is there a known urinary tract structural abnormality?',opts:['No','Yes']},
-    {id:'symptoms_checklist',section:'Symptoms checklist',type:'checkbox',progress:100,q:'Which of the following symptoms are present?',title:'SYMPTOMS CHECKLIST',opts:['Dysuria','Frequency','Urgency','Systemic symptoms or symptoms suggestive of upper UTI (out of protocol scope if present)','New onset or significant change in vaginal discharge (out of protocol scope if present)','Visible haematuria (out of protocol scope if present)']},
+    {id:'symptoms_checklist',section:'Symptoms checklist',type:'checkbox',progress:100,q:'Which of the following symptoms are present?',title:'SYMPTOMS CHECKLIST',opts:['Dysuria','Frequency','Urgency','Systemic symptoms or symptoms suggestive of upper UTI (out of protocol scope if present)','New onset or significant change in vaginal discharge (out of protocol scope if present)','Presence of blood in the urine (out of protocol scope if present)']},
     {id:'medication_contraindications_wait_see',section:'Check any medication contraindications',type:'checkbox',progress:100,title:'Check any medication contraindications',q:'Check any medication contraindications',opts:['Is kidney function moderately or severely reduced?','Is patient currently breastfeeding an infant < 1 month old?'],skip:function(ans){
       return ans.uti_flow !== 'treat';
     }},
@@ -1016,7 +1017,7 @@ uti: {
     });
     var hasSystemicOrUpper = symptomSelections.indexOf('Systemic symptoms or symptoms suggestive of upper UTI (out of protocol scope if present)') !== -1;
     var hasVaginalChangeChecklist = symptomSelections.indexOf('New onset or significant change in vaginal discharge (out of protocol scope if present)') !== -1;
-    var hasVisibleHaematuriaChecklist = symptomSelections.indexOf('Visible haematuria (out of protocol scope if present)') !== -1;
+    var hasVisibleHaematuriaChecklist = symptomSelections.indexOf('Presence of blood in the urine (out of protocol scope if present)') !== -1;
     var contraindications = ans.medication_contraindications_wait_see || [];
     var nitroContra = contraindications.indexOf('Is kidney function moderately or severely reduced?') !== -1 || contraindications.indexOf('Is patient currently breastfeeding an infant < 1 month old?') !== -1;
     var selectedMedication = ans.uti_selected_medication || '';
@@ -1048,14 +1049,13 @@ uti: {
     if(ans.skin_changes_or_retention_or_severe_or_breathing==='Yes') return{type:'emergency',reason:'Skin changes OR unable to pass urine all day OR severe symptoms getting worse quickly OR difficulty breathing. Call 999 or refer to Emergency Department immediately.'};
     if(ans.blood_clots_not_menstruation==='Yes') return{type:'emergency',reason:'Blood clots in urine not explained by menstruation. Call 999 or refer to Emergency Department immediately.'};
 
-    if(ans.immuno_diabetes_catheter_renal==='Yes') return{type:'urgent',reason:'Immunocompromised OR Diabetes Type 1/2 OR Urinary catheter in situ OR Chronic Kidney Disease (CKD) / renal impairment / on dialysis OR Impaired renal function. Refer to GP or out-of-hours service urgently.'};
+    if(ans.immuno_diabetes_catheter_renal==='Yes') return{type:'urgent',reason:'Immunocompromised OR Diabetes Type 1/2 OR Urinary catheter in situ OR Chronic Kidney Disease (CKD) / renal impairment / on dialysis OR Impaired renal function OR New onset urinary incontinence (only symptom). Refer to GP or out-of-hours service urgently.'};
     if(ans.pregnant_or_suspected==='Yes') return{type:'urgent',reason:'Pregnant or suspected pregnant. Refer to GP or out-of-hours service urgently.'};
-    if(ans.new_incontinence_only==='Yes') return{type:'urgent',reason:'New onset urinary incontinence is ONLY symptom. Refer to GP or out-of-hours service urgently.'};
     if(ans.cauda_equina==='Yes') return{type:'urgent',reason:'Differential diagnosis: Cauda Equina Syndrome (CES). Refer to GP or out-of-hours service urgently.'};
     if(ans.acute_pyelonephritis==='Yes') return{type:'urgent',reason:'Differential diagnosis: Acute Pyelonephritis suspected. Refer to GP or out-of-hours service urgently.'};
 
     if(ans.care_or_hospitalisation==='Yes') return{type:'refer',reason:'Nursing/residential care resident OR recent prolonged hospitalisation in Ireland OR hospitalisation abroad. Refer to GP at next available appointment.'};
-    if(ans.recurrent_uti==='Yes') return{type:'refer',reason:'Recurrent UTI: 1 or more UTI in last 6 months OR 2 or more UTI in last 12 months. Refer to GP at next available appointment.'};
+    if(ans.recurrent_uti==='Yes') return{type:'refer',reason:'Recurrent UTI: 2 or more UTIs in the past 12 months, or at least 1 in the past 6 months. Refer to GP at next available appointment.'};
     if(ans.urethritis==='Yes') return{type:'refer',reason:'Differential diagnosis: Urethritis suspected. Refer to GP at next available appointment.'};
     if(ans.gsm==='Yes') return{type:'refer',reason:'Differential diagnosis: Genitourinary syndrome of menopause suspected. Refer to GP at next available appointment.'};
     if(ans.sti_risk==='Yes') return{type:'refer',reason:'Potential STI risk after unprotected intercourse. Refer to GP, SH24, or local STI service.'};
