@@ -220,7 +220,7 @@ margin-bottom:12px;
 <div id="app">
 <div class="header">
 <div class="header-left">
-<div onclick="doLogout();showScreen('landing');" style="display:flex;align-items:center;gap:12px;cursor:pointer;min-width:0;">
+<div id="header-logo" style="display:flex;align-items:center;gap:12px;cursor:pointer;min-width:0;">
 <div class="logo"><svg viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"></path></svg></div>
 <span class="brand">Quick<span>CCS</span></span>
 <span id="version-badge" style="font-size:11px;color:#999;font-weight:400;"></span>
@@ -1910,8 +1910,9 @@ var pharmacist   = {};   // Persists across consultations within a session
 
 // ── Dev shortcut flag ────────────────────────────────────────────────────────
 // ⚠️  DEV ONLY — set to false before deploying to production.
-// To fully remove: set false here, delete devShortcut() below, and remove the
-// DEV SHORTCUT LISTENER block near the resize/load event listeners.
+// To fully remove: set false here, delete devShortcut() below, remove the
+// DEV SHORTCUT LISTENER block near the resize/load event listeners, and restore
+// the onclick attribute on #header-logo.
 var DEV_SHORTCUT = true;
 
 // ── Initialisation ────────────────────────────────────────────────────────────
@@ -1923,12 +1924,11 @@ var DEV_SHORTCUT = true;
   if (result && result.setAttribute) result.setAttribute('data-version', VERSION);
   var devWrap = document.getElementById('dev-shortcut-wrap');
   if (devWrap) devWrap.style.display = 'none';
-  // Wire landing feedback button href (click handling done by delegated listener below)
+  // Wire landing feedback button href
   var landingFb = document.getElementById('landing-feedback-btn');
   if (landingFb && FEEDBACK_FORM_ID) {
     landingFb.href = 'https://docs.google.com/forms/d/e/' + FEEDBACK_FORM_ID + '/viewform';
   }
-  // ── END DEV SHORTCUT LISTENER ─────────────────────────────────────────────
   // Landing is the initial screen — apply no-ptbar class for reduced body padding
   document.body.classList.add('no-ptbar');
 })();
@@ -2038,25 +2038,25 @@ window.addEventListener('resize', syncBars);
 window.addEventListener('load', syncBars);
 
 // ── DEV SHORTCUT LISTENER — remove this block when DEV_SHORTCUT is retired ──
-// Delegated listener catches ALL .btnfeedback clicks anywhere in the app,
-// including dynamically rendered ones (e.g. result screen).
-// Triple-click fires devShortcut(); single/double opens the form normally.
+// Delegated listener on the QuickCCS header logo (#header-logo).
+// Triple-click fires devShortcut(); single/double navigates home normally.
+// Also restore onclick="doLogout();showScreen('landing')" on #header-logo when removing.
 (function() {
-  var _fbClicks = 0, _fbTimer = null;
+  var _logoClicks = 0, _logoTimer = null;
   document.addEventListener('click', function(e) {
-    var btn = e.target.closest('.btnfeedback');
-    if (!btn) return;
+    var logo = e.target.closest('#header-logo');
+    if (!logo) return;
     e.preventDefault();
-    _fbClicks++;
-    if (_fbTimer) clearTimeout(_fbTimer);
-    if (_fbClicks >= 3 && DEV_SHORTCUT) {
-      _fbClicks = 0;
+    _logoClicks++;
+    if (_logoTimer) clearTimeout(_logoTimer);
+    if (_logoClicks >= 3 && DEV_SHORTCUT) {
+      _logoClicks = 0;
       devShortcut();
       return;
     }
-    _fbTimer = setTimeout(function() {
-      if (_fbClicks > 0) window.open(btn.href, '_blank', 'noopener');
-      _fbClicks = 0;
+    _logoTimer = setTimeout(function() {
+      if (_logoClicks > 0) { doLogout(); showScreen('landing'); }
+      _logoClicks = 0;
     }, 500);
   });
 })();
