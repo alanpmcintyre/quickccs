@@ -115,8 +115,8 @@ margin-bottom:12px;
 .divider{border:none;border-top:1px solid rgba(0,0,0,0.1);margin:16px 0;}
 .btnout{background:transparent;color:#185FA5;border:1px solid #185FA5;border-radius:8px;padding:9px 18px;font-size:14px;cursor:pointer;font-family:inherit;}
 .btnsave{background:#185FA5;color:white;border:none;border-radius:8px;padding:9px 18px;font-size:14px;cursor:pointer;font-family:inherit;}
-.btnfeedback{background:transparent;color:#27500A;border:1px solid #97C459;border-radius:8px;padding:9px 18px;font-size:14px;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
-.btnfeedback:hover{background:#EAF3DE;}
+.btnfeedback{background:#97C459;color:#27500A;border:none;border-radius:8px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btnfeedback:hover{background:#83b044;}
 a{color:#185FA5;text-decoration:underline;}a:hover{text-decoration-thickness:2px;}
 .qlead{font-weight:600;font-size:inherit;line-height:1.4;margin-bottom:6px;}
 .qbullets{
@@ -264,11 +264,8 @@ margin-bottom:12px;
 </ul>
 </div>
 <button class="btnp" onclick="showScreen('login')">Continue to sign in →</button>
-<div style="display:flex;justify-content:center;margin-top:12px;">
-<a class="btnfeedback" href="#" id="landing-feedback-btn" rel="noopener" target="_blank">Give feedback</a>
-</div>
-<div style="text-align:center;margin-top:10px;">
-<a href="mailto:contact@quickccs.ie" style="font-size:13px;color:#185FA5;text-decoration:none;">contact@quickccs.ie</a>
+<div style="text-align:center;margin-top:20px;">
+<a href="mailto:contact@quickccs.ie" style="font-size:12px;color:#666;font-weight:500;text-decoration:none;">contact@quickccs.ie</a>
 </div>
 </div>
 </div>
@@ -1927,11 +1924,6 @@ var DEV_SHORTCUT = true;
   if (result && result.setAttribute) result.setAttribute('data-version', VERSION);
   var devWrap = document.getElementById('dev-shortcut-wrap');
   if (devWrap) devWrap.style.display = 'none';
-  // Wire landing feedback button href
-  var landingFb = document.getElementById('landing-feedback-btn');
-  if (landingFb && FEEDBACK_FORM_ID) {
-    landingFb.href = 'https://docs.google.com/forms/d/e/' + FEEDBACK_FORM_ID + '/viewform';
-  }
   // Landing is the initial screen — apply no-ptbar class for reduced body padding
   document.body.classList.add('no-ptbar');
 })();
