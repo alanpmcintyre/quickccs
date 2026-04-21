@@ -710,6 +710,67 @@ function formatQuestionText(step, text) {
         'Failure to respond to treatment for this episode of UTI',
         'Deterioration in symptoms'
       ]
+    },
+    vvt_dd_trichomoniasis: {
+      lead: 'Are symptoms suggestive of trichomoniasis?',
+      bullets: [
+        'Frothy yellow-green vaginal discharge (malodorous)',
+        'Dyspareunia (painful intercourse)',
+        'Dysuria (pain, burning, or stinging on urinating)',
+        'Vulval itch or discomfort'
+      ]
+    },
+    vvt_dd_bv: {
+      lead: 'Are symptoms suggestive of bacterial vaginosis (BV)?',
+      bullets: [
+        'White, non-irritating, malodorous vaginal discharge',
+        'Discharge often described as fishy-smelling',
+        'Odour more noticeable after sexual intercourse'
+      ]
+    },
+    vvt_dd_gsm: {
+      lead: 'Are symptoms suggestive of genitourinary syndrome of menopause (vulvovaginal atrophy)?',
+      bullets: [
+        'Vaginal dryness or burning',
+        'Dyspareunia (painful intercourse)',
+        'Urinary frequency',
+        'Recurrent bladder infections',
+        'Sexual dysfunction'
+      ]
+    },
+    vvt_dd_ls: {
+      lead: 'Are symptoms suggestive of lichen sclerosus?',
+      bullets: [
+        'Itch, often severe (primary symptom)',
+        'Soreness or burning pain',
+        'Dysuria (pain, burning, or stinging on urinating)',
+        'Superficial dyspareunia (painful intercourse)'
+      ]
+    },
+    vvt_dd_dermatitis: {
+      lead: 'Are symptoms suggestive of vulvar dermatitis?',
+      bullets: [
+        'Chronic irritation or itch',
+        'Sleep disturbance due to itch',
+        'Dysmenorrhoea (painful periods)'
+      ]
+    },
+    vvt_dd_uti: {
+      lead: 'Are symptoms suggestive of a urinary tract infection?',
+      bullets: [
+        'Change in urgency of urination',
+        'Change in frequency of urination',
+        'Abdominal pain'
+      ]
+    },
+    vvt_contraindications: {
+      lead: 'Are there any contraindications, known hypersensitivity, or adverse reactions to any of the following treatment options?',
+      bullets: [
+        'Clotrimazole intravaginal pessary',
+        'Econazole intravaginal pessary',
+        'Clotrimazole cream',
+        'Clotrimazole and hydrocortisone cream'
+      ]
     }
   };
 
@@ -946,9 +1007,212 @@ var CONDITIONS = {
 
   vv_thrush: {
     name: 'Vulvovaginal Thrush', icon: '🔬',
-    overview: { description: 'Coming soon.', symptoms: [], exclusions: [] },
-    steps: [],
-    getOutcome: function() { return { type: 'refer', reason: 'Vulvovaginal Thrush pathway coming soon.' }; }
+    overview: {
+      description: 'This pathway helps you assess whether a patient presenting with vulvovaginal symptoms is suitable for treatment under the Common Conditions Service, or whether they should be referred for medical review. Treatment is topical antifungal therapy for uncomplicated vulvovaginal candidiasis.',
+      symptoms: [
+        'Female aged 16 to 60 years',
+        'Vulval and/or vaginal itch',
+        'Vaginal soreness or redness',
+        'White, thick vaginal discharge',
+        'Other symptoms may include non-offensive odour, dyspareunia, dysuria, vulval erythema, fissuring and/or satellite lesions'
+      ],
+      exclusions: [
+        'Male patient, age under 16 or over 60, or pregnant',
+        'Systemically very unwell or signs of severe/life-threatening infection or systemic sepsis',
+        'Immunocompromised or known diabetes mellitus (Type 1 or 2)',
+        'Recurrent VVT (two or more episodes in past 12 months) or previous treatment failure',
+        'Suspected STI, trichomoniasis, bacterial vaginosis, genitourinary syndrome of menopause, lichen sclerosus, vulvar dermatitis, or UTI',
+        'Any other atypical vaginal discharge or abnormal vaginal bleeding',
+        'Known contraindication or hypersensitivity to treatment options'
+      ]
+    },
+    steps: [
+      {id:'patient', section:'Patient details', type:'patient', progress:5},
+
+      {id:'vvt_emergency', section:'Emergency checks', type:'single', progress:10,
+       q:'Is the individual systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis?',
+       opts:['No','Yes']},
+
+      {id:'vvt_serious_condition', section:'Urgent checks', type:'single', progress:14,
+       q:'Are there signs or symptoms of a more serious condition or illness?',
+       opts:['No','Yes']},
+
+      {id:'vvt_pregnant', section:'Eligibility checks', type:'single', progress:20, femaleOnly:true,
+       q:'Is the individual pregnant?',
+       opts:['No','Yes']},
+
+      {id:'vvt_immuno_diabetes', section:'Eligibility checks', type:'single', progress:26,
+       q:'Is the individual immunocompromised due to underlying medical conditions or treatments, or do they have known diabetes mellitus (Type 1 or 2)?',
+       opts:['No','Yes']},
+
+      {id:'vvt_recurrent', section:'Eligibility checks', type:'single', progress:32,
+       q:'Has the individual had two or more episodes of self-reported vulvovaginal symptoms within the past 12 months?',
+       sub:'Two or more episodes within the past 12 months meets the threshold for recurrent VVT and referral is indicated. Pharmacist discretion is permitted to treat further episodes where there is a known precipitant and/or prior clinical assessment by a medical practitioner.',
+       opts:['No','Yes — pharmacist discretion applies, continue consultation','Yes — refer to GP at next available appointment']},
+
+      {id:'vvt_treatment_failure', section:'Eligibility checks', type:'single', progress:38,
+       q:'Has the individual previously failed to respond to treatment for vulvovaginal thrush?',
+       opts:['No','Yes']},
+
+      {id:'vvt_sti_concern', section:'Eligibility checks', type:'single', progress:42,
+       q:'Is the individual concerned they might be at risk of a sexually transmitted infection from unprotected sexual intercourse?',
+       opts:['No','Yes']},
+
+      {id:'vvt_dd_trichomoniasis', section:'Differential diagnosis', type:'single', progress:47, isDifferentialDiagnosis:true,
+       q:'Are symptoms suggestive of trichomoniasis?',
+       opts:['No','Yes']},
+
+      {id:'vvt_dd_bv', section:'Differential diagnosis', type:'single', progress:52, isDifferentialDiagnosis:true,
+       q:'Are symptoms suggestive of bacterial vaginosis (BV)?',
+       opts:['No','Yes']},
+
+      {id:'vvt_dd_gsm', section:'Differential diagnosis', type:'single', progress:57, isDifferentialDiagnosis:true,
+       q:'Are symptoms suggestive of genitourinary syndrome of menopause (vulvovaginal atrophy)?',
+       opts:['No','Yes']},
+
+      {id:'vvt_dd_ls', section:'Differential diagnosis', type:'single', progress:62, isDifferentialDiagnosis:true,
+       q:'Are symptoms suggestive of lichen sclerosus?',
+       opts:['No','Yes']},
+
+      {id:'vvt_dd_dermatitis', section:'Differential diagnosis', type:'single', progress:67, isDifferentialDiagnosis:true,
+       q:'Are symptoms suggestive of vulvar dermatitis?',
+       opts:['No','Yes']},
+
+      {id:'vvt_dd_uti', section:'Differential diagnosis', type:'single', progress:71, isDifferentialDiagnosis:true,
+       q:'Are symptoms suggestive of a urinary tract infection?',
+       opts:['No','Yes']},
+
+      {id:'vvt_atypical_discharge', section:'Eligibility checks', type:'single', progress:75,
+       q:'Is there any other atypical vaginal discharge (e.g. foul-smelling) or abnormal vaginal bleeding?',
+       opts:['No','Yes']},
+
+      {id:'vvt_contraindications', section:'Eligibility checks', type:'single', progress:79,
+       q:'Are there any contraindications, known hypersensitivity, or adverse reactions to the medication treatment options included in the treatment section?',
+       opts:['No','Yes']},
+
+      {id:'vvt_symptoms', section:'Symptoms checklist', type:'checkbox', progress:85,
+       title:'SYMPTOMS CHECKLIST',
+       q:'Which of the following symptoms consistent with vulvovaginal thrush are present?',
+       opts:[
+         'Vulval and/or vaginal itch',
+         'Vaginal soreness',
+         'Vaginal redness',
+         'White, thick vaginal discharge',
+         'Non-offensive odour',
+         'Dyspareunia (painful intercourse)',
+         'Dysuria (pain, burning, or stinging on urinating)',
+         'Vulval erythema, fissuring and/or satellite lesions'
+       ]},
+
+      {id:'vvt_vulval_severity', section:'Treatment', type:'single', progress:91,
+       q:'Are significant vulval symptoms present (e.g. marked erythema, pain, or itch)?',
+       sub:'If yes, combined clotrimazole 1% and hydrocortisone 1% cream is recommended as an adjunct to the intravaginal pessary to address vulvitis.',
+       opts:['No','Yes'],
+       skip:function(ans){
+         var syms = ans.vvt_symptoms || [];
+         return !Array.isArray(syms) || syms.length === 0;
+       }},
+
+      {id:'vvt_selected_treatment', section:'Select treatment', type:'single', progress:96,
+       title:'SELECT TREATMENT',
+       q:'Which intravaginal treatment would you like to prescribe?',
+       sub:'Select the primary intravaginal treatment. Topical cream adjunct will be noted on the prescription.',
+       opts:[
+         'Clotrimazole pessary 500mg — single dose (insert high into vagina at night)',
+         'Clotrimazole pessary 200mg — one pessary nightly for 3 consecutive days',
+         'Clotrimazole pessary 100mg — one pessary nightly for 6 consecutive days',
+         'Econazole pessary 150mg — single dose (insert high into vagina at night)'
+       ],
+       skip:function(ans){
+         var syms = ans.vvt_symptoms || [];
+         return !Array.isArray(syms) || syms.length === 0;
+       }}
+    ],
+    getOutcome: function(ans) {
+      var ageYears = calcAgeYears(ans.pt_dob);
+      var sex = ans.pt_sex || '';
+
+      if(sex === 'Male') return {type:'refer', reason:'Patient is male. This protocol applies to individuals whose sex assigned at birth is female only. Refer to GP at next available appointment.'};
+      if(ageYears < 16) return {type:'refer', reason:'Patient is under 16 years of age and is outside the eligible age range. Refer to GP at next available appointment.'};
+      if(ageYears > 60) return {type:'refer', reason:'Patient is over 60 years of age and is outside the eligible age range. Refer to GP at next available appointment.'};
+
+      if(ans.vvt_emergency === 'Yes') return {type:'emergency', reason:'Individual is systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis. Call 999 or refer to Emergency Department immediately.'};
+
+      if(ans.vvt_serious_condition === 'Yes') return {type:'urgent', reason:'Signs or symptoms of a more serious condition or illness are present. Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
+
+      if(ans.vvt_pregnant === 'Yes') return {type:'refer', reason:'Individual is pregnant. Refer to GP at next available appointment.'};
+      if(ans.vvt_immuno_diabetes === 'Yes') return {type:'refer', reason:'Individual is immunocompromised due to underlying medical conditions or treatments, or has known diabetes mellitus (Type 1 or 2). Refer to GP at next available appointment.'};
+      if(ans.vvt_recurrent === 'Yes — refer to GP at next available appointment') return {type:'refer', reason:'Recurrent vulvovaginal thrush: two or more episodes of self-reported vulvovaginal symptoms within the past 12 months. Refer to GP at next available appointment.'};
+      if(ans.vvt_treatment_failure === 'Yes') return {type:'refer', reason:'Individual has previously failed to respond to treatment for vulvovaginal thrush. Refer to GP at next available appointment.'};
+      if(ans.vvt_sti_concern === 'Yes') return {type:'refer', reason:'Individual is concerned about potential STI risk from unprotected sexual intercourse. Refer to GP or HSE Sexual Health services for STI testing. Signpost to sexualwellbeing.ie.'};
+      if(ans.vvt_dd_trichomoniasis === 'Yes') return {type:'refer', reason:'Differential diagnosis: Trichomoniasis suspected. Refer to GP or HSE Sexual Health services at next available appointment.'};
+      if(ans.vvt_dd_bv === 'Yes') return {type:'refer', reason:'Differential diagnosis: Bacterial vaginosis suspected. Refer to GP at next available appointment.'};
+      if(ans.vvt_dd_gsm === 'Yes') return {type:'refer', reason:'Differential diagnosis: Genitourinary syndrome of menopause (vulvovaginal atrophy) suspected. Refer to GP at next available appointment.'};
+      if(ans.vvt_dd_ls === 'Yes') return {type:'refer', reason:'Differential diagnosis: Lichen sclerosus suspected. Refer to GP at next available appointment.'};
+      if(ans.vvt_dd_dermatitis === 'Yes') return {type:'refer', reason:'Differential diagnosis: Vulvar dermatitis suspected. Refer to GP at next available appointment.'};
+      if(ans.vvt_dd_uti === 'Yes') return {type:'refer', reason:'Differential diagnosis: Urinary tract infection suspected. Refer to the Uncomplicated Lower UTI protocol if UTI symptoms are present, or to GP at next available appointment.'};
+      if(ans.vvt_atypical_discharge === 'Yes') return {type:'refer', reason:'Atypical vaginal discharge or abnormal vaginal bleeding present. Refer to GP at next available appointment.'};
+      if(ans.vvt_contraindications === 'Yes') return {type:'refer', reason:'Contraindication, known hypersensitivity, or adverse reaction to treatment options. Refer to GP at next available appointment.'};
+
+      var symptoms = ans.vvt_symptoms || [];
+      if(!Array.isArray(symptoms) || symptoms.length === 0) {
+        if(ans.vvt_no_symptoms) return {type:'refer', reason:'Symptoms are not consistent with vulvovaginal thrush. Refer to GP at next available appointment.'};
+        return {type:'treat', reason:null};
+      }
+
+      ans.symptoms = symptoms.slice();
+
+      var selectedTreatment = ans.vvt_selected_treatment || '';
+      var vulvalSevere = ans.vvt_vulval_severity === 'Yes';
+
+      if(!selectedTreatment) return {type:'treat', reason:null};
+
+      var rx = [selectedTreatment];
+      var instructions = [];
+
+      if(/500mg/i.test(selectedTreatment)) {
+        instructions.push('Insert ONE pessary high into the vagina using the applicator provided, at night.');
+      } else if(/200mg/i.test(selectedTreatment)) {
+        instructions.push('Insert ONE pessary high into the vagina using the applicator provided, preferably at night before going to bed, for three consecutive days.');
+      } else if(/100mg/i.test(selectedTreatment)) {
+        instructions.push('Insert ONE pessary high into the vagina using the applicator provided, preferably at night before going to bed, for six consecutive days. Alternatively, two pessaries can be inserted nightly for three consecutive days.');
+      } else if(/econazole/i.test(selectedTreatment)) {
+        instructions.push('Insert ONE pessary high into the vagina using the applicator provided, at night.');
+      }
+
+      if(vulvalSevere) {
+        rx.push('Clotrimazole 1% w/w and Hydrocortisone 1% w/w cream — apply to the affected vulval area every 12 hours until symptoms have resolved, or up to 7 days');
+        instructions.push('Apply Clotrimazole/Hydrocortisone cream to the external vulval area every 12 hours until symptoms resolve, or for up to 7 days.');
+      } else {
+        rx.push('Clotrimazole 1% w/w or 2% w/w cream — apply to the affected area every 8–12 hours until symptoms have resolved, or up to 7 days');
+        instructions.push('Apply Clotrimazole cream to the external vulval area every 8–12 hours until symptoms resolve, or for up to 7 days. (Adjunct to the intravaginal pessary for external vulval symptoms.)');
+      }
+
+      instructions.push('Note: latex condoms and diaphragms can be damaged by pessaries and cream — extra contraceptive precautions are advised during treatment.');
+
+      return {
+        type:'treat',
+        reason:'Symptoms are consistent with vulvovaginal thrush and no exclusion criteria are present. Treatment can be supplied under the Common Conditions Service.',
+        rx: rx,
+        instructions: instructions,
+        extra: [
+          'Wear loose clothes and cotton underwear; avoid tight clothing.',
+          'Avoid excessive washing of the genital area.',
+          'Avoid perfumed soaps, tea tree oil, baby wipes, vaginal deodorant products, or douches.',
+          'Wash the genitals using an emollient and pat dry with a clean towel after washing.',
+          'Use non-perfumed panty liners or sanitary pads.',
+          'Change out of damp swimwear or sweaty sports gear as soon as possible.',
+          'Thrush can be passed on to sexual partners. Condom use may reduce this risk. A sexual partner does not need to be treated unless they have symptoms.',
+          'Topical and intravaginal azoles may reduce the efficacy of condoms and additional contraceptive precautions may be needed.',
+          'Menstruation may limit the efficacy of topical or intravaginal preparations. Ideally complete treatment prior to onset of menstruation, or restart once menstrual flow lightens.'
+        ],
+        safety: [
+          'Advise the individual to seek further advice from a GP or other relevant medical practitioner if symptoms do not improve within seven days of commencing treatment.',
+          'Seek further medical advice if symptoms return within two months of treatment.',
+          'Information on thrush and appropriate vulval skincare is available at sexualwellbeing.ie and the HSE A-Z.'
+        ]
+      };
+    }
   },
 
 
@@ -1339,15 +1603,15 @@ var CONDITION_CARDS = {
 var AVAILABLE_CONDITIONS = [
   'oral_thrush',
   'conjunctivitis',
-  'uti'
+  'uti',
+  'vv_thrush'
 ];
 
 var COMING_SOON_CONDITIONS = [
   'allergic_rhinitis',
   'cold_sores',
   'impetigo',
-  'shingles',
-  'vv_thrush'
+  'shingles'
 ];
 
 
@@ -1377,6 +1641,10 @@ function setPtbarPill(name){
 //    copy the URL and extract each entry.XXXXXXXXX field ID.
 // 3. Paste your Form ID below and update the four entry IDs in buildFeedbackUrl().
 var FEEDBACK_FORM_ID = '1FAIpQLSejVUoBYDiESL1LIt4ZLNDZKgGK_wTHFn6kJ822zkd_0P9vWg';
+
+// Telemetry — anonymous usage logging to Google Sheet via Apps Script web app.
+// Replace with your deployed Apps Script URL. Set to '' to disable.
+var TELEMETRY_URL = 'https://script.google.com/macros/s/AKfycbxdcEPSH_FpqONTh3JkWqkPs_HwNsx1cLO9fSUuknY0r0Mx1rAo_Gkdr8bNNZVRyTKG/exec';
 
 // ──────────────────────────────────────────────────────────────────────────
 
@@ -1548,7 +1816,7 @@ function renderCheckbox(step, cbState) {
     var isChk = !!cbState[step.id][o];
     var cls  = isChk ? ' chk' : '';
     var tick = isChk ? '✓' : '';
-    html += '<div class="cbopt' + cls + '" onclick="toggleCb(this,\'' + step.id + '\',\'' + o + '\')">'
+    html += '<div class="cbopt' + cls + '" onclick="toggleCb(this,\'' + step.id + '\',\'' + o.replace(/'/g, "&#39;") + '\')">'
           + '<div class="cbbox">' + tick + '</div>' + expandClinicalTerms(linkSepsis(o)) + '</div>';
   });
   html += '</div>';
@@ -1829,9 +2097,19 @@ function renderActionButtons(feedbackUrl) {
 }
 
 // ── showResult — pure dispatcher ──────────────────────────────────────────────
+function logUsage(condKey, outcomeType) {
+  if (!TELEMETRY_URL) return;
+  var url = TELEMETRY_URL
+    + '?cond='    + encodeURIComponent(condKey)
+    + '&outcome=' + encodeURIComponent(outcomeType)
+    + '&version=' + encodeURIComponent(VERSION);
+  fetch(url).catch(function() {});
+}
+
 function showResult() {
   var outcome = CONDITIONS[activeCond].getOutcome(answers);
   var rec     = buildRecord(answers, outcome);
+  logUsage(activeCond, outcome.type);
 
   var alertTitles = {
     emergency:    'Emergency referral required',
@@ -1982,7 +2260,7 @@ function devShortcut() {
   };
   document.getElementById('username-display').textContent = 'Alan McIntyre';
   document.getElementById('userwrap').style.display = 'flex';
-  activeCond = 'uti';
+  activeCond = 'vv_thrush';
   answers = {
     ph_fname:'Alan', ph_sname:'McIntyre', ph_psi:'11876',
     ph_pharmacy:'Guerins', ph_address:'Mitchel Street, Nenagh', ph_phone:'086 8794424',
@@ -2222,6 +2500,26 @@ function nextStep() {
   }
 
   if(activeCond === 'uti' && s.id === 'uti_selected_medication') {
+    showResult();
+    return;
+  }
+
+  if(activeCond === 'vv_thrush' && s.id === 'vvt_symptoms') {
+    var vvtSyms = answers.vvt_symptoms || [];
+    if(!Array.isArray(vvtSyms) || vvtSyms.length === 0) {
+      answers.vvt_no_symptoms = true;
+      showResult();
+      return;
+    }
+    currentStep++;
+    while (currentStep < steps().length - 1 && isStepSkipped(steps()[currentStep])) {
+      currentStep++;
+    }
+    renderStep();
+    return;
+  }
+
+  if(activeCond === 'vv_thrush' && s.id === 'vvt_selected_treatment') {
     showResult();
     return;
   }
