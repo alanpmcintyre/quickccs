@@ -40,9 +40,9 @@ body.no-ptbar{padding-top:80px;}
 .lerr{font-size:13px;color:#c0392b;margin-bottom:12px;display:none;}
 .btnp{width:100%;padding:10px;background:#185FA5;color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3;}
 .btnp:hover{background:#0C447C;}
-.dhtitle{font-size:20px;font-weight:600;color:#111;line-height:1.3;}
-.dhsub{font-size:13px;color:#666;line-height:1.45;margin-top:4px;margin-bottom:20px;}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px;}
+.dhtitle{font-size:20px;font-weight:600;color:#111;line-height:1.3;max-width:620px;margin-left:auto;margin-right:auto;}
+.dhsub{font-size:13px;color:#666;line-height:1.45;margin-top:4px;margin-bottom:20px;max-width:620px;margin-left:auto;margin-right:auto;}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;max-width:620px;margin-left:auto;margin-right:auto;}
 .ccard{background:white;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:16px;cursor:pointer;}
 .ccard.avail:hover{border-color:#185FA5;}
 .ccard.sel{border:2px solid #185FA5;}
@@ -50,7 +50,7 @@ body.no-ptbar{padding-top:80px;}
 .cicon{font-size:20px;margin-bottom:8px;}
 .cname{font-size:15px;font-weight:600;color:#111;line-height:1.35;}
 .cstatus{font-size:12px;font-weight:500;line-height:1.3;margin-top:2px;}
-.ocard{background:white;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:20px;max-width:580px;}
+.ocard{background:white;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:20px;max-width:580px;margin-left:auto;margin-right:auto;}
 .otag{display:inline-block;font-size:11px;font-weight:500;background:#E6F1FB;color:#0C447C;padding:3px 10px;border-radius:8px;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.04em;}
 .otitle{font-size:21px;font-weight:600;color:#111;line-height:1.3;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
 .odesc{font-size:13px;color:#666;line-height:1.5;margin-bottom:20px;}
@@ -62,7 +62,7 @@ body.no-ptbar{padding-top:80px;}
 .olist li::before{content:'';width:5px;height:5px;border-radius:50%;background:#185FA5;flex-shrink:0;margin-top:5px;}
 .olist.excl li::before{background:#A32D2D;}
 .odivider{border:none;border-top:1px solid rgba(0,0,0,0.1);margin:0 0 20px;}
-.qcard{background:white;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:20px;max-width:580px;}
+.qcard{background:white;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:20px;max-width:580px;margin-left:auto;margin-right:auto;}
 .pbar{height:3px;background:#e0e0e0;border-radius:2px;margin-bottom:12px;}
 .pfill{height:3px;background:#185FA5;border-radius:2px;transition:width 0.3s;}
 .slabel{font-size:11px;font-weight:500;color:#185FA5;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;}
@@ -75,7 +75,10 @@ margin-bottom:12px;
 .vizsum{padding:10px 14px 8px 14px;font-size:13px;font-weight:600;color:#111;cursor:pointer;list-style:none;line-height:1.35;}
 .vizsum::-webkit-details-marker{display:none;}
 .vizbody{padding:0 14px 14px 14px;display:flex;flex-direction:column;gap:6px;}
-.vizimg{display:block;width:100%;max-width:100%;height:auto;max-height:220px;object-fit:contain;object-position:center;border-radius:8px;border:1px solid rgba(0,0,0,0.12);margin:0;background:#f5f5f5;padding:0;}
+.vizimg{display:block;width:100%;max-width:100%;height:auto;max-height:220px;object-fit:contain;object-position:center;border-radius:8px;margin:0;background:#f5f5f5;padding:0;cursor:zoom-in;}
+#lightbox{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.88);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;}
+#lightbox.open{display:flex;}
+#lightbox-img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.5);}
 .vizcap{font-size:12px;color:#555;line-height:1.5;margin:0;}
 .vizsrc{font-size:11px;color:#777;line-height:1.45;margin:0;}
 .opts{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
@@ -142,6 +145,7 @@ a{color:#185FA5;text-decoration:underline;}a:hover{text-decoration-thickness:2px
 
 
 @media (max-width:600px){
+  .cgrid{grid-template-columns:repeat(2,1fr);}
   .vizimg{max-height:180px;}
   .qtext{font-size:16px;
 margin-bottom:12px;
@@ -158,7 +162,7 @@ margin-bottom:12px;
   .header{padding:10px 14px;gap:6px;min-height:unset;position:fixed;top:0;left:0;right:0;width:100vw;max-width:none;padding:4px 16px;z-index:1000;}
   .ccs-logo{width:130px;height:auto;transform:translateY(-1px);}
   .pharmacist-label{display:none;}
-  /* Pharmacist dropdown not needed during mobile consultation — hide to free ptbar space */
+  /* Pharmacist dropdown not needed during mobile consultation - hide to free ptbar space */
   #userwrap.ptbar-user{display:none !important;}
   /* Tighten pill so namegroup has room for full name + age */
   .ptbar-pill{padding:0 8px;font-size:10px;letter-spacing:0.02em;}
@@ -179,10 +183,10 @@ margin-bottom:12px;
   * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   body { background:white; font-family:Georgia, serif; font-size:13pt; color:#000; }
 
-  /* Strip card styling — result card becomes plain page content */
+  /* Strip card styling - result card becomes plain page content */
   .qcard { border:none; box-shadow:none; padding:0; max-width:100%; border-radius:0; }
 
-  /* Clean up alert boxes — keep colour coding but simplify */
+  /* Clean up alert boxes - keep colour coding but simplify */
   .abox { border-radius:4px; font-size:11pt; margin-bottom:14pt; }
   .adanger { background:#FCEBEB !important; color:#791F1F !important; border:1pt solid #F09595 !important; }
   .awarn   { background:#FAEEDA !important; color:#633806 !important; border:1pt solid #EF9F27 !important; }
@@ -204,7 +208,7 @@ margin-bottom:12px;
 
   /* Footer */
   #s-result::after {
-    content:'Printed from QuickCCS v' attr(data-version) ' — for clinical records only. Verify all recommendations against current HSE CCS protocols.';
+    content:'Printed from QuickCCS v' attr(data-version) ' - for clinical records only. Verify all recommendations against current HSE CCS protocols.';
     display:block;
     font-family:system-ui, sans-serif;
     font-size:8pt;
@@ -213,6 +217,33 @@ margin-bottom:12px;
     padding-top:8pt;
     margin-top:20pt;
   }
+}
+abbr.ctip {
+  text-decoration: underline dotted #666;
+  cursor: help;
+  position: relative;
+}
+abbr.ctip::after {
+  content: attr(data-tip);
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: normal;
+  width: 240px;
+  z-index: 999;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+abbr.ctip:hover::after, abbr.ctip:focus::after {
+  display: block;
 }
 </style>
 </head>
@@ -281,7 +312,7 @@ margin-bottom:12px;
 <div class="field"><label>Pharmacy name <span class="req">*</span></label><input id="ph-pharmacy" placeholder="Required" type="text"/></div>
 <div class="field"><label>Pharmacy address <span class="req">*</span></label><input id="ph-address" placeholder="Required" type="text"/></div>
 <div class="field"><label>Pharmacy phone <span class="req">*</span></label><input id="ph-phone" placeholder="Required" type="tel"/></div>
-<div style="background:#f5f5f5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#555;line-height:1.5;">Your name and PSI number are used only to populate the consultation record at the end for printing or filing. They are not stored or transmitted anywhere.</div>
+<div style="background:#f5f5f5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#555;line-height:1.5;">Your name and PSI number are used only to populate the consultation record at the end for printing or filing. They are not stored or transmitted anywhere. Anonymous usage data is collected for service improvement purposes only.</div>
 <div class="lerr" id="ph-err">Please complete all fields before continuing.</div>
 <button class="btnp" onclick="doLogin()">Sign in</button>
 </div>
@@ -291,14 +322,14 @@ margin-bottom:12px;
 <div class="dhtitle">New consultation</div>
 <div class="dhsub">Select a condition to begin</div>
 <div class="cgrid" id="cgrid"></div>
-<div style="background:#f5f5f5;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:14px 16px;max-width:580px;margin-bottom:16px;">
+<div style="background:#f5f5f5;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:14px 16px;max-width:620px;margin-left:auto;margin-right:auto;margin-bottom:16px;">
 <p style="font-size:13px;color:#444;line-height:1.6;margin-bottom:12px;"><strong>Disclaimer:</strong> QuickCCS is a clinical decision support tool only. It does not replace the professional judgement of the prescribing pharmacist. The pharmacist remains solely responsible for all clinical decisions made during a consultation, including verification of recommendations against current HSE CCS protocols and applicable clinical guidelines. The developers of QuickCCS accept no liability for clinical decisions made in reliance on this tool.</p>
 <label style="display:flex;align-items:flex-start;gap:6px;cursor:pointer;font-size:13px;color:#333;">
 <input id="disclaimerCb" onchange="toggleStartBtn()" style="margin-top:2px;accent-color:#185FA5;width:15px;height:15px;flex-shrink:0;" type="checkbox"/>
         I understand and acknowledge the above disclaimer
       </label>
 </div>
-<div class="navrow" style="max-width:580px;"><div class="navbtns"><button class="btnback" onclick="doLogout()">← Back</button><button class="btnnext" disabled="" id="btnstart" onclick="goToOverview()" style="opacity:0.4;cursor:default;">Next →</button></div></div>
+<div class="navrow" style="max-width:620px;margin-left:auto;margin-right:auto;"><div class="navbtns"><button class="btnback" onclick="doLogout()">← Back</button><button class="btnnext" disabled="" id="btnstart" onclick="goToOverview()" style="opacity:0.4;cursor:default;">Next →</button></div></div>
 </div>
 <div class="screen" id="s-overview">
 <div class="ocard" id="ocard"></div>
@@ -320,7 +351,7 @@ margin-bottom:12px;
 </div>
 <!--
 ════════════════════════════════════════════════════════════════════════════
-QuickCCS — Cursor Rules v2 (STRICT)
+QuickCCS - Cursor Rules v2 (STRICT)
 ════════════════════════════════════════════════════════════════════════════
 
 PURPOSE
@@ -351,11 +382,11 @@ DO NOT:
 
 ccs-render      → UI layer ONLY
 - renderStep(), showResult(), buildRecord(), rendering helpers
-- Reads from CONDITIONS and answers — does not mutate navigation state
+- Reads from CONDITIONS and answers - does not mutate navigation state
 DO NOT:
 - Add clinical logic
 - Mutate navigation state
-- Add more logic into renderStep() — create a new named helper function instead
+- Add more logic into renderStep() - create a new named helper function instead
 - Embed raw HTML strings directly in renderStep() or showResult()
 
 ccs-logic       → Flow layer ONLY
@@ -391,7 +422,7 @@ Treatment:
   safety:[]
 }
 
-- rx[] must contain ONLY: drug name, dose, frequency — no usage instructions
+- rx[] must contain ONLY: drug name, dose, frequency - no usage instructions
 - instructions[] contains: how to use, duration, what to expect
 - Prescription block renders rx[] and may intentionally render instructions[] in a separate DIRECTIONS section
 - Never mix instructional prose into rx[]
@@ -413,7 +444,7 @@ MANDATORY ORDER:
 4. Relative exclusions (recurrence, swallowing, new med, mild immunocompromise)
 5. Treatment selection
 
-- Return early on first matched exclusion — do not accumulate
+- Return early on first matched exclusion - do not accumulate
 - Never return rx[] and reason together
 
 ════════════════════════════════════════════════════════════════════════════
@@ -486,26 +517,26 @@ DRIFT WARNING
 ════════════════════════════════════════════════════════════════════════════
 
 If you find yourself editing renderStep() or showResult() for a new condition,
-or adding condition-specific if() checks inside rendering functions —
+or adding condition-specific if() checks inside rendering functions -
 STOP. That is architectural drift. The fix belongs in ccs-conditions.
 The rendering layer must remain condition-agnostic.
 
 ════════════════════════════════════════════════════════════════════════════
-GUI CONVENTIONS — APPLY THESE WHEN BUILDING EACH NEW CONDITION
+GUI CONVENTIONS - APPLY THESE WHEN BUILDING EACH NEW CONDITION
 ════════════════════════════════════════════════════════════════════════════
 
 The following conventions were established during v2.4.72 and apply to ALL
-conditions. They are NOT enforced automatically — you must follow them by hand
+conditions. They are NOT enforced automatically - you must follow them by hand
 when writing new condition modules.
 
-1. PRESCRIPTION DIRECTIONS — use count-based language, never mg amounts:
+1. PRESCRIPTION DIRECTIONS - use count-based language, never mg amounts:
    - Tablets: "Take ONE tablet every 12 hours for X days."
    - Capsules: "Take ONE capsule every 6 hours for X days."
    - Liquid/topical: volume or application count is acceptable (e.g. "1-2ml", "Apply 1 drop")
    - The drug name line in rx[] SHOULD still include the mg strength (e.g. "Trimethoprim 200mg tablets")
    - The direction line in instructions[] is where count language applies
 
-2. LEAD+BULLETS QUESTION FORMAT — for steps with dense clinical criteria lists,
+2. LEAD+BULLETS QUESTION FORMAT - for steps with dense clinical criteria lists,
    use the formatQuestionText() map in ccs-render rather than embedding the full
    list in the step's q: string. To add a new step to the map:
    - Open formatQuestionText() in ccs-render
@@ -513,17 +544,17 @@ when writing new condition modules.
    - The rendering machinery handles the rest automatically
    - Do NOT add HTML directly into q: strings
 
-3. SYMPTOM CHECKLIST DISQUALIFIERS — items that exclude a patient from the
+3. SYMPTOM CHECKLIST DISQUALIFIERS - items that exclude a patient from the
    treatment pathway should be labelled "(out of protocol scope if present)"
    rather than "(must NOT be present for diagnosis)" or similar.
-   - The label string is a FIXED CONTRACT — update opts[], getOutcome() indexOf
+   - The label string is a FIXED CONTRACT - update opts[], getOutcome() indexOf
      checks, and any seedState references together if you change a label.
 
-4. expandClinicalTerms() — automatically expands: dysuria, haematuria,
+4. expandClinicalTerms() - automatically expands: dysuria, haematuria,
    photophobia, urethritis. Case of the first letter is preserved.
    - If a new clinical term needs inline expansion, add it to expandClinicalTerms()
      using the same case-preserving function pattern already in use.
-   - Do NOT expand terms inline in q: or opts[] strings — use expandClinicalTerms.
+   - Do NOT expand terms inline in q: or opts[] strings - use expandClinicalTerms.
 
 ════════════════════════════════════════════════════════════════════════════
 -->
@@ -532,14 +563,14 @@ when writing new condition modules.
 // CONDITIONS
 // ───────────────────────────────────────────────────────────────────────────
 // ════════════════════════════════════════════════════════════════════════════
-//  QuickCCS — CONDITION DATA
+//  QuickCCS - CONDITION DATA
 //  This script block contains all clinical content:
 //    - Condition modules (overview, steps, getOutcome logic)
 //    - Dashboard configuration
 //  Add new modules here. Do not put UI logic in this block.
 // ════════════════════════════════════════════════════════════════════════════
 // ── Version ──────────────────────────────────────────────────────────────────
-var VERSION = '2.4.73';  // Major.Minor.Patch — bump on every deploy
+var VERSION = '2.4.73';  // Major.Minor.Patch - bump on every deploy
 
 function calcAgeMonths(dob) {
   var d = new Date(dob), n = new Date();
@@ -568,8 +599,10 @@ VISUALS.adenoviral = VISUALS.adenoviral || 'data:image/png;base64,iVBORw0KGgoAAA
 VISUALS.scleritis = VISUALS.scleritis || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAIICAIAAAC5Kbd7AABfcUlEQVR4nO3deXgUVaL38ZOwBAIhQBK2oOyRTVYlM8iObCoBFFCMcwFFURQdZRDUi4AICiqjI6KOF2G4DvAgCCICCWsE2cSwCShIIAESICEQghCzvn/UnX7b6iXVXVVdS38/j49PqFRXna46feqXc05Vh5SVlQkAAADACKFGFwAAAADBizAKAAAAwxBGAQAAYBjCKAAAAAxDGAUAAIBhCKMAAAAwDGEUAAAAhiGMAgAAwDCEUQAAABiGMAoAAADDEEYBAABgGMIoAAAADEMYBQAAgGEIowAAADAMYRQAAACGIYwCAADAMIRRAAAAGIYwCgAAAMMQRgEAAGCYikbtePv27UbtGgAAAK569+4d+J2GlJWVBWxnBFAAAABLCFgwDVAYdY2hXbt2DcB+AQAAoNDu3btlSwIQSXUPo84xlAAKAABgCc7BVNdIqm8YdSRRYigAAIDlOCKpfnlUrzBKDAUAALAHXSOpLo92IokCAADYhiPR6XEzuvZhlCQKAABgM/rlUY2H6aXyEUMBAABsSRqy13C8XsueUR4jCgAAEAw0TH3aD9PTLQoAAGBXmic9zcIoA/QAAADBQMp7WnWOahNGSaIAAADBQ8M8qsujnQAAAAAlNAijdIsCAAAEG606R+kZBQAAgGHUhlG6RQEAAIKTJp2j9IwCAADAMIRRAAAAGIYwCgAAAMOoCqNMGAUAAAhm6qeN0jMKAAAAwxBGAQAAYBjCKAAAAAxDGAUAAIBhCKMAAAAwTEWjC2AKZ8+e7datm/OSdu3abdiwwajyOOhRMNO+WcvhSAaSPY62Pd6FQuZ5sxqWZP78+fPnz3deMnny5BdeeEFV+YCgZ6IwmpOT8/XXX+/bt+/EiRO5ubm//fZbhQoVwsPDY2JiGjRo0Lx587Zt23bs2LFZs2ZGlxQAAADaMEUYLSgoeO+99z777LPi4mLn5cXFxb///vvVq1dPnjy5Y8cOaWHdunX//ve/9+jRw4CCmtXUqVO/+OIL5yUfffTRkCFDjCoPoAT1FgAgzBBGb968+Ze//GXfvn0K17906dLFixd1LRIAAAACw/gbmObMmaM8iQIAAMBODO4ZzcnJ+d///V9jy2BmjRs3Pn/+vPm3CejNHvXWHu/CcjjsgMkZHEa3b99eUlLivKRixYpPPfXU/fff37Rp0/Dw8Js3b+bk5Pz0008//vhjcnJyRkaGUUUFAACA5gwOo+fOnZMtefnllydMmOD4Z0RERERERJMmTQYPHjxjxowjR44sXrw4LCzMyzbLysq+++6777777scff8zMzLx27VpJSUlUVFR0dHRcXFz37t27d+9ep04dv8tcXFy8YcOGXbt2HTx4MCcn59q1a1WqVKlVq1br1q27dev20EMPRUREuH2hl8eLZGdnL126NDk5+dy5c9evXx8yZMhHH33k/SVCiFmzZn366adu9/Xss88+++yzzkteeeUVaYnyp5xcv359/fr1KSkpp06dunTp0s2bNytUqFCrVq2aNWtGR0c3b978jjvu6NixY8uWLStUqOD1mAWC+tJqWHN++eWX5cuXp6SkZGVllZaWNmjQoEePHuPHj4+NjfX+Qr9r1y+//NK3b1/nJY7Tum3btmXLlh0+fDg3N7devXodO3YcN25chw4dHGv+/vvvX3311apVq9LS0q5fv16nTp0//elPY8eObdeunadyXr169aeffvrpp5+OHTuWlpZ26dKl/Pz833//vVKlShEREfXq1WvTpk23bt0GDRrk+mnVu95KtG0Htm7dOnr0aOclI0aM+Pvf/+525QULFrz99tvOS6ZMmTJx4kTl78Lvyvz111/LDuCwYcM+/PBD2faV3Dqm5hRrS31JfKo8RUVFy5cvX79+/cmTJ69fvx4dHd2qVathw4YlJCSEhho/sQ2wJYPDaEFBgWxJ69atvazfrl07TxcAybfffvv222+fOXNGtjwzMzMzM/PIkSOrVq1q2LDh3r17/Svw8uXL33333UuXLjkvLCoqys/Pz8jI2LRp09y5cydOnPjMM8+EhIQo3ObWrVufe+65/Px8x5KysjL/iqehL7/8cvr06devX3deWFRUlJWVlZWVJYTYuXOntHD+/PkjR440oIhO1JdWq5pTUlIyd+7cTz/91LnL/9dff/3111+XLVu2cOHC/v37e3qt5rXrt99+mzRp0vr16x1L0tPT09PT165dO2nSpBdffFEIcfr06SeffPLkyZOOdc6dO3fu3LnVq1dPnTrV+S9DZ3369MnOznb79gsKCrKzs48ePbpixYpatWrNnDnzwQcfVFJaDWneDvTq1atu3brOp2bjxo1vvfVWlSpVXFdes2aN8z8rVKgwYsQI5YXX9qOnvCGSMc8pDmRJfv755/Hjx58+fdqxRKozW7duXbRo0YIFC9RsHIAnBv+d59oz8cUXX8ge8KRQaWnp5MmTx48f73oF0kRxcfFzzz03efJkWVaQyc/PnzNnztixY4uKipRs9scffxw3bpxzEhUmCKPffvvtiy++KLscmpbK0mpYc4qKip599tmFCxfKJp9ICgoKxo8f7xz7HPSoXUVFRU8++aRzEnX23nvvLV68+Ny5c0OHDnVbpNLS0jlz5qh8RPnVq1eff/75Tz75RM1GfKJTO1ChQoXhw4c7L7lx48bmzZtd1/zll19++eUX5yW9evWqV6+ewh1p/tHzO4wqFPhTrF9JTp48OXLkSOck6uzgwYMjRoxgqhigB4PDqGzoRAixadOmP//5z6+//vr69etPnz7t9qLu1rRp05YvX651Af+/V155Ze3atQpX3rJly+TJk8tdraCgYOLEiQpjayDNmTPH6CL4QGVpNaw5J06c8BT+JEVFRW+99Zbrcj1q14kTJ7777jsvK8ydO3fMmDFXr171ss4bb7xRWlqqsGCezJkz5+eff1a5EYX0awceeeQR2RK3p+yrr74q94VeaP7R0zuMSgJ5ir3zuyTSH4S5uble1snMzFy1apW/RQPgkcFhtGXLln369JEtzMrK+vzzz59++umePXu2aNFi4MCB06ZN27Rp0++//+5pOzt37vzXv/4lWxgZGTl16tTt27efPn36xIkT69ate+qpp8LDw/0o57Zt22RXuCpVqjz//PPbt28/derUDz/88O6778bExDivsGrVqpSUFO+bPXnypNu/sxX2jE6bNu38+fPnz59/7LHHZL/66KOPzv+RbCaZFxkZGenp6c5LevXq9fXXXx8/fvzs2bOHDh1avXr1q6++2rFjR4Ub1JXK0updc1xt27btypUrsiV61K5y3bhxQ9aH5+r8+fNexrLj4+NnzZq1YcOGw4cPnz179vTp099///17773XuHFj59VKS0s//vhjxz91qrdC57PZpEmT+Ph45yXbtm3Ly8tzXlJWVrZu3TrnJVFRUf369VO4Cz0+eirnc/t3ivWgd0mWL19+/Phx2cKHHnpo27ZtZ86c2bt37/PPP8+cUUAnxj/0/u9///vw4cNPnTrl9reFhYXS1PXFixdXr179sccee/bZZ2vVqiVbbd68ebIlMTEx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WKVAlmTUqFFffPGF7BtBV69evXr1as33BUDGFMP0PomMjPzss89cH1Lz5ptv+vpUP5/MmzdP+T06Ada5c2fXMaaASUxMbNu2rVF795VrafWuOUqYuXbJREVFvfDCC97Xueuuu1znwrrSo94G7GzK/h5W+Cttuf3oPfnkk94fjN+mTZv77rvPywoanmKVAlmSSpUqLViwwPuz9urXrz98+HD1+wIgY3AYvffee+fPn9+9e3eFo3I9evRYv369bI6dJDQ09J133vnkk08aN26scSmFEEJUrFhxwYIFf//733X9Fhm/ffjhh67zyfQWFhb2wgsveJ/gaB6eSqt3zVHC5LVLZuLEiRMmTPD01T4DBgxYunSpkq9NFzrU24CdzaZNm959992uy2NiYly/zVVzXj561atX/+KLL1yfLSAZOHDgypUrXb/+QEbDU6xSIEsSFxf35Zdfuj68RdKuXbsvv/zSdeYAAPUMHqavVq3ayJEjR44c+dtvv+3fv3///v2nTp1KS0vLycm5ceNGaWlpeHh4zZo14+Li2rVr98ADD5T73XoPPPDA/fffn5KSkpKSkpqaeuHChby8vJKSkqioqOjo6DvuuKNbt27du3f3u8AjRox48MEHt27dunPnzoMHD2ZlZeXl5RUXF9eoUSMiIiIyMjIqKqply5YtW7Zs1apVixYt/N6Rr1q3br1ly5YvvvhC+s6q/Px8NXdk7969+9ixY8ePHz927FhGRkbef5SVlYWHh9erV6958+Zdu3a9//77VQ5HakKT0updc5Qwbe1y9eqrr95///3/+te/9u7de+nSpYoVK0ZHR3fu3HnYsGG9e/dWvh1t661DYM7mI4888sMPP8gWjhgxQs0j2zSpzHFxcTt27Pj888+TkpLOnDnz+++/161bt3PnziNGjFA+eVSrU6xeIEvSsmXLLVu2LFu27Jtvvjl16tT169ejoqJatWo1ZMiQYcOGefkyAgBqhKh5lsr27duFEF27dtWuPAAAALCS3bt3CyH8/vvQenNGAQAAYBuEUQAAABiGMAoAAADDEEYBAABgGMIoAAAADEMYBQAAgGEIowAAADAMYRQAAACGIYwCAADAMIRRAAAAGIYwCgAAAMMQRgEAAGAYwigAAAAMQxgFAACAYQijAAAAMAxhFAAAAIYhjAIAAMAwhFEAAAAYhjAKAAAAwxBGAQAA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t+bPn19UVNShQ4exY8fedtttubm5a9as+fbbb9W8I0uX0x7sE0avXbsmhEhMTLzjjjukJU2aNHEODeUaMWLEo48+Kv3cokWLv/71r88///zRo0fLysqkPqSUlJSrV69GRETMnDmzWrVqQohatWo9/PDDt27d+uqrr9asWeN8dVcvPj4+Kirqp59+unDhQmxsrLTw4sWLR44ciYiIcL2zoVevXo8//rj0c/PmzadPn/7UU09duXJl165dffr0cbuL77//PiMjIyIiYu7cuVFRUdLCRo0ayYaYZV0psbGxiYmJV65c2bJly+HDh329x0KPw6jy7D/yyCMPP/yw9PNdd9314IMPLlmy5PLlyzNmzOjUqZO0fODAgYcPH/7++++PHj0q27IfR37v3r1paWn16tWbM2dOeHi4tLBjx44zZsx49tlnN2/ePGbMGC+dK0pOnK/Hudz6r4ly96KwTirXo0ePRYsW7d+/XxqslBbeuHFj//79FStWlAUUv6lvf1zNnTvXdaHrwLdQUYF9rYf33XffE0884bzrlJSU69ev161b97XXXpOSUExMzBNPPJGTk/P99987r+nrvrSqKr42pG7J3rjKz68fL3c98t5/pW2jLaO+tvt9PL/77rtr167FxMRMmzZNmndRp06d8ePH5+Tk7Nu3T82bsnQ5bcA+NzA1a9ZMCJGcnHz9+nX/tiCbzNG4ceOwsLCCggLHg3CPHTsmhBgwYIB0aXd48MEHhRBZWVlXrlzxb9duhYaGSn9JOw8TJCUllZWV9enTRzb/SQiRkJDg/M+qVatKLz969KinXaSmpgohBgwY4GjK3SopKUlKSnrttdcee+wxqQswISFhy5YtQojLly/7+r70OIwqz76se0zaWmRkpONC7rw8NzdX9nI/jvyBAwek/TpaNElUVFTr1q2Lioqch9hcKTlxvh7ncuu/Jsrdi8I6qVy1atXi4+NLSkpSUlIcC3fu3FlUVBQfHx8REaHJXtS3P2r4XYF9rYf33XefbNfHjx8XQgwaNEg2JVf2ofBjX1pVFV8bUrdkb1zl59ePl7seee+/0rbRllFf2/0+nlKzNmjQINmJGzp0qH8lsUc5bcA+PaNDhgw5ePBgSkrKzp07Gzdu3KJFizZt2nTp0kVWaTwJCQmJjo6WLaxatervv/9eVFRUtWpVIYR08b7ttttkq9WoUSMyMjIvL+/KlStaXUElAwYMWLly5datW//yl79UqlSppKREak3cDi05/uh3kOZC5eTkeNp+dna2+E/L4klpaemMGTMOHz7s9reFhYXlvQk5PQ6jmrPveuqlP23r1q0rW1OqBo45QA5+HPlLly4JIZYtWybd3+CYAeb4Qep78ETJifPpOCup/+op2YuSt+arvn377ty5c9u2bYMHD5aWeB+j94PK9scthY92UlOBfaqHISEh9erVk21TqmYNGjSQLXdd4uu+NKwqPjWkrlzfuMrPr68vd3vkvfxK80ZbRv3V1u/jKTWqnppcbVmlnPZgnzAaFhb21ltvHT169Icffjh58mRKSkpSUlKVKlWefvppT0OlzkJCQsodi5QqXCAfWVy7du34+Pjdu3fv3r27Z8+ee/fuVT7jXmhU4JSUlMOHD4eHh48bN65t27a1a9euVKlSSEjI0qVLV61a5ccG9TiMas6+Hie03PcorVBWVuZ8I4Kz4uJivcvgTEn9Vy8we3HVsWPH6Ojo06dPp6enN2rU6MKFCydPnqxVq5as41ANle2PGmoOqU/1MCQkRGE/oib70rCqqGxIXd+4ys+vry/3cuTd/krzRltG/dVW5fEMTDNilXLag33CqOTOO++88847hRAlJSU//vjj/PnzP/zww9atW3v6s9In0l/qrnO08/Pz8/LyhBDadotKBg0atHv37k2bNvXs2XPTpk1CCE9TKi9cuNC8eXPZEu+lkh7Dcfr0aS8dMNJYc2Ji4r333uu83O87M/Q7jLqefS/8OPLSQRg/fvz999/vxx6VnLgAVNeKFSsKIW7duiVbfvHiRb+3qeSt+SokJKRXr16rVq3aunXr448/LnWL9urVKzRU43lKRtVAv6msh+I/tcj55mKJ6xL1+5Lxqaoob0iVUPleND8UMpo32m5pWNuVHxBpTel7BJy5LtGjddKjnJDYZ86oTIUKFbp06dK6deuSkpJTp05pss02bdoIIZKTk2X1e82aNUKI+vXrO67u0p9Trh8DT7ys365du9jY2GPHjh04cECacd+1a1e3G1m3bp3zP2/dupWcnCyEkNoLtzp37iy9o6tXr3paR/pTT3Y3cXp6ujR7xg/KD6Pf9Dj7Xqg58v7NyFRy4gJwnGvUqFGhQoWrV6/KJiRIY6D+UfLWhO8fMWlEfseOHcXFxTt27BDKxuh93YtD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';
 
 
+VISUALS.imp_placeholder = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22140%22%3E%3Crect%20width%3D%22300%22%20height%3D%22140%22%20fill%3D%22%23f3f4f6%22%20rx%3D%228%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2262%22%20text-anchor%3D%22middle%22%20fill%3D%22%239ca3af%22%20font-size%3D%2213%22%20font-family%3D%22sans-serif%22%3EImage%20placeholder%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%2284%22%20text-anchor%3D%22middle%22%20fill%3D%22%23d1d5db%22%20font-size%3D%2211%22%20font-family%3D%22sans-serif%22%3E-%20add%20image%20here%20-%3C%2Ftext%3E%3C%2Fsvg%3E';
+
 function visualAid(src, alt, summary, caption, sourceNote) {
-  return '<div class="vizcard"><div class="vizbody"><img class="vizimg" src="' + src + '" alt="' + alt + '">'
+  return '<div class="vizcard"><div class="vizbody"><img class="vizimg" src="' + src + '" alt="' + escapeHtml(alt) + '" onclick="openLightbox(this.src,this.alt)">'
     + '<div class="vizcap">' + caption + '</div>'
     + '<div class="vizsrc">' + sourceNote + '</div></div></div>';
 }
@@ -582,6 +615,13 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+function wrapCorrectedAge(text) {
+  if (text === null || text === undefined) return '';
+  return String(text).replace(/corrected age/gi, function(match) {
+    return '<abbr class="ctip" data-tip="The corrected age is the age based on the date they should have been born - e.g. if a 10-month-old baby was born 2 months early, their corrected age is 8 months." tabindex="0">' + match + '</abbr>';
+  });
 }
 
 function linkSepsis(text) {
@@ -828,12 +868,12 @@ var CONDITIONS = {
       {id:'mucositis',section:'Exclusion criteria',type:'single',progress:69,
         skip:function(ans){return ans.lesion_type!=='No white patches visible';},
         q:'Has the patient recently had radiation therapy or chemoradiation (e.g. for head, neck, or oral cancer)?',
-        sub:'Radiation and chemoradiation commonly cause mucositis — a red, sore mouth without white patches that can resemble oral thrush but requires specialist management.',
+        sub:'Radiation and chemoradiation commonly cause mucositis - a red, sore mouth without white patches that can resemble oral thrush but requires specialist management.',
         opts:['No','Yes - recent radiation or chemoradiation therapy']},
       {id:'geographic_tongue',section:'Exclusion criteria',type:'single',progress:71,
         skip:function(ans){return ans.lesion_type!=='No white patches visible';},
         q:'Does the tongue have irregular blotchy red patches with a pale or white border, and do the patches change position over days or weeks?',
-        sub:'This pattern is characteristic of geographic tongue (benign migratory glossitis) — a harmless inflammatory condition that does not require antifungal treatment.',
+        sub:'This pattern is characteristic of geographic tongue (benign migratory glossitis) - a harmless inflammatory condition that does not require antifungal treatment.',
         opts:['No','Yes - pattern consistent with geographic tongue']},
       {id:'symptoms',section:'Symptom assessment',type:'checkbox',progress:73,q:'Which symptoms is the patient experiencing?',sub:'Select all that apply.',opts:['White patches inside mouth or on tongue (rub off)','Redness or soreness in the mouth','Cracking at the corners of the mouth (angular cheilitis)','Loss of taste or unpleasant taste','Pain or discomfort when eating or drinking','Reluctance to feed (infant)']},
       {id:'clinical_confidence',section:'Symptom assessment',type:'single',progress:75,
@@ -848,8 +888,8 @@ var CONDITIONS = {
         skip:function(ans){
           return !ans.symptoms || ans.symptoms.indexOf('Cracking at the corners of the mouth (angular cheilitis)')===-1;
         },
-        q:'Is angular cheilitis the only symptom — with no other signs of oral thrush inside the mouth?',
-        sub:'Isolated angular cheilitis may be multifactorial — causes include denture-related issues, bacterial infection, nutritional deficiency, IBD, diabetes, or immunodeficiency. It is not always Candida.',
+        q:'Is angular cheilitis the only symptom - with no other signs of oral thrush inside the mouth?',
+        sub:'Isolated angular cheilitis may be multifactorial - causes include denture-related issues, bacterial infection, nutritional deficiency, IBD, diabetes, or immunodeficiency. It is not always Candida.',
         opts:['No - angular cheilitis is present alongside other oral thrush signs','Yes - angular cheilitis is the only symptom, no other oral thrush signs']},
       {id:'taste_isolated',section:'Symptom assessment',type:'single',progress:79,
         skip:function(ans){
@@ -858,8 +898,8 @@ var CONDITIONS = {
             ans.symptoms.indexOf('Pain or discomfort when eating or drinking')===-1
           );
         },
-        q:'Is altered taste, unpleasant taste, or a persistent sore tongue the main or only complaint — without visible oral changes consistent with thrush?',
-        sub:'Taste disturbance and persistent sore tongue can result from medication side effects, dental or bacterial causes, or nutritional deficiencies such as iron, B12, or folate — rather than oral thrush.',
+        q:'Is altered taste, unpleasant taste, or a persistent sore tongue the main or only complaint - without visible oral changes consistent with thrush?',
+        sub:'Taste disturbance and persistent sore tongue can result from medication side effects, dental or bacterial causes, or nutritional deficiencies such as iron, B12, or folate - rather than oral thrush.',
         opts:['No - taste changes are present alongside other clear oral thrush signs','Yes - taste disturbance or sore tongue is the main or only complaint']},
       {id:'dentures',section:'Contributing factors',type:'single',progress:81,q:'Does the patient wear dentures?',opts:['No','Yes']},
       {id:'inhaled_steroids',section:'Contributing factors',type:'single',progress:87,q:'Is the patient using inhaled corticosteroids (e.g. for asthma or COPD)?',opts:['No','Yes','Unknown']},
@@ -867,7 +907,7 @@ var CONDITIONS = {
       {id:'nipple_only',section:'Contributing factors',type:'single',progress:90,
         skip:function(ans){return ans.breastfeeding_mother!=='Yes';},
         q:'Are there nipple or breast symptoms suggestive of thrush?',
-        sub:'If nipple or breast symptoms are present and the infant is not affected, important differentials must be excluded — including impetigo, HSV, herpes zoster, mastitis, breast abscess, and breast cancer.',
+        sub:'If nipple or breast symptoms are present and the infant is not affected, important differentials must be excluded - including impetigo, HSV, herpes zoster, mastitis, breast abscess, and breast cancer.',
         opts:['No - no nipple or breast symptoms','Yes - nipple or breast symptoms present, infant also has oral thrush','Yes - nipple or breast symptoms present, infant not affected']},
       {id:'bf_systemic',section:'Contributing factors',type:'single',progress:91,
         skip:function(ans){return ans.nipple_only!=='Yes - nipple or breast symptoms present, infant not affected';},
@@ -1048,7 +1088,7 @@ var CONDITIONS = {
       {id:'vvt_recurrent', section:'Eligibility checks', type:'single', progress:32,
        q:'Has the individual had two or more episodes of self-reported vulvovaginal symptoms within the past 12 months?',
        sub:'Two or more episodes within the past 12 months meets the threshold for recurrent VVT and referral is indicated. Pharmacist discretion is permitted to treat further episodes where there is a known precipitant and/or prior clinical assessment by a medical practitioner.',
-       opts:['No','Yes — pharmacist discretion applies, continue consultation','Yes — refer to GP at next available appointment']},
+       opts:['No','Yes - pharmacist discretion applies, continue consultation','Yes - refer to GP at next available appointment']},
 
       {id:'vvt_treatment_failure', section:'Eligibility checks', type:'single', progress:38,
        q:'Has the individual previously failed to respond to treatment for vulvovaginal thrush?',
@@ -1058,29 +1098,37 @@ var CONDITIONS = {
        q:'Is the individual concerned they might be at risk of a sexually transmitted infection from unprotected sexual intercourse?',
        opts:['No','Yes']},
 
+      {id:'vvt_dd_gate', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'dd_gate', progress:44},
+
       {id:'vvt_dd_trichomoniasis', section:'Differential diagnosis', type:'single', progress:47, isDifferentialDiagnosis:true,
        q:'Are symptoms suggestive of trichomoniasis?',
-       opts:['No','Yes']},
+       opts:['No','Yes'],
+       skip:function(ans){return ans.vvt_dd_gate!=='check';}},
 
       {id:'vvt_dd_bv', section:'Differential diagnosis', type:'single', progress:52, isDifferentialDiagnosis:true,
        q:'Are symptoms suggestive of bacterial vaginosis (BV)?',
-       opts:['No','Yes']},
+       opts:['No','Yes'],
+       skip:function(ans){return ans.vvt_dd_gate!=='check';}},
 
       {id:'vvt_dd_gsm', section:'Differential diagnosis', type:'single', progress:57, isDifferentialDiagnosis:true,
        q:'Are symptoms suggestive of genitourinary syndrome of menopause (vulvovaginal atrophy)?',
-       opts:['No','Yes']},
+       opts:['No','Yes'],
+       skip:function(ans){return ans.vvt_dd_gate!=='check';}},
 
       {id:'vvt_dd_ls', section:'Differential diagnosis', type:'single', progress:62, isDifferentialDiagnosis:true,
        q:'Are symptoms suggestive of lichen sclerosus?',
-       opts:['No','Yes']},
+       opts:['No','Yes'],
+       skip:function(ans){return ans.vvt_dd_gate!=='check';}},
 
       {id:'vvt_dd_dermatitis', section:'Differential diagnosis', type:'single', progress:67, isDifferentialDiagnosis:true,
        q:'Are symptoms suggestive of vulvar dermatitis?',
-       opts:['No','Yes']},
+       opts:['No','Yes'],
+       skip:function(ans){return ans.vvt_dd_gate!=='check';}},
 
       {id:'vvt_dd_uti', section:'Differential diagnosis', type:'single', progress:71, isDifferentialDiagnosis:true,
        q:'Are symptoms suggestive of a urinary tract infection?',
-       opts:['No','Yes']},
+       opts:['No','Yes'],
+       skip:function(ans){return ans.vvt_dd_gate!=='check';}},
 
       {id:'vvt_atypical_discharge', section:'Eligibility checks', type:'single', progress:75,
        q:'Is there any other atypical vaginal discharge (e.g. foul-smelling) or abnormal vaginal bleeding?',
@@ -1118,10 +1166,10 @@ var CONDITIONS = {
        q:'Which intravaginal treatment would you like to prescribe?',
        sub:'Select the primary intravaginal treatment. Selection should be made on the basis of location of symptoms, patient preference and availability of product. Topical cream adjunct will be noted on the prescription.',
        opts:[
-         'Clotrimazole pessary 500mg — single dose (insert high into vagina at night)',
-         'Clotrimazole pessary 200mg — one pessary nightly for 3 consecutive days',
-         'Clotrimazole pessary 100mg — one pessary nightly for 6 consecutive days (or two pessaries nightly for 3 consecutive days)',
-         'Econazole pessary 150mg — single dose (insert high into vagina at night)'
+         'Clotrimazole pessary 500mg - single dose (insert high into vagina at night)',
+         'Clotrimazole pessary 200mg - one pessary nightly for 3 consecutive days',
+         'Clotrimazole pessary 100mg - one pessary nightly for 6 consecutive days (or two pessaries nightly for 3 consecutive days)',
+         'Econazole pessary 150mg - single dose (insert high into vagina at night)'
        ],
        skip:function(ans){
          var syms = ans.vvt_symptoms || [];
@@ -1142,7 +1190,7 @@ var CONDITIONS = {
 
       if(ans.vvt_pregnant === 'Yes') return {type:'refer', reason:'Individual is pregnant. Refer to GP at next available appointment.'};
       if(ans.vvt_immuno_diabetes === 'Yes') return {type:'refer', reason:'Individual is immunocompromised due to underlying medical conditions or treatments, or has known diabetes mellitus (Type 1 or 2). Refer to GP at next available appointment.'};
-      if(ans.vvt_recurrent === 'Yes — refer to GP at next available appointment') return {type:'refer', reason:'Recurrent vulvovaginal thrush: two or more episodes of self-reported vulvovaginal symptoms within the past 12 months. Refer to GP at next available appointment.'};
+      if(ans.vvt_recurrent === 'Yes - refer to GP at next available appointment') return {type:'refer', reason:'Recurrent vulvovaginal thrush: two or more episodes of self-reported vulvovaginal symptoms within the past 12 months. Refer to GP at next available appointment.'};
       if(ans.vvt_treatment_failure === 'Yes') return {type:'refer', reason:'Individual has previously failed to respond to treatment for vulvovaginal thrush. Refer to GP at next available appointment.'};
       if(ans.vvt_sti_concern === 'Yes') return {type:'refer', reason:'Individual is concerned about potential STI risk from unprotected sexual intercourse. Refer to GP or HSE Sexual Health services for STI testing. Signpost to sexualwellbeing.ie.'};
       if(ans.vvt_dd_trichomoniasis === 'Yes') return {type:'refer', reason:'Differential diagnosis: Trichomoniasis suspected. Refer to GP or HSE Sexual Health services at next available appointment.'};
@@ -1181,14 +1229,14 @@ var CONDITIONS = {
       }
 
       if(vulvalSevere) {
-        rx.push('Clotrimazole 1% w/w and Hydrocortisone 1% w/w cream — apply to the affected vulval area every 12 hours until symptoms have resolved, or up to 7 days');
+        rx.push('Clotrimazole 1% w/w and Hydrocortisone 1% w/w cream - apply to the affected vulval area every 12 hours until symptoms have resolved, or up to 7 days');
         instructions.push('Apply Clotrimazole/Hydrocortisone cream to the external vulval area every 12 hours until symptoms resolve, or for up to 7 days.');
       } else {
-        rx.push('Clotrimazole 1% w/w or 2% w/w cream — apply to the affected area every 8–12 hours until symptoms have resolved, or up to 7 days');
+        rx.push('Clotrimazole 1% w/w or 2% w/w cream - apply to the affected area every 8–12 hours until symptoms have resolved, or up to 7 days');
         instructions.push('Apply Clotrimazole cream to the external vulval area every 8–12 hours until symptoms resolve, or for up to 7 days. (Adjunct to the intravaginal pessary for external vulval symptoms.)');
       }
 
-      instructions.push('Note: latex condoms and diaphragms can be damaged by pessaries and cream — extra contraceptive precautions are advised during treatment.');
+      instructions.push('Note: latex condoms and diaphragms can be damaged by pessaries and cream - extra contraceptive precautions are advised during treatment.');
 
       return {
         type:'treat',
@@ -1564,9 +1612,257 @@ uti: {
 
   impetigo: {
     name: 'Impetigo', icon: '🩹',
-    overview: { description: 'Coming soon.', symptoms: [], exclusions: [] },
-    steps: [],
-    getOutcome: function() { return { type: 'refer', reason: 'Impetigo pathway coming soon.' }; }
+    overview: {
+      description: 'This pathway supports assessment and treatment of localised non-bullous impetigo (\u22643 lesions) under the Common Conditions Service. Impetigo is a highly contagious bacterial skin infection caused by Staphylococcus aureus and Streptococcus pyogenes. Symptoms resolve in 7\u201310 days with treatment, or 2\u20133 weeks without.',
+      symptoms: [
+        'Individuals aged 2 months and over (corrected age for pre-term infants)',
+        'Localised non-bullous impetigo - 3 or fewer lesions',
+        'Flat erythematous macule progressing to small vesicles (<0.5cm), then thick honey-coloured crusts (~2cm)',
+        'Lesions around nose and mouth, or on limbs and flexures - not painful; itching may be present',
+        'Informed consent from individual or parent/legal guardian (required for under 16s)'
+      ],
+      exclusions: [
+        'Systemically very unwell, severe/life-threatening infection, or systemic sepsis',
+        'Spreading redness, purple patches on skin, pain, pus, area warm to touch, or large blisters forming',
+        'Moderate to severe immunocompromise, or complications (cellulitis, deeper soft tissue infection, scarlet fever)',
+        'Bullous impetigo, or widespread non-bullous impetigo (4 or more lesions/clusters)',
+        'Recurrent impetigo (2+ episodes in past 12 months), failed previous treatment, or fusidic acid use in past 12 months',
+        'Active underlying skin condition (Contact Dermatitis, Atopic Dermatitis, Scabies)',
+        'Breastfeeding with lesion on breast, open wounds at application site, or known hypersensitivity to treatment options'
+      ]
+    },
+    steps: [
+      {id:'patient', section:'Patient details', type:'patient', progress:5},
+
+      {id:'imp_emergency', section:'Emergency referral', type:'single', progress:12,
+       q:'Is the individual systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis?',
+       opts:['No', 'Yes']},
+
+      {id:'imp_urgent_checks', section:'Urgent referral', type:'checkbox', progress:28,
+       q:'Tick any criteria below that apply.',
+       opts:[
+         'Signs and symptoms of a more serious condition or illness e.g. affected area appears swollen and red, spreading redness, purple patches on the skin, pain, pus, area is warm to touch, or large blisters forming',
+         'Moderate to severe immunocompromise due to underlying medical conditions or treatments',
+         'Complications suspected: secondary infection of wounds, cellulitis, deeper soft tissue infection, or scarlet fever'
+       ]},
+
+      {id:'imp_lesion_site', section:'Non-urgent referral', type:'checkbox', progress:30,
+       q:'Tick any criteria below that apply.',
+       sub:'This pathway is restricted to localised non-bullous impetigo (≤3 lesions).',
+       opts:[
+         '4 or more impetigo lesions or clusters are present (widespread)',
+         'Open wounds are present affecting the topical treatment application area or the immediate vicinity'
+       ]},
+
+      {id:'imp_breastfeeding_breast', section:'Non-urgent referral', type:'single', progress:32, femaleOnly:true,
+       q:'Is the individual currently breastfeeding with impetigo lesion(s) present on the breast?',
+       opts:['No', 'Yes']},
+
+      {id:'imp_treatment_history', section:'Non-urgent referral', type:'checkbox', progress:34,
+       q:'Tick any criteria below that apply.',
+       opts:[
+         'The individual has had 2 or more prior episodes of impetigo in the previous 12 months',
+         'Previous topical or oral treatment (including antimicrobials) has failed for this episode of impetigo',
+         'Fusidic acid has been used within the previous 12 months (extended, recurrent, or any use)'
+       ]},
+
+      {id:'imp_contraindications', section:'Non-urgent referral', type:'checkbox', progress:36,
+       q:'Tick any criteria below that apply.',
+       sub:'Topical preparations containing paraffin (including Sodium Fusidate ointment) present a fire hazard if the treated area cannot be protected from open or naked flames.',
+       opts:[
+         'Contraindications as specified in the medication Summary of Product Characteristics',
+         'The affected area(s) cannot be protected from open or naked flames (e.g. the individual smokes)',
+         'Known hypersensitivity or adverse reaction to Fusidic Acid 20mg/g cream, Sodium Fusidate 20mg/g ointment, or any components of the formulations'
+       ]},
+
+      {id:'imp_mild_immuno', section:'Non-urgent referral - initial limited supply', type:'single', progress:38,
+       q:'Does the individual have <u>mild to moderate</u> immunocompromise due to underlying medical conditions or treatments?',
+       sub:'For individuals with mild immunocompromise, an initial limited supply of treatment may be prescribed if clinically appropriate, while the individual is awaiting referral. Treatment of individuals with moderate to severe immunocompromise is outside the scope of this service and they must be referred as a matter of urgency.',
+       opts:['No', 'Yes - initial limited supply', 'Yes - refer']},
+
+      {id:'imp_dd_gate', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'dd_gate', progress:75},
+
+      {id:'imp_bullous', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:78,
+       q:'Is bullous impetigo suspected rather than non-bullous impetigo?',
+       sub:'Non-bullous impetigo (in scope): small vesicles (<0.5cm) bursting to form thick honey-coloured crusts (~2cm). Lesions not painful. Usually around nose and mouth, or on limbs and flexures.\n\nBullous impetigo (not in scope): large flaccid blisters (1\u20132cm), yellow/clear fluid, spreading rapidly. Affects trunk, neck, arms and legs. More likely to cause fever and swollen glands.' +
+         visualAid('pics/bullous impetigo 1.png', 'Bullous impetigo', '', 'Bullous impetigo', 'Source: HSE Antibiotic Prescribing / UpToDate.'),
+       opts:['No - presentation is consistent with non-bullous impetigo', 'Yes - bullous impetigo is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_shingles', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:80,
+       q:'Is Shingles (Herpes Zoster) suspected as an alternative diagnosis?',
+       sub:'Shingles: reactivation of the varicella zoster virus, localised to a dermatome (area of skin innervated by a specific nerve). Usually painful. Begins as blotches that become itchy blisters, then dry out and crust over. More common in older individuals or those who are immunocompromised.' +
+         visualAid('pics/shingles 1.jpg', 'Shingles (Herpes Zoster) - close-up of blisters', '', 'Close-up of Herpes Zoster blisters', 'Source: DermNetNZ.org / HSE Antibiotic Prescribing.') +
+         visualAid('pics/shingles 2.jpg', 'Shingles - blisters crusting over', '', 'The blotches become itchy blisters that ooze fluid. A few days later, the blisters dry out and crust over.', 'Source: HSE A-Z.'),
+       opts:['No', 'Yes - Shingles (Herpes Zoster) is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_cold_sores', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:82,
+       q:'Is a Cold Sore (Herpes Simplex Virus) suspected as an alternative diagnosis?',
+       sub:'Cold sores: small fluid-filled blisters, usually perioral (around the mouth) or elsewhere on the face. Typically begin with a prodromal tingling, itching, or burning sensation before blisters appear. Blisters weep and crust over into a scab. Lymph nodes may be swollen and tender.' +
+         visualAid('pics/hsv 1.jpg', 'Cold sores - small fluid-filled blisters', '', 'Small fluid-filled blisters appear', 'Source: HSE A-Z.') +
+         visualAid('pics/hsv 2.jpg', 'Cold sores - blisters anywhere on face', '', 'The blisters can appear anywhere on the face', 'Source: HSE A-Z.'),
+       opts:['No', 'Yes - Cold sore (HSV) is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_candida', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:84,
+       q:'Is Cutaneous Candida infection suspected as an alternative diagnosis?',
+       sub:'Cutaneous Candida: a fungal infection of the skin caused by Candida species. Commonly affects skin folds, genital and nappy areas, oral, and nail areas. May appear as a secondary infection in individuals with existing skin conditions. Often presents with satellite lesions beyond the main affected area.' +
+         visualAid('pics/cutaneous candidiasis 1.jpg', 'Cutaneous candidiasis', '', 'Cutaneous candidiasis', 'Source: DermNetNZ.org / HSE Antibiotic Prescribing.') +
+         visualAid('pics/cutaneous candidiasis 2.jpg', 'Cutaneous candidiasis', '', 'Cutaneous candidiasis', 'Source: DermNetNZ.org / HSE Antibiotic Prescribing.'),
+       opts:['No', 'Yes - Cutaneous Candida is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_psoriasis', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:86,
+       q:'Is Guttate Psoriasis suspected as an alternative diagnosis?',
+       sub:'Guttate psoriasis: small, drop-shaped (guttate) erythematous papules with scale on the chest, legs, arms, and scalp. More common in children and teenagers. Often preceded by a streptococcal infection (e.g. throat infection). Usually resolves over a few weeks but may develop into plaque psoriasis.' +
+         visualAid('pics/guttate psoriasis 1.jpg', 'Guttate psoriasis', '', 'Guttate psoriasis', 'Source: UpToDate.'),
+       opts:['No', 'Yes - Guttate Psoriasis is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_tinea', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:88,
+       q:'Is Dermatophytosis (Tinea / ringworm) suspected as an alternative diagnosis?',
+       sub:'Dermatophytosis: a fungal infection of the skin, hair, and nails. Presents as an annular lesion with a raised erythematous border and central clearing. Includes Tinea corporis (body/ringworm), Tinea capitis (scalp), Tinea cruris (groin), and Tinea pedis (feet). Acquired through direct contact.' +
+         visualAid('pics/Tinea 1.webp', 'Tinea corporis (ringworm)', '', 'Typical ringworm presentation', 'Source: HSE A-Z / UpToDate.') +
+         visualAid('pics/Tinea 2.jpg', 'Tinea capitis (scalp ringworm)', '', 'Tinea Capitis', 'Source: HSE A-Z / UpToDate.'),
+       opts:['No', 'Yes - Dermatophytosis (Tinea) is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_eczema', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:90,
+       q:'Is Atopic Dermatitis (Eczema) suspected as an alternative or co-existing diagnosis?',
+       sub:'Atopic dermatitis: chronic or relapsing dry, itchy, inflamed skin. Often affects flexures (inside elbows, behind knees, neck). Family history of atopy (asthma, hay fever) common. May be associated with weeping or crusting but typically widespread and symmetrical rather than focal crusted lesions.' +
+         visualAid('pics/eczema 1.webp', 'Eczema on the ankle', '', 'Eczema on the ankle', 'Source: HSE A-Z / DermNetNZ.') +
+         visualAid('pics/eczema 2.jpg', 'Eczema on the back of the knees', '', 'Eczema on the back of the knees', 'Source: UpToDate.'),
+       opts:['No - atopic dermatitis is not suspected', 'Yes - atopic dermatitis (eczema) is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_contact_dermatitis', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:92,
+       q:'Is Contact Dermatitis suspected as an alternative diagnosis?',
+       sub:'Contact dermatitis: redness, itching, stinging, or blistered skin strictly localised to the site of allergen or irritant exposure. Onset typically within hours to days of contact. Geometric or distribution-matching pattern (e.g. under a watch strap, waistband, or jewellery).' +
+         visualAid('pics/contact dermatitis 1.jpg', 'Allergic contact dermatitis', '', 'Allergic contact dermatitis', 'Source: UpToDate.') +
+         visualAid('pics/contact dermatitis 2.png', 'Allergic contact dermatitis', '', 'Allergic contact dermatitis', 'Source: DermNetNZ.'),
+       opts:['No - contact dermatitis is not suspected', 'Yes - contact dermatitis is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_dd_scabies', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:94,
+       q:'Is Scabies suspected as an alternative diagnosis?',
+       sub:'Scabies (Sarcoptes scabiei): intensely itchy eruption typically in web spaces between fingers, wrists, axilla, belt line, and genitalia. Symptoms are markedly worse at night or after a hot bath. Household contacts or close contacts often report a similar itch or rash.' +
+         visualAid('pics/scabies 1.jpg', 'Scabies', '', 'Scabies', 'Source: DermNetNZ.org.') +
+         visualAid('pics/scabies 2.jpg', 'Interdigital lesions of scabies', '', 'Interdigital lesions of scabies', 'Source: UpToDate.'),
+       opts:['No - scabies is not suspected', 'Yes - scabies is suspected'],
+       skip:function(ans){return ans.imp_dd_gate!=='check';}},
+
+      {id:'imp_selected_formulation', section:'Select treatment', type:'single', progress:96,
+       title:'SELECT TREATMENT',
+       q:'Which formulation would you like to prescribe?',
+       sub:'Both options contain the same active ingredient (fusidic acid). Select based on patient preference and product availability. A 15g tube should be supplied; a 30g tube may be used only if the 15g is unavailable.',
+       opts:[
+         'Fusidic Acid 20mg/g cream - apply topically to affected areas every 8 hours for 5\u20137 days (15g tube)',
+         'Sodium Fusidate 20mg/g ointment - apply topically to affected areas every 8 hours for 5\u20137 days (15g tube)'
+       ],
+       skip: function(ans) { return ans.imp_mild_immuno === 'Yes - refer'; }}
+    ],
+    getOutcome: function(ans) {
+      // Age check: under 2 months corrected age
+      var ageMonths = calcAgeMonths(ans.pt_dob);
+      if(ans.pt_dob && ageMonths < 2) return {type:'refer', reason:'Individual is under 2 months of age (corrected age for pre-term infants). Pharmacist prescribing is not permitted for infants under 2 months of age. Refer to GP at next available appointment.'};
+
+      if(ans.imp_emergency === 'Yes') return {type:'emergency', reason:'Individual is systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis. Call 999 or refer to Emergency Department via ambulance immediately.'};
+
+      var urgentChecks = Array.isArray(ans.imp_urgent_checks) ? ans.imp_urgent_checks : [];
+      if(urgentChecks.length > 0) {
+        var urgentReasons = [];
+        if(urgentChecks.some(function(c){return c.indexOf('Swollen')===0;})) urgentReasons.push('Signs and symptoms of a more serious condition or illness are present: affected area appears swollen and red, spreading redness, purple patches on the skin, pain, pus, area is warm to touch, or large blisters forming.');
+        if(urgentChecks.some(function(c){return c.indexOf('Moderate')===0;})) urgentReasons.push('Individual has moderate to severe immunocompromise due to underlying medical conditions or treatments.');
+        if(urgentChecks.some(function(c){return c.indexOf('Complications')===0;})) urgentReasons.push('Complications suspected: secondary infection of wounds, cellulitis, deeper soft tissue infection, or scarlet fever.');
+        return {type:'urgent', reason:urgentReasons.join('<br><br>') + '<br><br>Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
+      }
+
+      var lesionSiteChecks = Array.isArray(ans.imp_lesion_site) ? ans.imp_lesion_site : [];
+      if(lesionSiteChecks.length > 0) {
+        var lesionSiteReasons = [];
+        if(lesionSiteChecks.some(function(c){return c.indexOf('4 or more')===0;})) lesionSiteReasons.push('Widespread non-bullous impetigo: four or more lesions/clusters present. Pharmacist prescribing is reserved for localised impetigo (≤3 lesions).');
+        if(lesionSiteChecks.some(function(c){return c.indexOf('Open wounds')===0;})) lesionSiteReasons.push('Open wounds are present affecting the topical treatment application area or the immediate vicinity.');
+        return {type:'refer', reason:lesionSiteReasons.join('<br><br>') + '<br><br>Refer to GP at next available appointment.'};
+      }
+
+      if(ans.imp_breastfeeding_breast === 'Yes') return {type:'refer', reason:'Individual is currently breastfeeding with impetigo lesion(s) present on the breast. Refer to GP at next available appointment.'};
+
+      var txHistoryChecks = Array.isArray(ans.imp_treatment_history) ? ans.imp_treatment_history : [];
+      if(txHistoryChecks.length > 0) {
+        var txHistoryReasons = [];
+        if(txHistoryChecks.some(function(c){return c.indexOf('The individual has had')===0;})) txHistoryReasons.push('Recurrent impetigo: two or more prior episodes in the previous 12 months.');
+        if(txHistoryChecks.some(function(c){return c.indexOf('Previous topical')===0;})) txHistoryReasons.push('Previous topical or oral treatment (including antimicrobials) has failed for this episode of impetigo.');
+        if(txHistoryChecks.some(function(c){return c.indexOf('Fusidic acid')===0;})) txHistoryReasons.push('Fusidic acid has been used within the previous 12 months - increased risk of antibiotic resistance.');
+        return {type:'refer', reason:txHistoryReasons.join('<br><br>') + '<br><br>Refer to GP at next available appointment.'};
+      }
+      var contraChecks = Array.isArray(ans.imp_contraindications) ? ans.imp_contraindications : [];
+      if(contraChecks.length > 0) {
+        var contraReasons = [];
+        if(contraChecks.some(function(c){return c.indexOf('Contraindications as specified')===0;})) contraReasons.push('Contraindications as specified in the medication Summary of Product Characteristics are present.');
+        if(contraChecks.some(function(c){return c.indexOf('The affected area')===0;})) contraReasons.push('The affected area cannot be protected from open or naked flames - topical treatment containing paraffin cannot be safely prescribed.');
+        if(contraChecks.some(function(c){return c.indexOf('Known hypersensitivity')===0;})) contraReasons.push('Known hypersensitivity or adverse reaction to Fusidic Acid cream, Sodium Fusidate ointment, or components of the formulations.');
+        return {type:'refer', reason:contraReasons.join('<br><br>') + '<br><br>Refer to GP at next available appointment.'};
+      }
+
+      var impInstructions = [
+        'Apply a small amount of cream or ointment to each affected lesion every 8 hours (three times daily) for 5 to 7 days.',
+        'Before applying, soak off crusts by gently applying petroleum jelly (Vaseline®) and removing with a warm, damp facecloth. Do not share or reuse the facecloth - wash at a high temperature after each use.',
+        'Wash hands with soap and water before and after applying the cream or ointment.',
+        'A 15g tube should be supplied. A 30g tube may be used only if the 15g tube is unavailable.'
+      ];
+      var impExtra = [
+        'Impetigo stops being contagious 24 hours after starting treatment. If lesions are not yet healed, cover with gauze and tape until fully crusted and healed.',
+        'Keep sores, blisters, and crusty patches clean and dry. Cover with loose clothing or gauze bandages.',
+        'Wash hands frequently. Avoid touching the affected area - wash hands with soap and water immediately if the area is touched or cream/ointment has been applied.',
+        'Ensure household contacts wash hands regularly or use alcohol hand gel.',
+        'Wash face cloths, sheets, and towels at a high temperature. Do not share them.',
+        'Wash or wipe down toys with soap and warm water if a child is affected.',
+        'Inform school or childcare facilities. The usual guidance is to stay at home until lesions have crusted over, or until 24 hours after starting treatment.',
+        'Avoid: touching or scratching sores (this also helps prevent scarring); close contact with children, or individuals with diabetes or a weakened immune system; preparing food for others; going to the gym; playing contact sports.'
+      ];
+      var impSafety = [
+        'If symptoms do not improve within 72 hours of commencing treatment, seek further advice from a GP or other relevant medical practitioner.',
+        'Seek immediate medical advice if symptoms worsen, the rash spreads, or signs of serious infection develop (spreading redness, fever, swollen glands, or purple patches on the skin).',
+        'Impetigo is highly contagious until treated. Follow the infection control measures provided carefully.'
+      ];
+
+      if(ans.imp_mild_immuno === 'Yes - refer') {
+        return {type:'refer', reason:'Individual is immunocompromised (mild to moderate). Pharmacist prescribing is not clinically appropriate. Refer to GP at next available appointment.'};
+      }
+
+      if(ans.imp_bullous === 'Yes - bullous impetigo is suspected') return {type:'refer', reason:'Bullous impetigo suspected. Pharmacist prescribing is not permitted for bullous impetigo. Refer to GP at next available appointment.'};
+      if(ans.imp_dd_shingles === 'Yes - Shingles (Herpes Zoster) is suspected') return {type:'refer', reason:'Shingles (Herpes Zoster) suspected as an alternative diagnosis. Refer to GP at next available appointment for assessment and appropriate antiviral treatment.'};
+      if(ans.imp_dd_cold_sores === 'Yes - Cold sore (HSV) is suspected') return {type:'refer', reason:'Cold sores (Herpes Simplex) suspected as an alternative diagnosis. This condition is outside the scope of the CCS Impetigo pathway. Advise and refer appropriately.'};
+      if(ans.imp_dd_candida === 'Yes - Cutaneous Candida is suspected') return {type:'refer', reason:'Cutaneous candidiasis suspected as an alternative diagnosis. This condition is outside the scope of the CCS Impetigo pathway. Refer to GP at next available appointment.'};
+      if(ans.imp_dd_psoriasis === 'Yes - Guttate Psoriasis is suspected') return {type:'refer', reason:'Guttate psoriasis suspected as an alternative diagnosis. This condition is outside the scope of the CCS Impetigo pathway. Refer to GP at next available appointment.'};
+      if(ans.imp_dd_tinea === 'Yes - Dermatophytosis (Tinea) is suspected') return {type:'refer', reason:'Dermatophytosis (tinea / ringworm) suspected as an alternative diagnosis. This condition is outside the scope of the CCS Impetigo pathway. Refer to GP or advise appropriately.'};
+      if(ans.imp_dd_eczema === 'Yes - atopic dermatitis (eczema) is suspected') return {type:'refer', reason:'Atopic dermatitis (eczema) suspected as an underlying or co-existing diagnosis. Active underlying skin conditions require referral. Refer to GP at next available appointment.'};
+      if(ans.imp_dd_contact_dermatitis === 'Yes - contact dermatitis is suspected') return {type:'refer', reason:'Contact dermatitis suspected as an alternative diagnosis. Active underlying skin conditions require referral. Refer to GP at next available appointment.'};
+      if(ans.imp_dd_scabies === 'Yes - scabies is suspected') return {type:'refer', reason:'Scabies suspected as an alternative diagnosis. Refer to GP at next available appointment. Advise the patient and close household contacts to seek treatment simultaneously.'};
+      var selectedFormulation = ans.imp_selected_formulation || '';
+      if(!selectedFormulation) return {type:'treat', reason:null};
+
+      if(ans.imp_mild_immuno === 'Yes - initial limited supply') {
+        return {
+          type:'refer_supply',
+          reason:'Individual is immunocompromised (mild to moderate). An initial limited supply of treatment may be prescribed if clinically appropriate, while referring the individual to the GP.',
+          rx:[selectedFormulation],
+          instructions: impInstructions,
+          extra: impExtra,
+          safety: impSafety
+        };
+      }
+
+      return {
+        type:'treat',
+        reason:'Presentation is consistent with localised non-bullous impetigo (\u22643 lesions) with no exclusion criteria present. Treatment can be supplied under the Common Conditions Service.',
+        rx:[selectedFormulation],
+        instructions: impInstructions,
+        extra: impExtra,
+        safety: impSafety
+      };
+    }
   },
 
   allergic_rhinitis: {
@@ -1604,13 +1900,13 @@ var AVAILABLE_CONDITIONS = [
   'oral_thrush',
   'conjunctivitis',
   'uti',
-  'vv_thrush'
+  'vv_thrush',
+  'impetigo'
 ];
 
 var COMING_SOON_CONDITIONS = [
   'allergic_rhinitis',
   'cold_sores',
-  'impetigo',
   'shingles'
 ];
 
@@ -1625,9 +1921,9 @@ function setPtbarPill(name){
 // RENDER HELPERS / UI
 // ───────────────────────────────────────────────────────────────────────────
 // ════════════════════════════════════════════════════════════════════════════
-//  QuickCCS — RENDERING
+//  QuickCCS - RENDERING
 //  Builds and updates all UI: dashboard, overview, consultation wizard,
-//  result summary. Reads from CONDITIONS and answers — does not mutate
+//  result summary. Reads from CONDITIONS and answers - does not mutate
 //  navigation state directly.
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -1635,14 +1931,14 @@ function setPtbarPill(name){
 // 1. Create a Google Form with these fields (short answer or dropdown):
 //      • Condition (entry.XXXXXXXXX)
 //      • Outcome    (entry.XXXXXXXXX)
-//      • Rating     (entry.XXXXXXXXX)  — e.g. Linear scale 1–5
-//      • Comments   (entry.XXXXXXXXX)  — Paragraph
+//      • Rating     (entry.XXXXXXXXX)  - e.g. Linear scale 1–5
+//      • Comments   (entry.XXXXXXXXX)  - Paragraph
 // 2. Get the pre-fill link: ⋮ menu → Get pre-filled link, fill dummy values,
 //    copy the URL and extract each entry.XXXXXXXXX field ID.
 // 3. Paste your Form ID below and update the four entry IDs in buildFeedbackUrl().
 var FEEDBACK_FORM_ID = '1FAIpQLSejVUoBYDiESL1LIt4ZLNDZKgGK_wTHFn6kJ822zkd_0P9vWg';
 
-// Telemetry — anonymous usage logging to Google Sheet via Apps Script web app.
+// Telemetry - anonymous usage logging to Google Sheet via Apps Script web app.
 // Replace with your deployed Apps Script URL. Set to '' to disable.
 var TELEMETRY_URL = 'https://script.google.com/macros/s/AKfycbxdcEPSH_FpqONTh3JkWqkPs_HwNsx1cLO9fSUuknY0r0Mx1rAo_Gkdr8bNNZVRyTKG/exec';
 
@@ -1655,7 +1951,7 @@ function buildFeedbackUrl(conditionName, outcomeType) {
   // Outcome type → human-readable label
   var outcomeLabels = {
     treat:        'Treat (suitable for CCS)',
-    refer:        'Refer — outside scope',
+    refer:        'Refer - outside scope',
     refer_supply: 'Refer with limited supply',
     urgent:       'Urgent medical assessment',
     emergency:    'Emergency referral'
@@ -1691,9 +1987,9 @@ function goToOverview(){
   html+='<div class="odesc">'+ov.description+'</div>';
   html+='<hr class="odivider">';
   html+='<div class="osecs"><div class="osec"><div class="oseclabel">Common symptoms</div><ul class="olist">';
-  ov.symptoms.forEach(function(s){html+='<li>'+linkSepsis(s)+'</li>';});
+  ov.symptoms.forEach(function(s){html+='<li><span>'+wrapCorrectedAge(linkSepsis(s))+'</span></li>';});
   html+='</ul></div><div class="osec"><div class="oseclabel" style="color:#A32D2D;">Key exclusions</div><ul class="olist excl">';
-  ov.exclusions.forEach(function(e){html+='<li>'+linkSepsis(e)+'</li>';});
+  ov.exclusions.forEach(function(e){html+='<li><span>'+wrapCorrectedAge(linkSepsis(e))+'</span></li>';});
   html+='</ul></div></div><hr class="odivider">';
   html+='<div class="navrow"><div class="navbtns"><button class="btnback" onclick="showScreen(\'dash\')">← Back</button><button class="btnnext" onclick="startConsult()">Next →</button></div></div>';
   document.getElementById('ocard').innerHTML=html;updatePtBar();showScreen('overview');
@@ -1727,7 +2023,7 @@ function visibleStepTotal(){
 }
 
 
-// ── Render helpers — consultation wizard ──────────────────────────────────────
+// ── Render helpers - consultation wizard ──────────────────────────────────────
 
 function renderProgressBar(progress) {
   return '<div class="pbar"><div class="pfill" style="width:' + progress + '%"></div></div>';
@@ -1823,7 +2119,20 @@ function renderCheckbox(step, cbState) {
   return html;
 }
 
-// ── renderStep — pure dispatcher ───────────────────────────────────────────────
+function renderDdGate(visIdx, visTotal) {
+  var html = '';
+  html += '<div class="qtext">Differential diagnosis</div>';
+  html += '<div class="qsub">Core eligibility assessment complete. If you are confident in the diagnosis and no alternative condition is suspected, you can proceed directly to treatment selection.<br><br>If there is any diagnostic uncertainty, tap <strong>Review differential diagnoses</strong> to work through a structured comparison of conditions that may present similarly.</div>';
+  html += '<div style="display:flex;flex-direction:column;gap:10px;margin-top:24px;">';
+  html += '<button class="btnnext" style="width:100%;padding:12px 18px;font-size:15px;" onclick="selectDdGate(\'skip\')">Proceed to treatment →</button>';
+  html += '<button onclick="selectDdGate(\'check\')" style="width:100%;padding:10px 18px;font-size:14px;background:transparent;color:#185FA5;border:1.5px solid #185FA5;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3;">Review differential diagnoses</button>';
+  html += '</div>';
+  html += '<div class="navrow" style="margin-top:16px;"><div class="navbtns"><button class="btnback" onclick="prevStep()">← Back</button></div>'
+       + '<span class="scount">Step ' + visIdx + ' of ' + visTotal + '</span></div>';
+  return html;
+}
+
+// ── renderStep - pure dispatcher ───────────────────────────────────────────────
 function renderStep() {
   var s        = steps()[currentStep];
   var visIdx   = visibleStepIndex();
@@ -1840,6 +2149,8 @@ function renderStep() {
     seedUtiChecklistState(s);
     html += renderCheckbox(s, cbState);
     html += renderNavRow('prevStep()', false, visIdx, visTotal);
+  } else if (s.type === 'dd_gate') {
+    html += renderDdGate(visIdx, visTotal);
   }
 
   document.getElementById('qcard').innerHTML = html;
@@ -1848,7 +2159,7 @@ function renderStep() {
 
 // ── buildRecord ────────────────────────────────────────────────────────────────
 // Assembles a single structured consultation record object from answers + outcome.
-// All rendering and printing reads from this — never directly from answers/outcome.
+// All rendering and printing reads from this - never directly from answers/outcome.
 function buildRecord(answers, outcome) {
   var now = new Date();
 
@@ -1915,12 +2226,12 @@ function buildRecord(answers, outcome) {
   };
 }
 
-// ── Render helpers — result summary ──────────────────────────────────────────
+// ── Render helpers - result summary ──────────────────────────────────────────
 
 function renderAlert(type, title, reason) {
   var cls = { emergency:'adanger', urgent:'awarn', refer:'adanger', refer_supply:'awarn', treat:'aok', wait_see:'awarn' };
   var html = '<div class="abox ' + (cls[type] || 'aok') + '"><strong>' + title + '</strong>';
-  if (reason) html += '<br>' + linkSepsis(reason);
+  if (reason) html += '<br>' + wrapCorrectedAge(linkSepsis(reason));
   html += '</div>';
   return html;
 }
@@ -1937,6 +2248,17 @@ function renderSection(label, items, itemClass, dividerBefore) {
   return html;
 }
 
+function rxShortLine(r) {
+  var dashIdx = r.indexOf(' - ');
+  if (dashIdx === -1) return r;
+  var product   = r.substring(0, dashIdx);
+  var sizeMatch = r.match(/\(([^)]+)\)\s*$/);
+  if (sizeMatch && /^\d[\d.]*\s*(g|mg|ml|L|mcg|tablets?|capsules?|tubes?|pack|unit)/i.test(sizeMatch[1])) {
+    return product + ' ' + sizeMatch[0].trim();
+  }
+  return product;
+}
+
 function renderPrescriptionBlock(rec) {
   if (!rec.outcome.rx.length) return '';
   var lines = '';
@@ -1946,12 +2268,11 @@ function renderPrescriptionBlock(rec) {
   lines += rec.patient.address + '\n';
   lines += 'DOB: ' + rec.patient.dobFmt + ' (' + rec.patient.ageRx + ')\n\n';
   lines += 'PRESCRIPTION\n';
-  // rx[] only — prescription lines (drug, dose, frequency)
   rec.outcome.rx.forEach(function(r, i) {
-    lines += r + '\n';
+    lines += rxShortLine(r) + '\n';
     var qty = inferDispenseQuantity(r, rec.outcome.instructions || []);
     if (qty) lines += 'Quantity: ' + qty.qty + ' ' + qty.unit + '\n';
-    if (i === 0) lines += '\n';
+    if (i < rec.outcome.rx.length - 1) lines += '\n';
   });
   if (rec.outcome.instructions && rec.outcome.instructions.length) {
     lines += '\nDIRECTIONS\n';
@@ -2096,14 +2417,25 @@ function renderActionButtons(feedbackUrl) {
   return html;
 }
 
-// ── showResult — pure dispatcher ──────────────────────────────────────────────
+// ── showResult - pure dispatcher ──────────────────────────────────────────────
 function logUsage(condKey, outcomeType) {
   if (!TELEMETRY_URL) return;
-  var url = TELEMETRY_URL
-    + '?cond='    + encodeURIComponent(condKey)
-    + '&outcome=' + encodeURIComponent(outcomeType)
-    + '&version=' + encodeURIComponent(VERSION);
-  fetch(url).catch(function() {});
+  function sendLog(geo) {
+    var url = TELEMETRY_URL
+      + '?cond='    + encodeURIComponent(condKey)
+      + '&outcome=' + encodeURIComponent(outcomeType)
+      + '&version=' + encodeURIComponent(VERSION)
+      + '&ip='      + encodeURIComponent((geo && geo.ip)           || '')
+      + '&city='    + encodeURIComponent((geo && geo.city)         || '')
+      + '&region='  + encodeURIComponent((geo && geo.region)       || '')
+      + '&country=' + encodeURIComponent((geo && geo.country_name) || '')
+      + '&org='     + encodeURIComponent((geo && geo.org)          || '');
+    fetch(url).catch(function() {});
+  }
+  fetch('https://ipapi.co/json/')
+    .then(function(r) { return r.json(); })
+    .then(function(geo) { sendLog(geo); })
+    .catch(function() { sendLog(null); });
 }
 
 function showResult() {
@@ -2122,6 +2454,14 @@ function showResult() {
 
   var html = '';
   html += renderAlert(rec.outcome.type, alertTitles[rec.outcome.type], rec.outcome.reason);
+  var ddGateKeys = {impetigo:'imp_dd_gate', vv_thrush:'vvt_dd_gate'};
+  var ddGateKey  = ddGateKeys[activeCond];
+  if (ddGateKey && answers[ddGateKey] !== 'check'
+      && (rec.outcome.type === 'treat' || rec.outcome.type === 'refer_supply')) {
+    html += '<div class="abox" style="background:#EEF3FA;color:#1A3A5C;border:1px solid #A8BFD8;margin-bottom:16px;">'
+          + '<strong>Note:</strong> Differential diagnoses were not formally assessed during this consultation.'
+          + '</div>';
+  }
   html += '<div class="rtitle">Consultation summary</div>';
   html += '<div class="rsub">' + rec.meta.timestamp + ' | ' + rec.meta.condition + '</div>';
 
@@ -2148,7 +2488,7 @@ function showResult() {
 
   // Treatment and advice sections
   if (rec.outcome.type === 'treat' || rec.outcome.type === 'refer_supply') {
-    html += renderSection('Selected treatment',                    withDispenseQuantity(rec.outcome.rx, rec.outcome),           '',     false);
+    html += renderSection('Selected treatment',                    withDispenseQuantity(rec.outcome.rx.map(rxShortLine), rec.outcome),           '',     false);
     html += renderSection('Directions for use',                     rec.outcome.instructions, '',     true);
     html += renderSection('Breastfeeding mother: nipple treatment',  rec.outcome.breastRx,     'warn', true);
     html += renderSection('Additional advice',                     rec.outcome.extra,    '',     true);
@@ -2175,7 +2515,7 @@ function showResult() {
 // ENGINE / FLOW LOGIC
 // ───────────────────────────────────────────────────────────────────────────
 // ════════════════════════════════════════════════════════════════════════════
-//  QuickCCS — APPLICATION LOGIC
+//  QuickCCS - APPLICATION LOGIC
 //  Navigation, state management, user input handlers, login/logout.
 //  Calls into ccs-render to update the UI.
 // ════════════════════════════════════════════════════════════════════════════
@@ -2187,7 +2527,7 @@ var activeCond   = 'oral_thrush';
 var pharmacist   = {};   // Persists across consultations within a session
 
 // ── Dev shortcut flag ────────────────────────────────────────────────────────
-// ⚠️  DEV ONLY — set to false before deploying to production.
+// ⚠️  DEV ONLY - set to false before deploying to production.
 // To fully remove: set false here, delete devShortcut() below, remove the
 // DEV SHORTCUT LISTENER block near the resize/load event listeners, and restore
 // the onclick attribute on #header-logo.
@@ -2202,7 +2542,7 @@ var DEV_SHORTCUT = true;
   if (result && result.setAttribute) result.setAttribute('data-version', VERSION);
   var devWrap = document.getElementById('dev-shortcut-wrap');
   if (devWrap) devWrap.style.display = 'none';
-  // Landing is the initial screen — apply no-ptbar class for reduced body padding
+  // Landing is the initial screen - apply no-ptbar class for reduced body padding
   document.body.classList.add('no-ptbar');
 })();
 
@@ -2252,7 +2592,7 @@ function doLogout() {
 }
 
 // ── Dev shortcut ─────────────────────────────────────────────────────────────
-// ⚠️  DEV ONLY — remove this entire function when DEV_SHORTCUT is retired.
+// ⚠️  DEV ONLY - remove this entire function when DEV_SHORTCUT is retired.
 function devShortcut() {
   pharmacist = {
     fname:'Alan', sname:'McIntyre', psi:'11876',
@@ -2260,16 +2600,16 @@ function devShortcut() {
   };
   document.getElementById('username-display').textContent = 'Alan McIntyre';
   document.getElementById('userwrap').style.display = 'flex';
-  activeCond = 'vv_thrush';
+  activeCond = 'impetigo';
   answers = {
     ph_fname:'Alan', ph_sname:'McIntyre', ph_psi:'11876',
     ph_pharmacy:'Guerins', ph_address:'Mitchel Street, Nenagh', ph_phone:'086 8794424',
-    pt_fname:'Nora', pt_sname:'Jones', pt_dob:'1972-01-28',
-    pt_sex:'Female', pt_address:'30 Bru na Gruadan, Castletroy, Limerick',
-    pt_scheme:'Private', pt_scheme_num:''
+    pt_fname:'Ciarán', pt_sname:'Murphy', pt_dob:'2015-06-10',
+    pt_sex:'Male', pt_address:'14 Harbour Street, Nenagh, Co. Tipperary',
+    pt_scheme:'Medical Card', pt_scheme_num:'AB12345678'
   };
   cbState = {};
-  currentStep = 1; // Skip patient step — answers already populated
+  currentStep = 1; // Skip patient step - answers already populated
   showScreen('consult');
   updatePtBar();
   renderStep();
@@ -2285,6 +2625,7 @@ function selectCond(key,el){
 
 
 function startConsult(){answers={ph_fname:pharmacist.fname,ph_sname:pharmacist.sname,ph_psi:pharmacist.psi,ph_pharmacy:pharmacist.pharmacy,ph_address:pharmacist.address,ph_phone:pharmacist.phone};cbState={};currentStep=0;showScreen('consult');updatePtBar();renderStep();}
+function selectDdGate(val){answers[steps()[currentStep].id]=val;nextStep();}
 function toggleStartBtn(){
   var cb=document.getElementById('disclaimerCb');
   var btn=document.getElementById('btnstart');
@@ -2293,7 +2634,7 @@ function toggleStartBtn(){
   btn.style.cursor=cb.checked?'pointer':'default';
 }
 
-// ── syncBars — keeps ptbar directly below header at any window width ──────────
+// ── syncBars - keeps ptbar directly below header at any window width ──────────
 // Called on load, resize, and every screen transition. Measures the header's
 // actual rendered height, positions the ptbar immediately below it, then sets
 // body padding-top so content is never hidden behind either fixed bar.
@@ -2310,7 +2651,7 @@ function syncBars() {
 window.addEventListener('resize', syncBars);
 window.addEventListener('load', syncBars);
 
-// ── DEV SHORTCUT LISTENER — remove this block when DEV_SHORTCUT is retired ──
+// ── DEV SHORTCUT LISTENER - remove this block when DEV_SHORTCUT is retired ──
 // Delegated listener on the QuickCCS header logo (#header-logo).
 // Triple-click fires devShortcut(); single/double navigates home normally.
 // Also restore onclick="doLogout();showScreen('landing')" on #header-logo when removing.
@@ -2357,25 +2698,25 @@ function showScreen(id) {
 function steps(){return CONDITIONS[activeCond].steps;}
 
 function isStepSkipped(s){
-  // Function-based skip — step defines its own skip condition in ccs-conditions
+  // Function-based skip - step defines its own skip condition in ccs-conditions
   if(typeof s.skip==='function' && s.skip(answers)) return true;
 
-  // femaleOnly — protocol-based: steps only relevant for female patients
+  // femaleOnly - protocol-based: steps only relevant for female patients
   if(s.femaleOnly && answers.pt_sex==='Male') return true;
 
-  // Pregnant — UI heuristic only, not a protocol rule. Skipped for males and
+  // Pregnant - UI heuristic only, not a protocol rule. Skipped for males and
   // outside typical reproductive age range (12–55) as a practical shortcut.
-  // Note: does not replace clinical judgement — edge cases exist.
+  // Note: does not replace clinical judgement - edge cases exist.
   if(s.id==='pregnant' && (answers.pt_sex==='Male' || calcAgeYears(answers.pt_dob)<12 || calcAgeYears(answers.pt_dob)>55)) return true;
 
-  // Breastfeeding mother — same heuristic as pregnant. UI shortcut only.
+  // Breastfeeding mother - same heuristic as pregnant. UI shortcut only.
   if(s.id==='breastfeeding_mother' && (answers.pt_sex==='Male' || calcAgeYears(answers.pt_dob)<12 || calcAgeYears(answers.pt_dob)>55)) return true;
 
-  // Breastfeeding infant — skip if mother already confirmed breastfeeding (covered by breastfeeding_mother)
+  // Breastfeeding infant - skip if mother already confirmed breastfeeding (covered by breastfeeding_mother)
   // or if patient is 2+ years old (unlikely to be a breastfed infant)
   if(s.id==='breastfeeding_infant' && (answers.breastfeeding_mother==='Yes' || calcAgeYears(answers.pt_dob)>=2)) return true;
 
-  // Dentures — age skip removed. Younger denture wearers exist and the protocol
+  // Dentures - age skip removed. Younger denture wearers exist and the protocol
   // does not impose an age threshold for this contributing factor.
 
   return false;
@@ -2423,7 +2764,7 @@ function seedUtiChecklistState(step) {
 function nextStep() {
   var s = steps()[currentStep];
 
-  // Patient step — validate and commit fields
+  // Patient step - validate and commit fields
   if (s.id === 'patient') {
     var fname     = document.getElementById('pt-fname').value.trim();
     var sname     = document.getElementById('pt-sname').value.trim();
@@ -2471,6 +2812,14 @@ function nextStep() {
     answers[s.id] = Object.keys(cbState[s.id] || {}).filter(function(k) { return cbState[s.id][k]; });
   }
 
+  // dd_gate answer is committed by selectDdGate() before nextStep() is called
+  if (s.type === 'dd_gate') {
+    currentStep++;
+    while (currentStep < steps().length - 1 && isStepSkipped(steps()[currentStep])) currentStep++;
+    renderStep();
+    return;
+  }
+
   var outcome=CONDITIONS[activeCond].getOutcome(answers);
 
   if(activeCond === 'uti' && s.id === 'symptoms_checklist') {
@@ -2500,6 +2849,11 @@ function nextStep() {
   }
 
   if(activeCond === 'uti' && s.id === 'uti_selected_medication') {
+    showResult();
+    return;
+  }
+
+  if(activeCond === 'impetigo' && s.id === 'imp_selected_formulation') {
     showResult();
     return;
   }
@@ -2554,4 +2908,20 @@ function goBackToConsult() { showScreen('consult'); renderStep(); }
 
 </script>
 <script>
+</script>
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+function openLightbox(src, alt) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt || '';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape') closeLightbox();
+});
 </script></body></html>
