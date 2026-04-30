@@ -1308,10 +1308,16 @@ uti: {
           + visualAid('images/erythema multiforme 2.jpg', 'Erythema multiforme', '', 'Target lesions with a dark red centre, pale inner ring, and darker outer ring.', ''),
        opts:['No', 'Yes']},
 
-      {id:'cs_mild_immuno_recurrent', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:54,
-       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>Individual has mild immunocompromise due to underlying medical conditions or treatments (excluding moderate to severe immunocompromise, which requires urgent referral)</li><li>Individual has recurrent problematic or frequently recurrent cold sores (to ensure no underlying immunocompromise or another diagnosis)</li></ul><br>An initial limited supply of treatment may be prescribed if clinically appropriate while referring to the GP.',
-       opts:['No', 'Yes']},
+      {id:'cs_mild_immuno', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:54,
+       q:'Is the patient <u>mildly to moderately</u> immunocompromised?',
+       sub:'For mildly to moderately immunocompromised individuals, an initial limited supply of treatment may be prescribed if clinically appropriate, while the individual is awaiting referral. Treatment of <u>moderately to severely</u> immunocompromised individuals is outside the scope of this service and they must be referred as a matter of urgency.',
+       opts:['No', 'Yes - initial limited supply', 'Yes - refer']},
+
+      {id:'cs_recurrent', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:57,
+       q:'Does the individual have recurrent problematic or frequently recurrent cold sores?',
+       sub:'If yes, refer to the GP to ensure there is no underlying immunocompromise or alternative diagnosis.',
+       opts:['No', 'Yes'],
+       skip:function(ans){return ans.cs_mild_immuno === 'Yes - refer' || ans.cs_mild_immuno === 'Yes - initial limited supply';}},
 
       {id:'cs_dd_gate', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'dd_gate', progress:64},
 
@@ -1344,7 +1350,8 @@ uti: {
        sub:'Aciclovir 5% w/w cream is the formulary treatment for cold sores under the Common Conditions Service. Treatment is most effective when started as early as possible, ideally during the prodromal (tingling/itching) stage.',
        opts:[
          'Aciclovir 5% w/w cream - apply five times daily at approximately four-hourly intervals, omitting the night-time application (2g tube)'
-       ]}
+       ],
+       skip:function(ans){return ans.cs_mild_immuno === 'Yes - refer';}}
     ],
     getOutcome: function(ans) {
       var ageMonths = calcAgeMonths(ans.pt_dob);
@@ -1358,6 +1365,8 @@ uti: {
 
       if(ans.cs_gingivostomatitis === 'Yes') return {type:'refer', reason:'Suspected gingivostomatitis - clusters of blisters or sores inside the mouth, or on the gums. Refer to GP or Dental Practitioner at next available appointment.'};
       if(ans.cs_erythema_multiforme === 'Yes') return {type:'refer', reason:'Suspected erythema multiforme - target lesions with a dark red centre, pale inner ring, and darker outer ring. Refer to GP at next available appointment.'};
+
+      if(ans.cs_mild_immuno === 'Yes - refer') return {type:'refer', reason:'Individual is immunocompromised (mild to moderate). Pharmacist prescribing is not clinically appropriate. Refer to GP at next available appointment.'};
 
       if(ans.cs_dd_shingles === 'Yes - Shingles (Herpes Zoster) is suspected') return {type:'refer', reason:'Shingles (Herpes Zoster) suspected as an alternative diagnosis. Refer to GP at next available appointment for assessment and appropriate antiviral treatment.'};
       if(ans.cs_dd_impetigo === 'Yes - Impetigo is suspected') return {type:'refer', reason:'Impetigo suspected as an alternative diagnosis. Refer to the CCS Impetigo pathway if appropriate, or to GP at next available appointment.'};
@@ -1388,14 +1397,26 @@ uti: {
         'Cold sores are highly contagious until fully healed. Follow the infection control measures provided carefully to prevent spreading to others.'
       ];
 
-      if(ans.cs_mild_immuno_recurrent === 'Yes') return {
-        type:'refer_supply',
-        reason:'One or more non-urgent referral criteria identified. An initial limited supply of treatment may be prescribed if clinically appropriate while referring to the GP. Treatment should be limited to the dose or time necessary for the individual to access the referral pathway.',
-        rx:[selectedTreatment],
-        instructions:csInstructions,
-        extra:csExtra,
-        safety:csSafety
-      };
+      if(ans.cs_mild_immuno === 'Yes - initial limited supply') {
+        return {
+          type:'refer_supply',
+          reason:'Individual is immunocompromised (mild to moderate). An initial limited supply of treatment may be prescribed if clinically appropriate, while referring the individual to the GP.',
+          rx:[selectedTreatment],
+          instructions:csInstructions,
+          extra:csExtra,
+          safety:csSafety
+        };
+      }
+      if(ans.cs_recurrent === 'Yes') {
+        return {
+          type:'refer_supply',
+          reason:'Individual has recurrent problematic or frequently recurrent cold sores. An initial limited supply of treatment may be prescribed if clinically appropriate, while referring the individual to the GP to ensure there is no underlying immunocompromise or alternative diagnosis.',
+          rx:[selectedTreatment],
+          instructions:csInstructions,
+          extra:csExtra,
+          safety:csSafety
+        };
+      }
 
       return {
         type:'treat',

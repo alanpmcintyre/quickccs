@@ -19,9 +19,10 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
-| 9 | Differential diagnosis gate | Click **Proceed to treatment** |
-| 10 | Select treatment | Select **Aciclovir** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Not immunocompromised - select **No** → Next |
+| 9 | Exclusion criteria - non-urgent referral required (recurrent cold sores?) | Not recurrent - select **No** → Next |
+| 10 | Differential diagnosis gate | Click **Proceed to treatment** |
+| 11 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Treat outcome - "Suitable for treatment under the Common Conditions Service", Aciclovir 5% w/w cream, directions include "five times daily"
 
@@ -207,7 +208,7 @@
 
 ---
 
-### 14. Refer: shingles suspected (via differential review)
+### 14. Refer: mild immunocompromise (refer without supply)
 
 **Patient:** Male, 30 years old
 
@@ -220,15 +221,35 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
-| 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Differential diagnosis - shingles suspected? | **Yes - Shingles (Herpes Zoster) is suspected** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Select **Yes - refer** → Next |
+
+**Expected:** Refer outcome - mentions "immunocompromised"
+
+---
+
+### 15. Refer: shingles suspected (via differential review)
+
+**Patient:** Male, 30 years old
+
+| # | Screen | Action |
+|---|--------|--------|
+| 1 | Patient details | Fill all fields, tick consent → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Not immunocompromised - select **No** → Next |
+| 9 | Exclusion criteria - non-urgent referral required (recurrent cold sores?) | Not recurrent - select **No** → Next |
+| 10 | Differential diagnosis gate | Click **Review differential diagnoses** |
+| 11 | Differential diagnosis - shingles suspected? | **Yes - Shingles (Herpes Zoster) is suspected** → Next |
 
 **Expected:** Refer outcome - mentions "Shingles"
 
 ---
 
-### 15. Refer: impetigo suspected (via differential review)
+### 16. Refer: impetigo suspected (via differential review)
 
 **Patient:** Male, 30 years old
 
@@ -241,16 +262,17 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
-| 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Differential diagnosis - shingles suspected? | **No** → Next |
-| 11 | Differential diagnosis - impetigo suspected? | **Yes - Impetigo is suspected** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Not immunocompromised - select **No** → Next |
+| 9 | Exclusion criteria - non-urgent referral required (recurrent cold sores?) | Not recurrent - select **No** → Next |
+| 10 | Differential diagnosis gate | Click **Review differential diagnoses** |
+| 11 | Differential diagnosis - shingles suspected? | **No** → Next |
+| 12 | Differential diagnosis - impetigo suspected? | **Yes - Impetigo is suspected** → Next |
 
 **Expected:** Refer outcome - mentions "Impetigo"
 
 ---
 
-### 16. Refer: squamous cell carcinoma suspected (via differential review)
+### 17. Refer: squamous cell carcinoma suspected (via differential review)
 
 **Patient:** Male, 30 years old
 
@@ -263,17 +285,18 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
-| 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Differential diagnosis - shingles suspected? | **No** → Next |
-| 11 | Differential diagnosis - impetigo suspected? | **No** → Next |
-| 12 | Differential diagnosis - squamous cell carcinoma of the lip suspected? | **Yes - Squamous cell carcinoma of the lip is suspected** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Not immunocompromised - select **No** → Next |
+| 9 | Exclusion criteria - non-urgent referral required (recurrent cold sores?) | Not recurrent - select **No** → Next |
+| 10 | Differential diagnosis gate | Click **Review differential diagnoses** |
+| 11 | Differential diagnosis - shingles suspected? | **No** → Next |
+| 12 | Differential diagnosis - impetigo suspected? | **No** → Next |
+| 13 | Differential diagnosis - squamous cell carcinoma of the lip suspected? | **Yes - Squamous cell carcinoma of the lip is suspected** → Next |
 
 **Expected:** Refer outcome - mentions "Squamous cell carcinoma"
 
 ---
 
-### 17. Refer with supply: mild immunocompromise
+### 18. Refer with supply: mild immunocompromise (initial limited supply)
 
 **Patient:** Male, 30 years old
 
@@ -286,7 +309,7 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | Mild immunocompromise applies - select **Yes** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Select **Yes - initial limited supply** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
 | 10 | Select treatment | Select **Aciclovir** → Next |
 
@@ -294,7 +317,7 @@
 
 ---
 
-### 18. Refer with supply: recurrent problematic cold sores
+### 19. Refer with supply: recurrent problematic cold sores
 
 **Patient:** Male, 30 years old
 
@@ -307,15 +330,16 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | Recurrent problematic cold sores applies - select **Yes** → Next |
-| 9 | Differential diagnosis gate | Click **Proceed to treatment** |
-| 10 | Select treatment | Select **Aciclovir** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Not immunocompromised - select **No** → Next |
+| 9 | Exclusion criteria - non-urgent referral required (recurrent cold sores?) | Recurrent problematic cold sores applies - select **Yes** → Next |
+| 10 | Differential diagnosis gate | Click **Proceed to treatment** |
+| 11 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Refer with supply outcome - "Refer: initial limited supply may be considered", Aciclovir 5% w/w cream
 
 ---
 
-### 19. Treat: all differentials reviewed and cleared
+### 20. Treat: all differentials reviewed and cleared
 
 **Patient:** Male, 30 years old
 
@@ -328,11 +352,12 @@
 | 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
 | 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
 | 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
-| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
-| 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Differential diagnosis - shingles suspected? | **No** → Next |
-| 11 | Differential diagnosis - impetigo suspected? | **No** → Next |
-| 12 | Differential diagnosis - squamous cell carcinoma of the lip suspected? | **No** → Next |
-| 13 | Select treatment | Select **Aciclovir** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mildly to moderately immunocompromised?) | Not immunocompromised - select **No** → Next |
+| 9 | Exclusion criteria - non-urgent referral required (recurrent cold sores?) | Not recurrent - select **No** → Next |
+| 10 | Differential diagnosis gate | Click **Review differential diagnoses** |
+| 11 | Differential diagnosis - shingles suspected? | **No** → Next |
+| 12 | Differential diagnosis - impetigo suspected? | **No** → Next |
+| 13 | Differential diagnosis - squamous cell carcinoma of the lip suspected? | **No** → Next |
+| 14 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Treat outcome - "Suitable for treatment under the Common Conditions Service", Aciclovir 5% w/w cream, directions include "five times daily"

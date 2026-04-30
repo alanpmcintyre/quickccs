@@ -68,7 +68,8 @@ async function clearExclusions(page) {
   await pickOpt(page, 'No');   // cs_nourgent_checks_b
   await pickOpt(page, 'No');   // cs_gingivostomatitis
   await pickOpt(page, 'No');   // cs_erythema_multiforme
-  await pickOpt(page, 'No');   // cs_mild_immuno_recurrent
+  await pickOpt(page, 'No');   // cs_mild_immuno
+  await pickOpt(page, 'No');   // cs_recurrent
   await proceedToTreatment(page);
 }
 
@@ -229,7 +230,8 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
     await pickOpt(page, 'No');                                            // cs_gingivostomatitis
     await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'No');                                            // cs_mild_immuno_recurrent
+    await pickOpt(page, 'No');                                            // cs_mild_immuno
+    await pickOpt(page, 'No');                                            // cs_recurrent
     await reviewDifferentials(page);
     await pickOpt(page, 'Yes - Shingles (Herpes Zoster) is suspected');  // cs_dd_shingles → exit
 
@@ -245,7 +247,8 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
     await pickOpt(page, 'No');                                            // cs_gingivostomatitis
     await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'No');                                            // cs_mild_immuno_recurrent
+    await pickOpt(page, 'No');                                            // cs_mild_immuno
+    await pickOpt(page, 'No');                                            // cs_recurrent
     await reviewDifferentials(page);
     await pickOpt(page, 'No');                                            // cs_dd_shingles
     await pickOpt(page, 'Yes - Impetigo is suspected');                   // cs_dd_impetigo → exit
@@ -262,7 +265,8 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
     await pickOpt(page, 'No');                                            // cs_gingivostomatitis
     await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'No');                                            // cs_mild_immuno_recurrent
+    await pickOpt(page, 'No');                                            // cs_mild_immuno
+    await pickOpt(page, 'No');                                            // cs_recurrent
     await reviewDifferentials(page);
     await pickOpt(page, 'No');                                            // cs_dd_shingles
     await pickOpt(page, 'No');                                            // cs_dd_impetigo
@@ -272,9 +276,7 @@ test.describe('Cold Sores', () => {
     await expect(page.getByTestId('outcome-alert')).toContainText('Squamous cell carcinoma');
   });
 
-  // ── Refer with supply ─────────────────────────────────────────────────────
-
-  test('refer_supply: mild immunocompromise → treatment supplied while referring', async ({ page }) => {
+  test('refer: mild immunocompromise (refer without supply)', async ({ page }) => {
     await fillPatient(page, { dob: dobOf(30) });
     await pickOpt(page, 'No');                                            // cs_emergency
     await pickOpt(page, 'No');                                            // cs_urgent_checks
@@ -282,7 +284,23 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
     await pickOpt(page, 'No');                                            // cs_gingivostomatitis
     await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'Yes');                                           // cs_mild_immuno_recurrent
+    await pickOpt(page, 'Yes - refer');                                   // cs_mild_immuno → exit
+
+    await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer');
+    await expect(page.getByTestId('outcome-alert')).toContainText('immunocompromised');
+  });
+
+  // ── Refer with supply ─────────────────────────────────────────────────────
+
+  test('refer_supply: mild immunocompromise → initial limited supply', async ({ page }) => {
+    await fillPatient(page, { dob: dobOf(30) });
+    await pickOpt(page, 'No');                                            // cs_emergency
+    await pickOpt(page, 'No');                                            // cs_urgent_checks
+    await pickOpt(page, 'No');                                            // cs_nourgent_checks
+    await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
+    await pickOpt(page, 'No');                                            // cs_gingivostomatitis
+    await pickOpt(page, 'No');                                            // cs_erythema_multiforme
+    await pickOpt(page, 'Yes - initial limited supply');                  // cs_mild_immuno (cs_recurrent skipped)
     await proceedToTreatment(page);
     await pickOpt(page, 'Aciclovir');
 
@@ -299,7 +317,8 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
     await pickOpt(page, 'No');                                            // cs_gingivostomatitis
     await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'Yes');                                           // cs_mild_immuno_recurrent
+    await pickOpt(page, 'No');                                            // cs_mild_immuno
+    await pickOpt(page, 'Yes');                                           // cs_recurrent
     await proceedToTreatment(page);
     await pickOpt(page, 'Aciclovir');
 
@@ -318,7 +337,8 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
     await pickOpt(page, 'No');                                            // cs_gingivostomatitis
     await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'No');                                            // cs_mild_immuno_recurrent
+    await pickOpt(page, 'No');                                            // cs_mild_immuno
+    await pickOpt(page, 'No');                                            // cs_recurrent
     await reviewDifferentials(page);
     await pickOpt(page, 'No');                                            // cs_dd_shingles
     await pickOpt(page, 'No');                                            // cs_dd_impetigo
