@@ -641,7 +641,7 @@ var CONDITIONS = {
     },
     steps:[
       {id:'patient',section:'Patient details',type:'patient',progress:5},
-      {id:'systemic',section:'Emergency screening',type:'single',progress:18,q:'Is the patient systemically very unwell, or showing signs of severe or life-threatening infection?',sub:'Symptoms such as high fever, rigors, inability to swallow, signs of sepsis.',opts:['No','Yes, signs of severe illness']},
+      {id:'systemic',section:'Exclusion criteria - emergency referral required',type:'single',progress:18,q:'Is the patient systemically very unwell, or showing signs of severe or life-threatening infection?',sub:'Symptoms such as high fever, rigors, inability to swallow, signs of sepsis.',opts:['No','Yes, signs of severe illness']},
       {id:'immunocompromise',section:'Exclusion criteria',type:'single',progress:26,q:'Is the patient immunocompromised?',sub:'e.g. HIV, active cancer treatment, organ transplant, high-dose systemic steroids.',opts:['No','Yes, moderate to severe','Yes, mild immunocompromise only']},
       {id:'pregnant',section:'Exclusion criteria',type:'single',progress:34,femaleOnly:true,q:'Is the patient pregnant or is pregnancy suspected?',opts:['No','Yes']},
       {id:'lesion_type',section:'Exclusion criteria',type:'single',progress:41,q:'Are white spots or patches present in the mouth?',sub:'If yes, can they be wiped off? Lesions that do not rub off may not be oral thrush.',opts:['No white patches visible','White patches present, they rub off easily','White patches or plaques present, they do not rub off','Red lesion or appearance not consistent with typical oral thrush']},
@@ -858,11 +858,11 @@ var CONDITIONS = {
     steps: [
       {id:'patient', section:'Patient details', type:'patient', progress:5},
 
-      {id:'vvt_emergency', section:'Emergency checks', type:'single', progress:10,
+      {id:'vvt_emergency', section:'Exclusion criteria - emergency referral required', type:'single', progress:10,
        q:'Is the individual systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis?',
        opts:['No','Yes']},
 
-      {id:'vvt_serious_condition', section:'Urgent checks', type:'single', progress:14,
+      {id:'vvt_serious_condition', section:'Exclusion criteria - urgent referral required', type:'single', progress:14,
        q:'Are there signs or symptoms of a more serious condition or illness?',
        opts:['No','Yes']},
 
@@ -1073,24 +1073,24 @@ uti: {
   },
   steps:[
     {id:'patient',section:'Patient details',type:'patient',progress:5},
-    {id:'systemically_very_unwell',section:'Emergency checks',type:'single',progress:15,q:'Is the individual systemically very unwell OR showing signs of severe / life-threatening infection OR systemic sepsis?',opts:['No','Yes']},
-    {id:'confused_drowsy_slurred',section:'Emergency checks',type:'single',progress:20,q:'Is the individual confused, drowsy, or experiencing slurred speech?',opts:['No','Yes']},
-    {id:'skin_changes_or_retention_or_severe_or_breathing',section:'Emergency checks',type:'single',progress:25,q:'Are any of the following present: skin changes (pain, redness, swelling, rash, discharge, mottling, or blistering), unable to pass urine all day, severe symptoms getting worse quickly, or difficulty breathing?',opts:['No','Yes']},
-    {id:'blood_clots_not_menstruation',section:'Emergency checks',type:'single',progress:30,q:'Are there blood clots in the urine not explained by menstruation?',opts:['No','Yes']},
+    {id:'systemically_very_unwell',section:'Exclusion criteria - emergency referral required',type:'single',progress:15,q:'Is the individual systemically very unwell OR showing signs of severe / life-threatening infection OR systemic sepsis?',opts:['No','Yes']},
+    {id:'confused_drowsy_slurred',section:'Exclusion criteria - emergency referral required',type:'single',progress:20,q:'Is the individual confused, drowsy, or experiencing slurred speech?',opts:['No','Yes']},
+    {id:'skin_changes_or_retention_or_severe_or_breathing',section:'Exclusion criteria - emergency referral required',type:'single',progress:25,q:'Are any of the following present: skin changes (pain, redness, swelling, rash, discharge, mottling, or blistering), unable to pass urine all day, severe symptoms getting worse quickly, or difficulty breathing?',opts:['No','Yes']},
+    {id:'blood_clots_not_menstruation',section:'Exclusion criteria - emergency referral required',type:'single',progress:30,q:'Are there blood clots in the urine not explained by menstruation?',opts:['No','Yes']},
 
-    {id:'immuno_diabetes_catheter_renal',section:'Urgent checks',type:'single',progress:38,q:'Is the individual immunocompromised, or do they have diabetes Type 1 or Type 2, a urinary catheter in situ, Chronic Kidney Disease (CKD), renal impairment, impaired renal function, or are they on dialysis? Is new onset urinary incontinence the only symptom?',opts:['No','Yes']},
-    {id:'pregnant_or_suspected',section:'Urgent checks',type:'single',progress:46,femaleOnly:true,q:'Is the individual pregnant or suspected pregnant?',opts:['No','Yes']},
+    {id:'immuno_diabetes_catheter_renal',section:'Exclusion criteria - urgent referral required',type:'single',progress:38,q:'Is the individual immunocompromised, or do they have diabetes Type 1 or Type 2, a urinary catheter in situ, Chronic Kidney Disease (CKD), renal impairment, impaired renal function, or are they on dialysis? Is new onset urinary incontinence the only symptom?',opts:['No','Yes']},
+    {id:'pregnant_or_suspected',section:'Exclusion criteria - urgent referral required',type:'single',progress:46,femaleOnly:true,q:'Is the individual pregnant or suspected pregnant?',opts:['No','Yes']},
 
-    {id:'cauda_equina',section:'Urgent checks',isDifferentialDiagnosis:true,type:'single',progress:62,q:'Is cauda equina syndrome suspected?',sub:'',opts:['No','Yes']},
-    {id:'acute_pyelonephritis',section:'Urgent checks',isDifferentialDiagnosis:true,type:'single',progress:70,q:'Is acute pyelonephritis suspected?',sub:'',opts:['No','Yes']},
+    {id:'cauda_equina',section:'Exclusion criteria - urgent referral required',isDifferentialDiagnosis:true,type:'single',progress:62,q:'Is cauda equina syndrome suspected?',sub:'',opts:['No','Yes']},
+    {id:'acute_pyelonephritis',section:'Exclusion criteria - urgent referral required',isDifferentialDiagnosis:true,type:'single',progress:70,q:'Is acute pyelonephritis suspected?',sub:'',opts:['No','Yes']},
 
-    {id:'care_or_hospitalisation',section:'Non-urgent checks',type:'single',progress:78,q:'Is the individual a nursing or residential care resident, hospitalised in Ireland for more than 7 days in the last 6 months, or hospitalised abroad in the last 3 months?',opts:['No','Yes']},
-    {id:'recurrent_uti',section:'Non-urgent checks',type:'single',progress:82,q:'Has the patient had 2 or more UTIs in the past 12 months, or at least 1 in the past 6 months?',opts:['No','Yes']},
-    {id:'urethritis',section:'Non-urgent checks',isDifferentialDiagnosis:true,type:'single',progress:86,q:'Is urethritis suspected, with discomfort on urination and pruritus or urethral discharge?',opts:['No','Yes']},
-    {id:'gsm',section:'Non-urgent checks',isDifferentialDiagnosis:true,type:'single',progress:90,q:'Is genitourinary syndrome of menopause (vulvovaginal atrophy) suspected?',sub:'',opts:['No','Yes']},
-    {id:'sti_risk',section:'Non-urgent checks',isDifferentialDiagnosis:true,type:'single',progress:93,q:'Is the individual concerned they might be at risk of a sexually transmitted infection from unprotected sexual intercourse?',opts:['No','Yes']},
-    {id:'medication_or_response_exclusion',section:'Non-urgent checks',type:'single',progress:96,q:'Are any of the following present: known resistance to previous UTI treatments, already on prophylactic antibiotics, contraindication to Nitrofurantoin or Trimethoprim, known hypersensitivity or adverse reaction to Nitrofurantoin or Trimethoprim, unable to swallow or absorb oral medications, or failure to respond to treatment for this episode of UTI or deterioration in symptoms?',opts:['No','Yes']},
-    {id:'structural_abnormality',section:'Non-urgent checks',type:'single',progress:98,q:'Is there a known urinary tract structural abnormality?',opts:['No','Yes']},
+    {id:'care_or_hospitalisation',section:'Exclusion criteria - non-urgent referral required',type:'single',progress:78,q:'Is the individual a nursing or residential care resident, hospitalised in Ireland for more than 7 days in the last 6 months, or hospitalised abroad in the last 3 months?',opts:['No','Yes']},
+    {id:'recurrent_uti',section:'Exclusion criteria - non-urgent referral required',type:'single',progress:82,q:'Has the patient had 2 or more UTIs in the past 12 months, or at least 1 in the past 6 months?',opts:['No','Yes']},
+    {id:'urethritis',section:'Exclusion criteria - non-urgent referral required',isDifferentialDiagnosis:true,type:'single',progress:86,q:'Is urethritis suspected, with discomfort on urination and pruritus or urethral discharge?',opts:['No','Yes']},
+    {id:'gsm',section:'Exclusion criteria - non-urgent referral required',isDifferentialDiagnosis:true,type:'single',progress:90,q:'Is genitourinary syndrome of menopause (vulvovaginal atrophy) suspected?',sub:'',opts:['No','Yes']},
+    {id:'sti_risk',section:'Exclusion criteria - non-urgent referral required',isDifferentialDiagnosis:true,type:'single',progress:93,q:'Is the individual concerned they might be at risk of a sexually transmitted infection from unprotected sexual intercourse?',opts:['No','Yes']},
+    {id:'medication_or_response_exclusion',section:'Exclusion criteria - non-urgent referral required',type:'single',progress:96,q:'Are any of the following present: known resistance to previous UTI treatments, already on prophylactic antibiotics, contraindication to Nitrofurantoin or Trimethoprim, known hypersensitivity or adverse reaction to Nitrofurantoin or Trimethoprim, unable to swallow or absorb oral medications, or failure to respond to treatment for this episode of UTI or deterioration in symptoms?',opts:['No','Yes']},
+    {id:'structural_abnormality',section:'Exclusion criteria - non-urgent referral required',type:'single',progress:98,q:'Is there a known urinary tract structural abnormality?',opts:['No','Yes']},
     {id:'symptoms_checklist',section:'Symptoms checklist',type:'checkbox',progress:100,q:'Which of the following symptoms are present?',title:'SYMPTOMS CHECKLIST',opts:['Dysuria','Frequency','Urgency','Systemic symptoms or symptoms suggestive of upper UTI (out of protocol scope if present)','New onset or significant change in vaginal discharge (out of protocol scope if present)','Presence of blood in the urine (out of protocol scope if present)']},
     {id:'medication_contraindications_wait_see',section:'Check any medication contraindications',type:'checkbox',progress:100,title:'Check any medication contraindications',q:'Check any medication contraindications',opts:['Is kidney function moderately or severely reduced?','Is patient currently breastfeeding an infant < 1 month old?'],skip:function(ans){
       return ans.uti_flow !== 'treat';
@@ -1276,57 +1276,42 @@ uti: {
     steps: [
       {id:'patient', section:'Patient details', type:'patient', progress:5},
 
-      {id:'cs_emergency', section:'Emergency referral', type:'single', progress:12,
+      {id:'cs_emergency', section:'Exclusion criteria - emergency referral required', type:'single', progress:12,
        q:'Is the individual systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis?',
        opts:['No', 'Yes']},
 
-      {id:'cs_urgent_checks', section:'Urgent referral', type:'checkbox', progress:26,
-       q:'Tick any criteria below that apply.',
-       opts:[
-         'Lesions are present on or involving the eye',
-         'Moderate to severe immunocompromise due to underlying medical conditions or treatments'
-       ]},
+      {id:'cs_urgent_checks', section:'Exclusion criteria - urgent referral required', type:'single', progress:26,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Lesions are present on or involving the eye</li><li>Moderate to severe immunocompromise due to underlying medical conditions or treatments</li></ul>',
+       opts:['No', 'Yes']},
 
-      {id:'cs_nourgent_checks', section:'Non-urgent referral', type:'checkbox', progress:40,
-       q:'Tick any criteria below that apply.',
-       opts:[
-         'Contraindications as specified in the medication Summary of Product Characteristics',
-         'Pregnancy or suspected pregnancy',
-         'Signs of infection spreading',
-         'Symptoms not improving within 14 days, with or without treatment'
-       ]},
+      {id:'cs_nourgent_checks', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:40,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Contraindications as specified in the medication Summary of Product Characteristics</li><li>Pregnancy or suspected pregnancy</li><li>Signs of infection spreading</li><li>Symptoms not improving within 14 days, with or without treatment</li></ul>',
+       opts:['No', 'Yes']},
 
-      {id:'cs_nourgent_checks_b', section:'Non-urgent referral', type:'checkbox', progress:47,
-       q:'Tick any criteria below that apply.',
-       opts:[
-         'Signs of secondary infection (sores are very painful or very swollen)',
-         'Known hypersensitivity or adverse reaction to Aciclovir 5% w/w cream or any component of the formulation'
-       ]},
+      {id:'cs_nourgent_checks_b', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:47,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Signs of secondary infection (sores are very painful or very swollen)</li><li>Known hypersensitivity or adverse reaction to Aciclovir 5% w/w cream or any component of the formulation</li></ul>',
+       opts:['No', 'Yes']},
 
-      {id:'cs_gingivostomatitis', section:'Non-urgent referral', type:'single', progress:49,
+      {id:'cs_gingivostomatitis', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:49,
        q:'Are clusters of blisters or sores present inside the mouth, or on the gums (gingivostomatitis)?',
        sub: 'Clusters of blisters or sores may develop inside the mouth. Gingivostomatitis may occur as part of the primary HSV infection and less frequently with subsequent infections. The blisters may appear similar to ulcers and have a white to yellowish appearance inside the mouth, and the gums may present as bleeding, red or swollen. It is more common in children but may also occur in adults.<br><br>'
           + visualAid('images/gingivostomatitis.png', 'Gingivostomatitis', '', 'Clusters of blisters or sores inside the mouth or on the gums.', ''),
        opts:['No', 'Yes']},
 
-      {id:'cs_erythema_multiforme', section:'Non-urgent referral', type:'single', progress:51,
+      {id:'cs_erythema_multiforme', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:51,
        q:'Are target lesions present with a dark red centre, pale inner ring, and darker outer ring (erythema multiforme)?',
        sub: 'Erythema multiforme is a skin reaction that can be triggered by an infection, often the cold sore virus, or some medicines. Some people will get a cold sore a few days before the rash starts. It is usually mild and goes away in a few weeks, but there is also a rare, severe form that can affect the mouth, genitals and eyes and can be life-threatening (erythema multiforme major). The rash starts suddenly and often begins on the hands or feet, spreading to the limbs, upper body and face. It often has patches with a dark red centre that may have a blister or crust, surrounded by a pale pink ring and a darker outermost ring - commonly called a "target lesion". It may be slightly itchy or uncomfortable and usually fades over 2 to 4 weeks.<br><br>'
           + visualAid('images/erythema multiforme 1.jpg', 'Erythema multiforme', '', 'Target lesions with a dark red centre, pale inner ring, and darker outer ring.', '')
           + visualAid('images/erythema multiforme 2.jpg', 'Erythema multiforme', '', 'Target lesions with a dark red centre, pale inner ring, and darker outer ring.', ''),
        opts:['No', 'Yes']},
 
-      {id:'cs_mild_immuno_recurrent', section:'Non-urgent referral - initial limited supply', type:'checkbox', progress:54,
-       q:'Tick any criteria below that apply.',
-       sub:'An initial limited supply of treatment may be prescribed if clinically appropriate while referring to the GP. Treatment should be limited to the dose or time necessary for the individual to access the referral pathway.',
-       optDisplay:{
-         'Individual has mild immunocompromise due to underlying medical conditions or treatments (excluding moderate to severe immunocompromise, which requires urgent referral)':
-           'Individual has <u>mild</u> immunocompromise due to underlying medical conditions or treatments (excluding <u>moderate to severe</u> immunocompromise, which requires urgent referral)'
-       },
-       opts:[
-         'Individual has mild immunocompromise due to underlying medical conditions or treatments (excluding moderate to severe immunocompromise, which requires urgent referral)',
-         'Individual has recurrent problematic or frequently recurrent cold sores (to ensure no underlying immunocompromise or another diagnosis)'
-       ]},
+      {id:'cs_mild_immuno_recurrent', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:54,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Individual has mild immunocompromise due to underlying medical conditions or treatments (excluding moderate to severe immunocompromise, which requires urgent referral)</li><li>Individual has recurrent problematic or frequently recurrent cold sores (to ensure no underlying immunocompromise or another diagnosis)</li></ul><br>An initial limited supply of treatment may be prescribed if clinically appropriate while referring to the GP.',
+       opts:['No', 'Yes']},
 
       {id:'cs_dd_gate', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'dd_gate', progress:64},
 
@@ -1367,31 +1352,12 @@ uti: {
 
       if(ans.cs_emergency === 'Yes') return {type:'emergency', reason:'Individual is systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis. Call 999 or refer to Emergency Department via ambulance immediately.'};
 
-      var urgentChecks = Array.isArray(ans.cs_urgent_checks) ? ans.cs_urgent_checks : [];
-      if(urgentChecks.length > 0) {
-        var urgentReasons = [];
-        if(urgentChecks.some(function(c){return c.indexOf('Lesions are present')===0;})) urgentReasons.push('Lesions are present on or involving the eye. This requires urgent medical assessment.');
-        if(urgentChecks.some(function(c){return c.indexOf('Moderate')===0;})) urgentReasons.push('Individual has moderate to severe immunocompromise due to underlying medical conditions or treatments.');
-        return {type:'urgent', reason:urgentReasons.join('<br><br>') + '<br><br>Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
-      }
+      if(ans.cs_urgent_checks === 'Yes') return {type:'urgent', reason:'One or more urgent referral criteria identified. Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
 
-      var nourgentChecks = (Array.isArray(ans.cs_nourgent_checks) ? ans.cs_nourgent_checks : [])
-                         .concat(Array.isArray(ans.cs_nourgent_checks_b) ? ans.cs_nourgent_checks_b : []);
-      if(nourgentChecks.length > 0) {
-        var nourgentReasons = [];
-        if(nourgentChecks.some(function(c){return c.indexOf('Contraindications')===0;})) nourgentReasons.push('Contraindications as specified in the medication Summary of Product Characteristics are present.');
-        if(nourgentChecks.some(function(c){return c.indexOf('Pregnancy')===0;})) nourgentReasons.push('Pregnancy or suspected pregnancy. Refer to GP or treating obstetrician/gynaecologist.');
-        if(nourgentChecks.some(function(c){return c.indexOf('Signs of infection spreading')===0;})) nourgentReasons.push('Signs of infection spreading are present.');
-        if(nourgentChecks.some(function(c){return c.indexOf('Symptoms not improving')===0;})) nourgentReasons.push('Symptoms not improving within 14 days, with or without treatment.');
-        if(nourgentChecks.some(function(c){return c.indexOf('Signs of secondary infection')===0;})) nourgentReasons.push('Signs of secondary infection are present (sores are very painful or very swollen).');
-        if(nourgentChecks.some(function(c){return c.indexOf('Known hypersensitivity')===0;})) nourgentReasons.push('Known hypersensitivity or adverse reaction to Aciclovir 5% w/w cream or components of the formulation.');
-        return {type:'refer', reason:nourgentReasons.join('<br><br>') + '<br><br>Refer to GP at next available appointment.'};
-      }
+      if(ans.cs_nourgent_checks === 'Yes' || ans.cs_nourgent_checks_b === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria identified. Refer to GP at next available appointment.'};
 
       if(ans.cs_gingivostomatitis === 'Yes') return {type:'refer', reason:'Suspected gingivostomatitis - clusters of blisters or sores inside the mouth, or on the gums. Refer to GP or Dental Practitioner at next available appointment.'};
       if(ans.cs_erythema_multiforme === 'Yes') return {type:'refer', reason:'Suspected erythema multiforme - target lesions with a dark red centre, pale inner ring, and darker outer ring. Refer to GP at next available appointment.'};
-
-      var mirChecks = Array.isArray(ans.cs_mild_immuno_recurrent) ? ans.cs_mild_immuno_recurrent : [];
 
       if(ans.cs_dd_shingles === 'Yes - Shingles (Herpes Zoster) is suspected') return {type:'refer', reason:'Shingles (Herpes Zoster) suspected as an alternative diagnosis. Refer to GP at next available appointment for assessment and appropriate antiviral treatment.'};
       if(ans.cs_dd_impetigo === 'Yes - Impetigo is suspected') return {type:'refer', reason:'Impetigo suspected as an alternative diagnosis. Refer to the CCS Impetigo pathway if appropriate, or to GP at next available appointment.'};
@@ -1422,19 +1388,14 @@ uti: {
         'Cold sores are highly contagious until fully healed. Follow the infection control measures provided carefully to prevent spreading to others.'
       ];
 
-      if(mirChecks.length > 0) {
-        var mirReasons = [];
-        if(mirChecks.some(function(c){return c.indexOf('mild immunocompromise')!==-1;})) mirReasons.push('Individual has mild immunocompromise. An initial limited supply of treatment may be prescribed if clinically appropriate, while referring to the GP.');
-        if(mirChecks.some(function(c){return c.indexOf('recurrent problematic')!==-1;})) mirReasons.push('Individual has recurrent problematic or frequently recurrent cold sores. An initial limited supply of treatment may be prescribed if clinically appropriate, while referring to the GP to exclude underlying immunocompromise or another diagnosis.');
-        return {
-          type:'refer_supply',
-          reason:mirReasons.join('<br><br>'),
-          rx:[selectedTreatment],
-          instructions:csInstructions,
-          extra:csExtra,
-          safety:csSafety
-        };
-      }
+      if(ans.cs_mild_immuno_recurrent === 'Yes') return {
+        type:'refer_supply',
+        reason:'One or more non-urgent referral criteria identified. An initial limited supply of treatment may be prescribed if clinically appropriate while referring to the GP. Treatment should be limited to the dose or time necessary for the individual to access the referral pathway.',
+        rx:[selectedTreatment],
+        instructions:csInstructions,
+        extra:csExtra,
+        safety:csSafety
+      };
 
       return {
         type:'treat',
@@ -1457,29 +1418,29 @@ uti: {
     },
     steps:[
       {id:'patient',section:'Patient details',type:'patient',progress:4},
-      {id:'contact_lens',section:'Emergency screening',type:'single',progress:10,q:'Does the patient wear contact lenses?',sub:'Any contact lens wearer with suspected infective conjunctivitis requires emergency referral. Advise removal of lenses while awaiting referral.',opts:[CJ.NO,CJ.YES]},
-      {id:'vision_change',section:'Emergency screening',type:'single',progress:15,q:'Are there changes or loss in vision or visual acuity?',sub:'Includes blurred vision or seeing halos.',opts:[CJ.NO,CJ.YES]},
-      {id:'photophobia',section:'Emergency screening',type:'single',progress:20,q:'Is there severe photophobia or severe foreign body sensation?',sub:'Red flags include intense light sensitivity, avoiding light, sitting in a darkened room, pain on reading, or inability to hold the eye open.',opts:[CJ.NO,CJ.YES]},
-      {id:'eye_pain',section:'Emergency screening',type:'single',progress:25,q:'Is there moderate to severe eye pain?',opts:[CJ.NO,CJ.YES]},
-      {id:'corneal_opacity',section:'Emergency screening',type:'single',progress:30,q:'Is there a visible corneal opacity or haze?',sub:'This is a red flag and is not typical of simple conjunctivitis.'+visualAid(VISUALS.cornealOpacity,'Example of corneal opacity','Show example image','Example image showing marked corneal opacity in one eye. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 4.0).'),opts:[CJ.NO,CJ.YES]},
-      {id:'significant_trauma',section:'Emergency screening',type:'single',progress:35,q:'Is there a history of recent significant ocular trauma?',sub:'Examples include recent eye surgery, welding flashes, or high velocity power tools.',opts:[CJ.NO,CJ.YES]},
-      {id:'herpes_zoster_features',section:'Emergency screening',type:'single',progress:40,q:'Is there a rash or vesicles around the eye, eyelid, or nose?',sub:'Consider herpes zoster ophthalmicus.'+visualAid(VISUALS.herpesZoster,'Example of herpes zoster ophthalmicus around the eye','Show example image','Example image showing vesicular rash and eyelid involvement. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0 / GFDL).'),opts:[CJ.NO,CJ.YES]},
-      {id:'herpes_simplex_suspected',section:'Emergency screening',type:'single',progress:45,q:'Is ocular herpes simplex suspected?',sub:'Typical clues include one eye affected with watery discharge, blurred vision, lid swelling, or light sensitivity.'+visualAid(VISUALS.herpes_simplex,'Example of ocular herpes simplex','Example image','Clinical photo showing grouped vesicles on an erythematous eyelid. Use as a visual cue only and refer if suspected.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
-      {id:'irregular_pupil',section:'Emergency screening',type:'single',progress:50,q:'Is the pupil irregular, fixed, unusually small or large, or sluggish to light?',opts:[CJ.NO,CJ.YES]},
-      {id:'ciliary_flush',section:'Emergency screening',type:'single',progress:55,q:'Is there ciliary flush, especially if unilateral?',sub:'This is redness in a circular pattern around the junction of the cornea and sclera.'+visualAid(VISUALS.ciliaryFlush,'Clinical photo of ciliary flush','Show example image','Clinical photo showing circumcorneal redness around the cornea. This is a red flag and is not typical of uncomplicated conjunctivitis.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
-      {id:'scleritis_suspected',section:'Emergency screening',type:'single',progress:58,q:'Is scleritis suspected?',sub:'Consider a deeply red eye with tortuous vessels and deep or intense pain. This is not typical of simple conjunctivitis and requires emergency referral.'+visualAid(VISUALS.scleritis,'Example of scleritis','Example image','Clinical photo showing deep scleral redness. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
-      {id:'adenoviral_suspected',section:'Emergency screening',type:'single',progress:59,q:'Is severe adenoviral conjunctivitis suspected?',sub:'Consider intensely injected conjunctiva with pain or light sensitivity, without mucopurulent discharge. This requires emergency referral under the protocol.'+visualAid(VISUALS.adenoviral,'Example of adenoviral conjunctivitis','Example image','Clinical photo showing diffuse hyperaemia. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
+      {id:'contact_lens',section:'Exclusion criteria - emergency referral required',type:'single',progress:10,q:'Does the patient wear contact lenses?',sub:'Any contact lens wearer with suspected infective conjunctivitis requires emergency referral. Advise removal of lenses while awaiting referral.',opts:[CJ.NO,CJ.YES]},
+      {id:'vision_change',section:'Exclusion criteria - emergency referral required',type:'single',progress:15,q:'Are there changes or loss in vision or visual acuity?',sub:'Includes blurred vision or seeing halos.',opts:[CJ.NO,CJ.YES]},
+      {id:'photophobia',section:'Exclusion criteria - emergency referral required',type:'single',progress:20,q:'Is there severe photophobia or severe foreign body sensation?',sub:'Red flags include intense light sensitivity, avoiding light, sitting in a darkened room, pain on reading, or inability to hold the eye open.',opts:[CJ.NO,CJ.YES]},
+      {id:'eye_pain',section:'Exclusion criteria - emergency referral required',type:'single',progress:25,q:'Is there moderate to severe eye pain?',opts:[CJ.NO,CJ.YES]},
+      {id:'corneal_opacity',section:'Exclusion criteria - emergency referral required',type:'single',progress:30,q:'Is there a visible corneal opacity or haze?',sub:'This is a red flag and is not typical of simple conjunctivitis.'+visualAid(VISUALS.cornealOpacity,'Example of corneal opacity','Show example image','Example image showing marked corneal opacity in one eye. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 4.0).'),opts:[CJ.NO,CJ.YES]},
+      {id:'significant_trauma',section:'Exclusion criteria - emergency referral required',type:'single',progress:35,q:'Is there a history of recent significant ocular trauma?',sub:'Examples include recent eye surgery, welding flashes, or high velocity power tools.',opts:[CJ.NO,CJ.YES]},
+      {id:'herpes_zoster_features',section:'Exclusion criteria - emergency referral required',type:'single',progress:40,q:'Is there a rash or vesicles around the eye, eyelid, or nose?',sub:'Consider herpes zoster ophthalmicus.'+visualAid(VISUALS.herpesZoster,'Example of herpes zoster ophthalmicus around the eye','Show example image','Example image showing vesicular rash and eyelid involvement. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0 / GFDL).'),opts:[CJ.NO,CJ.YES]},
+      {id:'herpes_simplex_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:45,q:'Is ocular herpes simplex suspected?',sub:'Typical clues include one eye affected with watery discharge, blurred vision, lid swelling, or light sensitivity.'+visualAid(VISUALS.herpes_simplex,'Example of ocular herpes simplex','Example image','Clinical photo showing grouped vesicles on an erythematous eyelid. Use as a visual cue only and refer if suspected.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
+      {id:'irregular_pupil',section:'Exclusion criteria - emergency referral required',type:'single',progress:50,q:'Is the pupil irregular, fixed, unusually small or large, or sluggish to light?',opts:[CJ.NO,CJ.YES]},
+      {id:'ciliary_flush',section:'Exclusion criteria - emergency referral required',type:'single',progress:55,q:'Is there ciliary flush, especially if unilateral?',sub:'This is redness in a circular pattern around the junction of the cornea and sclera.'+visualAid(VISUALS.ciliaryFlush,'Clinical photo of ciliary flush','Show example image','Clinical photo showing circumcorneal redness around the cornea. This is a red flag and is not typical of uncomplicated conjunctivitis.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
+      {id:'scleritis_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:58,q:'Is scleritis suspected?',sub:'Consider a deeply red eye with tortuous vessels and deep or intense pain. This is not typical of simple conjunctivitis and requires emergency referral.'+visualAid(VISUALS.scleritis,'Example of scleritis','Example image','Clinical photo showing deep scleral redness. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
+      {id:'adenoviral_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:59,q:'Is severe adenoviral conjunctivitis suspected?',sub:'Consider intensely injected conjunctiva with pain or light sensitivity, without mucopurulent discharge. This requires emergency referral under the protocol.'+visualAid(VISUALS.adenoviral,'Example of adenoviral conjunctivitis','Example image','Clinical photo showing diffuse hyperaemia. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
 
-      {id:'chlamydia_suspected',section:'Emergency screening',type:'single',progress:60,q:'Is Chlamydia trachomatis conjunctivitis suspected?',sub:'In the first month of life this requires emergency referral. '+visualAid(VISUALS.chlamydiaNeonate,'Example of neonatal conjunctivitis','Example image','Clinical photo showing neonatal conjunctivitis. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.') + ' In individuals aged 1 month and older, immediate GP or other relevant medical practitioner referral is required. Consider chronic low-grade irritation with mucous discharge, especially if there has been no response to standard topical therapy.',opts:[CJ.NO,CJ.YES]},
-      {id:'ocular_history',section:'Immediate GP referral screening',type:'single',progress:64,q:'Is there a history of ocular disease such as keratitis, scleritis, or iritis?',opts:[CJ.NO,CJ.YES]},
-      {id:'hyperpurulent_rapid',section:'Immediate GP referral screening',type:'single',progress:68,q:'Is there hyper-purulent yellow or green discharge with very rapid onset?',sub:'This may suggest Neisseria gonorrhoeae eye infection.',opts:[CJ.NO,CJ.YES]},
-      {id:'lid_swelling_closed',section:'Immediate GP referral screening',type:'single',progress:72,q:'Are both upper and lower lids intensely swollen or closed and difficult to open, with no palpable lesion?',sub:'This raises concern for preseptal or orbital cellulitis.'+visualAid(VISUALS.preseptalCellulitis,'Example of periorbital / preseptal cellulitis','Show example image','Example image showing marked eyelid swelling and erythema. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0).'),opts:[CJ.NO,CJ.YES]},
-      {id:'localised_cellulitis',section:'Immediate GP referral screening',type:'single',progress:76,q:'Is the entire lid swollen with a dark red appearance around a localised initial lump or swelling?',sub:'This raises concern for a meibomian cyst with localised cellulitis.'+visualAid(VISUALS.preseptalCellulitis,'Example of marked eyelid swelling / cellulitis','Show example image','Use this as a rough visual cue for significant lid swelling and surrounding erythema. Refer if this pattern is present.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0).'),opts:[CJ.NO,CJ.YES]},
-      {id:'minor_trauma',section:'Immediate GP referral screening',type:'single',progress:80,q:'Is there minor ocular trauma such as a fingernail or branch injury?',opts:[CJ.NO,CJ.YES]},
-      {id:'headache_nausea',section:'Immediate GP referral screening',type:'single',progress:84,q:'Is there a severe headache with or without nausea?',opts:[CJ.NO,CJ.YES]},
-      {id:'focal_redness',section:'Immediate GP referral screening',type:'single',progress:88,q:'Is the redness focal rather than diffuse across the conjunctiva?',opts:[CJ.NO,CJ.YES]},
-      {id:'recent_reinfection',section:'Immediate GP referral screening',type:'single',progress:92,q:'Has there been recent reinfection with relapse within the last 2 weeks?',opts:[CJ.NO,CJ.YES]},
-      {id:'not_improving_2_days',section:'Immediate GP referral screening',type:'single',progress:95,q:'Has treatment already been started and there has been no improvement after 2 days?',opts:[CJ.NO,CJ.YES]},
+      {id:'chlamydia_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:60,q:'Is Chlamydia trachomatis conjunctivitis suspected?',sub:'In the first month of life this requires emergency referral. '+visualAid(VISUALS.chlamydiaNeonate,'Example of neonatal conjunctivitis','Example image','Clinical photo showing neonatal conjunctivitis. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.') + ' In individuals aged 1 month and older, immediate GP or other relevant medical practitioner referral is required. Consider chronic low-grade irritation with mucous discharge, especially if there has been no response to standard topical therapy.',opts:[CJ.NO,CJ.YES]},
+      {id:'ocular_history',section:'Exclusion criteria - urgent referral required',type:'single',progress:64,q:'Is there a history of ocular disease such as keratitis, scleritis, or iritis?',opts:[CJ.NO,CJ.YES]},
+      {id:'hyperpurulent_rapid',section:'Exclusion criteria - urgent referral required',type:'single',progress:68,q:'Is there hyper-purulent yellow or green discharge with very rapid onset?',sub:'This may suggest Neisseria gonorrhoeae eye infection.',opts:[CJ.NO,CJ.YES]},
+      {id:'lid_swelling_closed',section:'Exclusion criteria - urgent referral required',type:'single',progress:72,q:'Are both upper and lower lids intensely swollen or closed and difficult to open, with no palpable lesion?',sub:'This raises concern for preseptal or orbital cellulitis.'+visualAid(VISUALS.preseptalCellulitis,'Example of periorbital / preseptal cellulitis','Show example image','Example image showing marked eyelid swelling and erythema. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0).'),opts:[CJ.NO,CJ.YES]},
+      {id:'localised_cellulitis',section:'Exclusion criteria - urgent referral required',type:'single',progress:76,q:'Is the entire lid swollen with a dark red appearance around a localised initial lump or swelling?',sub:'This raises concern for a meibomian cyst with localised cellulitis.'+visualAid(VISUALS.preseptalCellulitis,'Example of marked eyelid swelling / cellulitis','Show example image','Use this as a rough visual cue for significant lid swelling and surrounding erythema. Refer if this pattern is present.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0).'),opts:[CJ.NO,CJ.YES]},
+      {id:'minor_trauma',section:'Exclusion criteria - urgent referral required',type:'single',progress:80,q:'Is there minor ocular trauma such as a fingernail or branch injury?',opts:[CJ.NO,CJ.YES]},
+      {id:'headache_nausea',section:'Exclusion criteria - urgent referral required',type:'single',progress:84,q:'Is there a severe headache with or without nausea?',opts:[CJ.NO,CJ.YES]},
+      {id:'focal_redness',section:'Exclusion criteria - urgent referral required',type:'single',progress:88,q:'Is the redness focal rather than diffuse across the conjunctiva?',opts:[CJ.NO,CJ.YES]},
+      {id:'recent_reinfection',section:'Exclusion criteria - urgent referral required',type:'single',progress:92,q:'Has there been recent reinfection with relapse within the last 2 weeks?',opts:[CJ.NO,CJ.YES]},
+      {id:'not_improving_2_days',section:'Exclusion criteria - urgent referral required',type:'single',progress:95,q:'Has treatment already been started and there has been no improvement after 2 days?',opts:[CJ.NO,CJ.YES]},
       {id:'symptoms',section:'Symptom assessment',type:'checkbox',progress:96,q:'Which features are present?',sub:'Select all that apply.',opts:[CJ.DIFFUSE_RED_EYE,CJ.PURULENT_DISCHARGE_FEATURE,'Watery or mucoserous discharge','Grittiness, burning, or irritation','Crusting on lid margin in morning','Eye stuck closed in the morning','Associated viral symptoms such as common cold or sore throat']},
       {id:'conjunctival_hyperaemia',section:'Symptom assessment',type:'single',progress:97,q:'Is there diffuse conjunctival hyperaemia across the white of the eye?',opts:[CJ.NO,CJ.YES]},
       {id:'discharge_type',section:'Symptom assessment',type:'single',progress:98,q:'What best describes the discharge?',opts:[CJ.NONE,CJ.WATERY_OR_MUCOSEROUS,CJ.PURULENT_OR_MUCOPURULENT]},
@@ -1608,7 +1569,7 @@ uti: {
     steps: [
       {id:'patient', section:'Patient details', type:'patient', progress:5},
 
-      {id:'imp_emergency', section:'Emergency referral', type:'single', progress:12,
+      {id:'imp_emergency', section:'Exclusion criteria - emergency referral required', type:'single', progress:12,
        q:'Is the individual systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis?',
        opts:['No', 'Yes']},
 
@@ -1622,7 +1583,7 @@ uti: {
        sub:'<ul><li>4 or more impetigo lesions or clusters are present (widespread)</li><li>There are open wounds present in the area to be treated</li></ul>',
        opts:['No', 'Yes']},
 
-      {id:'imp_breastfeeding_breast', section:'Non-urgent referral', type:'single', progress:32, femaleOnly:true,
+      {id:'imp_breastfeeding_breast', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:32, femaleOnly:true,
        q:'Is the individual currently breastfeeding with impetigo lesion(s) present on the breast?',
        opts:['No', 'Yes']},
 
@@ -1636,7 +1597,7 @@ uti: {
        sub:'Topical preparations containing paraffin (including Sodium Fusidate ointment) present a fire hazard if the treated area cannot be protected from open or naked flames.<ul><li>Contraindications as specified in the medication Summary of Product Characteristics</li><li>The affected area(s) cannot be protected from open or naked flames (e.g. the individual smokes)</li><li>Known hypersensitivity or adverse reaction to Fusidic Acid 20mg/g cream, Sodium Fusidate 20mg/g ointment, or any components of the formulations</li></ul>',
        opts:['No', 'Yes']},
 
-      {id:'imp_mild_immuno', section:'Non-urgent referral - initial limited supply', type:'single', progress:38,
+      {id:'imp_mild_immuno', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:38,
        q:'Is the patient <u>mildly to moderately</u> immunocompromised?',
        sub:'For mildly to moderately immunocompromised individuals, an initial limited supply of treatment may be prescribed if clinically appropriate, while the individual is awaiting referral. Treatment of <u>moderately to severely</u> immunocompromised individuals is outside the scope of this service and they must be referred as a matter of urgency.',
        opts:['No', 'Yes - initial limited supply', 'Yes - refer']},
