@@ -25,15 +25,15 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **No** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
-| 10 | Select treatment | **Aciclovir** → Next |
+| 10 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Treat outcome - "Suitable for treatment under the Common Conditions Service", Aciclovir 5% w/w cream, directions include "five times daily"
 
@@ -46,7 +46,7 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | Systemically very unwell applies - select **Yes** → Next |
 
 **Expected:** Emergency outcome - "Emergency referral required", mentions 999
 
@@ -71,8 +71,8 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | Lesions on or involving the eye apply - select **Yes** → Next |
 
 **Expected:** Urgent outcome - "Urgent medical assessment required", mentions "urgent referral criteria"
 
@@ -85,8 +85,8 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | Moderate to severe immunocompromise applies - select **Yes** → Next |
 
 **Expected:** Urgent outcome - "Urgent medical assessment required"
 
@@ -99,9 +99,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | Pregnancy applies - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -114,9 +114,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | Signs of infection spreading apply - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope"
 
@@ -129,9 +129,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | Contraindications per SPC apply - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -144,9 +144,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | Symptoms not improving within 14 days applies - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -159,10 +159,10 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | Signs of secondary infection apply - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -175,10 +175,10 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **Yes** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | Known hypersensitivity to Aciclovir applies - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -191,10 +191,10 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **Yes** → Next |
 
 **Expected:** Refer outcome - mentions "gingivostomatitis"
@@ -208,10 +208,10 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **Yes** → Next |
 
@@ -226,13 +226,13 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **No** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
 | 10 | Shingles suspected? | **Yes - Shingles (Herpes Zoster) is suspected** → Next |
 
@@ -247,13 +247,13 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **No** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
 | 10 | Shingles suspected? | **No** → Next |
 | 11 | Impetigo suspected? | **Yes - Impetigo is suspected** → Next |
@@ -269,13 +269,13 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **No** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
 | 10 | Shingles suspected? | **No** → Next |
 | 11 | Impetigo suspected? | **No** → Next |
@@ -292,15 +292,15 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **Yes** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | Mild immunocompromise applies - select **Yes** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
-| 10 | Select treatment | **Aciclovir** → Next |
+| 10 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Refer with supply outcome - "Refer: initial limited supply may be considered", Aciclovir 5% w/w cream
 
@@ -313,15 +313,15 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **Yes** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | Recurrent problematic cold sores applies - select **Yes** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
-| 10 | Select treatment | **Aciclovir** → Next |
+| 10 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Refer with supply outcome - "Refer: initial limited supply may be considered", Aciclovir 5% w/w cream
 
@@ -334,17 +334,17 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | **No** → Next |
+| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
+| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
+| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
+| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
 | 6 | Gingivostomatitis suspected? | **No** → Next |
 | 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | **No** → Next |
+| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
 | 10 | Shingles suspected? | **No** → Next |
 | 11 | Impetigo suspected? | **No** → Next |
 | 12 | Squamous cell carcinoma of the lip suspected? | **No** → Next |
-| 13 | Select treatment | **Aciclovir** → Next |
+| 13 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Treat outcome - "Suitable for treatment under the Common Conditions Service", Aciclovir 5% w/w cream, directions include "five times daily"
