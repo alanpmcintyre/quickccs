@@ -352,215 +352,6 @@ abbr.ctip:hover::after, abbr.ctip:focus::after {
 <div class="qcard" id="rcard"></div>
 </div>
 </div>
-<!--
-════════════════════════════════════════════════════════════════════════════
-QuickCCS - Cursor Rules v2 (STRICT)
-════════════════════════════════════════════════════════════════════════════
-
-PURPOSE
-These rules define the architectural contract for QuickCCS.
-Follow them strictly. If a request conflicts with these rules, preserve them.
-
-CORE PRINCIPLES
-- Protocol-driven clinical decision tool
-- Safety over convenience
-- Conditions are data, not engine rewrites
-- No hidden behaviour
-- Prefer explicit, testable logic
-
-════════════════════════════════════════════════════════════════════════════
-ARCHITECTURE (MANDATORY)
-════════════════════════════════════════════════════════════════════════════
-
-ccs-conditions  → Clinical layer ONLY
-- Condition modules (overview, steps[], getOutcome)
-- Dashboard config
-- Clinical helpers
-DO NOT:
-- Access DOM
-- Render UI
-- Handle navigation
-- Each condition must be purely data + getOutcome(). No UI logic inside.
-- getOutcome() must only compute and return an outcome object.
-
-ccs-render      → UI layer ONLY
-- renderStep(), showResult(), buildRecord(), rendering helpers
-- Reads from CONDITIONS and answers - does not mutate navigation state
-DO NOT:
-- Add clinical logic
-- Mutate navigation state
-- Add more logic into renderStep() - create a new named helper function instead
-- Embed raw HTML strings directly in renderStep() or showResult()
-
-ccs-logic       → Flow layer ONLY
-- Navigation, login/logout, step progression
-- Input handlers
-DO NOT:
-- Add clinical logic
-- Duplicate rendering logic
-
-════════════════════════════════════════════════════════════════════════════
-SEPARATION OF CONCERNS (NON-NEGOTIABLE)
-════════════════════════════════════════════════════════════════════════════
-Clinical decisions → ccs-conditions
-UI / HTML         → ccs-render
-Navigation / flow → ccs-logic
-
-If unsure → STOP and place logic in correct layer
-
-════════════════════════════════════════════════════════════════════════════
-OUTCOME CONTRACT (STRICT)
-════════════════════════════════════════════════════════════════════════════
-
-Referral:
-{ type:'emergency'|'urgent'|'refer'|'refer_supply', reason:'...' }
-
-Treatment:
-{
-  type:'treat',
-  rx:[],           // drug name, dose, frequency ONLY
-  instructions:[], // patient-facing usage detail, duration, what to expect
-  breastRx:[],
-  extra:[],
-  safety:[]
-}
-
-- rx[] must contain ONLY: drug name, dose, frequency - no usage instructions
-- instructions[] contains: how to use, duration, what to expect
-- Prescription block renders rx[] and may intentionally render instructions[] in a separate DIRECTIONS section
-- Never mix instructional prose into rx[]
-- All arrays must be present on treat outcomes, even if empty
-
-════════════════════════════════════════════════════════════════════════════
-getOutcome RULES
-════════════════════════════════════════════════════════════════════════════
-
-Must be PURE:
-- No mutation of global state
-- No DOM access
-- No side effects
-
-MANDATORY ORDER:
-1. Emergency
-2. Urgent
-3. Absolute exclusions (age, pregnancy, lesion type, duration)
-4. Relative exclusions (recurrence, swallowing, new med, mild immunocompromise)
-5. Treatment selection
-
-- Return early on first matched exclusion - do not accumulate
-- Never return rx[] and reason together
-
-════════════════════════════════════════════════════════════════════════════
-STEP & SKIP RULES
-════════════════════════════════════════════════════════════════════════════
-
-- Step skip logic must live on the step object as a skip() function in ccs-conditions
-- Single source of truth: isStepSkipped() in ccs-logic
-- NEVER add conditional skip or branch logic directly into renderStep()
-- If a pharmacist requests "skip this question if X":
-    1. Add a skip property to the step definition in ccs-conditions
-    2. Add a check for that property in isStepSkipped() in ccs-logic
-    3. Do NOT touch renderStep()
-
-════════════════════════════════════════════════════════════════════════════
-STRING CONSISTENCY
-════════════════════════════════════════════════════════════════════════════
-
-- Option strings are FIXED CONTRACTS
-- getOutcome() comparisons must match step option strings exactly
-- Tests must match EXACT strings
-- Logic-critical strings must use ASCII punctuation only:
-  - use straight apostrophes ' not curly apostrophes
-  - use hyphen-minus - not en/em dashes
-- This applies to: opts[], skip-condition comparisons, getOutcome() comparisons, and tests
-
-════════════════════════════════════════════════════════════════════════════
-buildRecord CONTRACT
-════════════════════════════════════════════════════════════════════════════
-
-Must include: meta, pharmacist, patient, outcome, symptoms, answers
-- meta.timestampISO must be valid ISO 8601 (for Bubble payload)
-- outcome arrays must always be present, even if empty
-
-════════════════════════════════════════════════════════════════════════════
-TESTING RULES
-════════════════════════════════════════════════════════════════════════════
-
-Each condition must include:
-- Outcome tests (all exclusion paths + all treatment paths)
-- Flow tests (step skipping behaviour)
-- Render tests (showResult output)
-- Record tests (buildRecord structure)
-
-Run test_quickccs_local.js after every change before deploying.
-The test script auto-detects the highest versioned QuickCCS*.html in the folder.
-
-════════════════════════════════════════════════════════════════════════════
-VERSIONING
-════════════════════════════════════════════════════════════════════════════
-
-- Patch (x.y.Z): bug fixes, copy changes
-- Minor (x.Y.0): new condition module added
-- Major (X.0.0): architecture or data model change
-
-════════════════════════════════════════════════════════════════════════════
-HARD PROHIBITIONS
-════════════════════════════════════════════════════════════════════════════
-
-DO NOT:
-- Put clinical logic in ccs-render or ccs-logic
-- Access DOM in getOutcome()
-- Duplicate skip logic outside isStepSkipped()
-- Mix rx[] and instructions[]
-- Change outcome contracts silently
-- Edit renderStep() or showResult() to accommodate a new condition
-
-════════════════════════════════════════════════════════════════════════════
-DRIFT WARNING
-════════════════════════════════════════════════════════════════════════════
-
-If you find yourself editing renderStep() or showResult() for a new condition,
-or adding condition-specific if() checks inside rendering functions -
-STOP. That is architectural drift. The fix belongs in ccs-conditions.
-The rendering layer must remain condition-agnostic.
-
-════════════════════════════════════════════════════════════════════════════
-GUI CONVENTIONS - APPLY THESE WHEN BUILDING EACH NEW CONDITION
-════════════════════════════════════════════════════════════════════════════
-
-The following conventions were established during v2.4.72 and apply to ALL
-conditions. They are NOT enforced automatically - you must follow them by hand
-when writing new condition modules.
-
-1. PRESCRIPTION DIRECTIONS - use count-based language, never mg amounts:
-   - Tablets: "Take ONE tablet every 12 hours for X days."
-   - Capsules: "Take ONE capsule every 6 hours for X days."
-   - Liquid/topical: volume or application count is acceptable (e.g. "1-2ml", "Apply 1 drop")
-   - The drug name line in rx[] SHOULD still include the mg strength (e.g. "Trimethoprim 200mg tablets")
-   - The direction line in instructions[] is where count language applies
-
-2. LEAD+BULLETS QUESTION FORMAT - for steps with dense clinical criteria lists,
-   use the formatQuestionText() map in ccs-render rather than embedding the full
-   list in the step's q: string. To add a new step to the map:
-   - Open formatQuestionText() in ccs-render
-   - Add an entry keyed by step.id with a lead: string and bullets: [] array
-   - The rendering machinery handles the rest automatically
-   - Do NOT add HTML directly into q: strings
-
-3. SYMPTOM CHECKLIST DISQUALIFIERS - items that exclude a patient from the
-   treatment pathway should be labelled "(out of protocol scope if present)"
-   rather than "(must NOT be present for diagnosis)" or similar.
-   - The label string is a FIXED CONTRACT - update opts[], getOutcome() indexOf
-     checks, and any seedState references together if you change a label.
-
-4. expandClinicalTerms() - automatically expands: dysuria, haematuria,
-   photophobia, urethritis. Case of the first letter is preserved.
-   - If a new clinical term needs inline expansion, add it to expandClinicalTerms()
-     using the same case-preserving function pattern already in use.
-   - Do NOT expand terms inline in q: or opts[] strings - use expandClinicalTerms.
-
-════════════════════════════════════════════════════════════════════════════
--->
 <script id="ccs-conditions">
 // ───────────────────────────────────────────────────────────────────────────
 // CONDITIONS
@@ -2755,18 +2546,18 @@ function doLogout() {
 // ⚠️  DEV ONLY - remove this entire function when DEV_SHORTCUT is retired.
 function devShortcut() {
   pharmacist = {
-    name:'Alan McIntyre', psi:'11876', contract:'CCS12345',
-    pharmacy:'Guerins', address:'Mitchel Street, Nenagh', phone:'086 8794424'
+    name:'Test Pharmacist', psi:'00000', contract:'CCS00000',
+    pharmacy:'Test Pharmacy', address:'1 Test Street, Dublin', phone:'000 0000000'
   };
-  document.getElementById('username-display').textContent = 'Alan McIntyre';
+  document.getElementById('username-display').textContent = 'Test Pharmacist';
   document.getElementById('userwrap').style.display = 'flex';
   activeCond = 'impetigo';
   answers = {
-    ph_name:'Alan McIntyre', ph_psi:'11876', ph_contract:'CCS12345',
-    ph_pharmacy:'Guerins', ph_address:'Mitchel Street, Nenagh', ph_phone:'086 8794424',
-    pt_name:'Ciarán Murphy', pt_dob:'1990-03-15',
-    pt_sex:'Male', pt_address:'14 Harbour Street, Nenagh, Co. Tipperary',
-    pt_phone:'086 1234567', pt_ppsn:'', pt_consent:true,
+    ph_name:'Test Pharmacist', ph_psi:'00000', ph_contract:'CCS00000',
+    ph_pharmacy:'Test Pharmacy', ph_address:'1 Test Street, Dublin', ph_phone:'000 0000000',
+    pt_name:'Test Patient', pt_dob:'1990-03-15',
+    pt_sex:'Male', pt_address:'1 Test Street, Dublin',
+    pt_phone:'000 0000000', pt_ppsn:'', pt_consent:true,
     pt_scheme:'Medical Card', pt_scheme_num:'AB12345678'
   };
   cbState = {};
