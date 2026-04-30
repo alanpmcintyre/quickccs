@@ -4,18 +4,6 @@
 
 **Patient details step (all tests):** fill name, DOB, sex, address, phone, tick informed consent → Next.
 
-**Step reference:**
-
-| Step | Section label (UI) | Criteria |
-|------|--------------------|----------|
-| 2 | Exclusion criteria - emergency referral required | Systemically very unwell / severe or life-threatening infection / systemic sepsis |
-| 3 | Exclusion criteria - urgent referral required | Lesions on or involving the eye / moderate to severe immunocompromise |
-| 4 | Exclusion criteria - non-urgent referral required (A) | Contraindications per SPC / pregnancy / signs of infection spreading / symptoms not improving within 14 days |
-| 5 | Exclusion criteria - non-urgent referral required (B) | Signs of secondary infection / known hypersensitivity to Aciclovir |
-| 6 | Exclusion criteria - non-urgent referral required | Gingivostomatitis suspected? |
-| 7 | Exclusion criteria - non-urgent referral required | Erythema multiforme suspected? |
-| 8 | Exclusion criteria - non-urgent referral required | Mild immunocompromise / recurrent problematic cold sores |
-
 ---
 
 ### 1. Treat: standard adult, no exclusions
@@ -25,13 +13,13 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
 | 10 | Select treatment | Select **Aciclovir** → Next |
 
@@ -46,7 +34,7 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | Systemically very unwell applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | Systemically very unwell applies - select **Yes** → Next |
 
 **Expected:** Emergency outcome - "Emergency referral required", mentions 999
 
@@ -71,8 +59,8 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | Lesions on or involving the eye apply - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | Lesions on or involving the eye apply - select **Yes** → Next |
 
 **Expected:** Urgent outcome - "Urgent medical assessment required", mentions "urgent referral criteria"
 
@@ -85,8 +73,8 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | Moderate to severe immunocompromise applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | Moderate to severe immunocompromise applies - select **Yes** → Next |
 
 **Expected:** Urgent outcome - "Urgent medical assessment required"
 
@@ -99,9 +87,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | Pregnancy applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | Pregnancy applies - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -114,9 +102,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | Signs of infection spreading apply - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | Signs of infection spreading apply - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope"
 
@@ -129,9 +117,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | Contraindications per SPC apply - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | Contraindications per SPC apply - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -144,9 +132,9 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | Symptoms not improving within 14 days applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | Symptoms not improving within 14 days applies - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -159,10 +147,10 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | Signs of secondary infection apply - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | Signs of secondary infection apply - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -175,10 +163,10 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | Known hypersensitivity to Aciclovir applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | Known hypersensitivity to Aciclovir applies - select **Yes** → Next |
 
 **Expected:** Refer outcome - "Refer: outside service scope", mentions "non-urgent referral criteria"
 
@@ -191,11 +179,11 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **Yes** → Next |
 
 **Expected:** Refer outcome - mentions "gingivostomatitis"
 
@@ -208,12 +196,12 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **Yes** → Next |
 
 **Expected:** Refer outcome - mentions "erythema multiforme"
 
@@ -226,15 +214,15 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Shingles suspected? | **Yes - Shingles (Herpes Zoster) is suspected** → Next |
+| 10 | Differential diagnosis - shingles suspected? | **Yes - Shingles (Herpes Zoster) is suspected** → Next |
 
 **Expected:** Refer outcome - mentions "Shingles"
 
@@ -247,16 +235,16 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Shingles suspected? | **No** → Next |
-| 11 | Impetigo suspected? | **Yes - Impetigo is suspected** → Next |
+| 10 | Differential diagnosis - shingles suspected? | **No** → Next |
+| 11 | Differential diagnosis - impetigo suspected? | **Yes - Impetigo is suspected** → Next |
 
 **Expected:** Refer outcome - mentions "Impetigo"
 
@@ -269,17 +257,17 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Shingles suspected? | **No** → Next |
-| 11 | Impetigo suspected? | **No** → Next |
-| 12 | Squamous cell carcinoma of the lip suspected? | **Yes - Squamous cell carcinoma of the lip is suspected** → Next |
+| 10 | Differential diagnosis - shingles suspected? | **No** → Next |
+| 11 | Differential diagnosis - impetigo suspected? | **No** → Next |
+| 12 | Differential diagnosis - squamous cell carcinoma of the lip suspected? | **Yes - Squamous cell carcinoma of the lip is suspected** → Next |
 
 **Expected:** Refer outcome - mentions "Squamous cell carcinoma"
 
@@ -292,13 +280,13 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | Mild immunocompromise applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | Mild immunocompromise applies - select **Yes** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
 | 10 | Select treatment | Select **Aciclovir** → Next |
 
@@ -313,13 +301,13 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | Recurrent problematic cold sores applies - select **Yes** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | Recurrent problematic cold sores applies - select **Yes** → Next |
 | 9 | Differential diagnosis gate | Click **Proceed to treatment** |
 | 10 | Select treatment | Select **Aciclovir** → Next |
 
@@ -334,17 +322,17 @@
 | # | Screen | Action |
 |---|--------|--------|
 | 1 | Patient details | Fill all fields, tick consent → Next |
-| 2 | Systemically unwell / severe infection / sepsis? | None apply - select **No** → Next |
-| 3 | Eye lesions / moderate-to-severe immunocompromise? | None apply - select **No** → Next |
-| 4 | Contraindications / pregnancy / spreading / not improving? | None apply - select **No** → Next |
-| 5 | Secondary infection / hypersensitivity to Aciclovir? | None apply - select **No** → Next |
-| 6 | Gingivostomatitis suspected? | **No** → Next |
-| 7 | Erythema multiforme suspected? | **No** → Next |
-| 8 | Mild immunocompromise / recurrent cold sores? | None apply - select **No** → Next |
+| 2 | Exclusion criteria - emergency referral required (systemically very unwell / severe infection / sepsis) | None apply - select **No** → Next |
+| 3 | Exclusion criteria - urgent referral required (eye lesions / moderate-to-severe immunocompromise) | None apply - select **No** → Next |
+| 4 | Exclusion criteria - non-urgent referral required (contraindications / pregnancy / spreading / not improving within 14 days) | None apply - select **No** → Next |
+| 5 | Exclusion criteria - non-urgent referral required (secondary infection / hypersensitivity to Aciclovir) | None apply - select **No** → Next |
+| 6 | Exclusion criteria - non-urgent referral required (gingivostomatitis suspected?) | **No** → Next |
+| 7 | Exclusion criteria - non-urgent referral required (erythema multiforme suspected?) | **No** → Next |
+| 8 | Exclusion criteria - non-urgent referral required (mild immunocompromise / recurrent cold sores) | None apply - select **No** → Next |
 | 9 | Differential diagnosis gate | Click **Review differential diagnoses** |
-| 10 | Shingles suspected? | **No** → Next |
-| 11 | Impetigo suspected? | **No** → Next |
-| 12 | Squamous cell carcinoma of the lip suspected? | **No** → Next |
+| 10 | Differential diagnosis - shingles suspected? | **No** → Next |
+| 11 | Differential diagnosis - impetigo suspected? | **No** → Next |
+| 12 | Differential diagnosis - squamous cell carcinoma of the lip suspected? | **No** → Next |
 | 13 | Select treatment | Select **Aciclovir** → Next |
 
 **Expected:** Treat outcome - "Suitable for treatment under the Common Conditions Service", Aciclovir 5% w/w cream, directions include "five times daily"
