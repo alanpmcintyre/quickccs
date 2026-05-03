@@ -375,6 +375,9 @@ function calcAgeMonths(dob) {
 function calcAgeYears(dob) {
   return Math.floor(calcAgeMonths(dob) / 12);
 }
+function calcAgeDays(dob) {
+  return Math.floor((new Date() - new Date(dob)) / 86400000);
+}
 
 var VISUALS = {
   ciliaryFlush: "images/ciliary-flush.jpg",
@@ -637,7 +640,7 @@ var CONDITIONS = {
     overview:{
       description:'Oral thrush (oropharyngeal candidiasis) is a fungal infection of the mouth caused by Candida species, most commonly Candida albicans. It is common in babies, in individuals who have taken antibiotics or steroids, and in older individuals with dentures. It is typically self-limiting in healthy individuals but requires treatment to resolve.',
       symptoms:['White spots or patches adhering to the oral mucosa (curd-like), can usually be wiped off revealing a red base','Red or sore mouth without white spots, especially after antibiotics or steroids','In denture wearers: red or sore area under dentures mirroring the fitting surface','Cracks at the corners of the mouth (angular cheilitis)','Unpleasant taste or mild pain in the mouth','In babies: white coating on tongue or palate, white spots, reluctance to feed'],
-      exclusions:['Infant under 1 month old (corrected age)','Pregnancy or suspected pregnancy','Systemically very unwell or signs of severe/life-threatening infection','Moderate to severe immunocompromise','Lesions present for more than 14 days','White spots or plaques that do not rub off','Recurrence of oral thrush','Pain on swallowing not attributable to oral thrush']
+      exclusions:['Infant under 1 month old (corrected age)','Pregnancy or suspected pregnancy','Systemically very unwell or signs of severe/life-threatening infection','<u>Moderate to severe</u> immunocompromise','Lesions present for more than 14 days','White spots or plaques that do not rub off','Recurrence of oral thrush','Pain on swallowing not attributable to oral thrush']
     },
     steps:[
       {id:'patient',section:'Patient details',type:'patient',progress:5},
@@ -711,7 +714,7 @@ var CONDITIONS = {
       var ageMonths=calcAgeMonths(ans.pt_dob),ageYears=calcAgeYears(ans.pt_dob);
       if(ageMonths<1) return{type:'refer',reason:'Patient is under 1 month old (corrected age). Pharmacist prescribing not permitted. Refer to GP.'};
       if(ans.systemic==='Yes, signs of severe illness') return{type:'emergency',reason:'Patient is systemically very unwell or showing signs of severe/life-threatening infection or sepsis. Refer urgently to Emergency Department via ambulance.'};
-      if(ans.immunocompromise==='Yes, moderate to severe') return{type:'urgent',reason:'Moderate to severe immunocompromise. Urgent medical assessment required. Refer to GP, GP out-of-hours, or Emergency Department as appropriate.'};
+      if(ans.immunocompromise==='Yes, moderate to severe') return{type:'urgent',reason:'<u>Moderate to severe</u> immunocompromise. Urgent medical assessment required. Refer to GP, GP out-of-hours, or Emergency Department as appropriate.'};
       if(ans.pregnant==='Yes'&&ans.pt_sex!=='Male') return{type:'refer',reason:'Pregnancy or suspected pregnancy. Refer to GP or treating obstetrician/gynaecologist. Pharmacist prescribing not permitted.'};
       if(ans.lesion_type==='White patches or plaques present, they do not rub off') return{type:'refer',reason:'White patches that do not rub off may not be oral thrush. Refer to Dental Practitioner for further investigation and to exclude malignancy.'};
       if(ans.lesion_type==='Red lesion or appearance not consistent with typical oral thrush') return{type:'refer',reason:'Red lesion or appearance not consistent with typical oral thrush. Possible erythroplakia or other pathology - significant malignant potential. Refer to Dental Practitioner for further investigation.'};
@@ -1267,7 +1270,7 @@ uti: {
       ],
       exclusions: [
         'Systemically very unwell, severe/life-threatening infection, or systemic sepsis',
-        'Under 1 month of age (corrected), lesions involving the eye, or moderate to severe immunocompromise',
+        'Under 1 month of age (corrected), lesions involving the eye, or <u>moderate to severe</u> immunocompromise',
         'Pregnancy or suspected pregnancy',
         'Signs of infection spreading, symptoms not improving within 14 days, or signs of secondary infection',
         'Suspected gingivostomatitis, suspected erythema multiforme, or known hypersensitivity to treatment options'
@@ -1282,7 +1285,7 @@ uti: {
 
       {id:'cs_urgent_checks', section:'Exclusion criteria - urgent referral required', type:'single', progress:26,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>Lesions are present on or involving the eye</li><li>Moderate to severe immunocompromise due to underlying medical conditions or treatments</li></ul>',
+       sub:'<ul><li>Lesions are present on or involving the eye</li><li><u>Moderate to severe</u> immunocompromise due to underlying medical conditions or treatments</li></ul>',
        opts:['No', 'Yes']},
 
       {id:'cs_nourgent_checks', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:40,
@@ -1308,16 +1311,10 @@ uti: {
           + visualAid('images/erythema multiforme 2.jpg', 'Erythema multiforme', '', 'Target lesions with a dark red centre, pale inner ring, and darker outer ring.', ''),
        opts:['No', 'Yes']},
 
-      {id:'cs_mild_immuno', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:54,
-       q:'Is the patient <u>mildly to moderately</u> immunocompromised?',
-       sub:'For mildly to moderately immunocompromised individuals, an initial limited supply of treatment may be prescribed if clinically appropriate, while the individual is awaiting referral. Treatment of <u>moderately to severely</u> immunocompromised individuals is outside the scope of this service and they must be referred as a matter of urgency.',
-       opts:['No', 'Yes - initial limited supply', 'Yes - refer']},
-
-      {id:'cs_recurrent', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:57,
-       q:'Does the individual have recurrent problematic or frequently recurrent cold sores?',
-       sub:'If yes, refer to the GP to ensure there is no underlying immunocompromise or alternative diagnosis.',
-       opts:['No', 'Yes'],
-       skip:function(ans){return ans.cs_mild_immuno === 'Yes - refer' || ans.cs_mild_immuno === 'Yes - initial limited supply';}},
+      {id:'cs_mild_immuno', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:57,
+       q:'Do any of the following apply?',
+       sub:'<ul><li>The individual is <u>mildly to moderately</u> immunocompromised</li><li>The individual has recurrent problematic or frequently recurrent cold sores</li></ul>',
+       opts:['No', 'Yes - provide initial limited supply and refer', 'Yes - refer without supply']},
 
       {id:'cs_dd_gate', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'dd_gate', progress:64},
 
@@ -1351,7 +1348,7 @@ uti: {
        opts:[
          'Aciclovir 5% w/w cream - apply five times daily at approximately four-hourly intervals, omitting the night-time application (2g tube)'
        ],
-       skip:function(ans){return ans.cs_mild_immuno === 'Yes - refer';}}
+       skip:function(ans){return ans.cs_mild_immuno === 'Yes - refer without supply';}}
     ],
     getOutcome: function(ans) {
       var ageMonths = calcAgeMonths(ans.pt_dob);
@@ -1366,7 +1363,7 @@ uti: {
       if(ans.cs_gingivostomatitis === 'Yes') return {type:'refer', reason:'Suspected gingivostomatitis - clusters of blisters or sores inside the mouth, or on the gums. Refer to GP or Dental Practitioner at next available appointment.'};
       if(ans.cs_erythema_multiforme === 'Yes') return {type:'refer', reason:'Suspected erythema multiforme - target lesions with a dark red centre, pale inner ring, and darker outer ring. Refer to GP at next available appointment.'};
 
-      if(ans.cs_mild_immuno === 'Yes - refer') return {type:'refer', reason:'Individual is immunocompromised (mild to moderate). Pharmacist prescribing is not clinically appropriate. Refer to GP at next available appointment.'};
+      if(ans.cs_mild_immuno === 'Yes - refer without supply') return {type:'refer', reason:'Individual is immunocompromised (mild to moderate). Pharmacist prescribing is not clinically appropriate. Refer to GP at next available appointment.'};
 
       if(ans.cs_dd_shingles === 'Yes - Shingles (Herpes Zoster) is suspected') return {type:'refer', reason:'Shingles (Herpes Zoster) suspected as an alternative diagnosis. Refer to GP at next available appointment for assessment and appropriate antiviral treatment.'};
       if(ans.cs_dd_impetigo === 'Yes - Impetigo is suspected') return {type:'refer', reason:'Impetigo suspected as an alternative diagnosis. Refer to the CCS Impetigo pathway if appropriate, or to GP at next available appointment.'};
@@ -1397,7 +1394,7 @@ uti: {
         'Cold sores are highly contagious until fully healed. Follow the infection control measures provided carefully to prevent spreading to others.'
       ];
 
-      if(ans.cs_mild_immuno === 'Yes - initial limited supply') {
+      if(ans.cs_mild_immuno === 'Yes - provide initial limited supply and refer') {
         return {
           type:'refer_supply',
           reason:'Individual is immunocompromised (mild to moderate). An initial limited supply of treatment may be prescribed if clinically appropriate, while referring the individual to the GP.',
@@ -1407,17 +1404,6 @@ uti: {
           safety:csSafety
         };
       }
-      if(ans.cs_recurrent === 'Yes') {
-        return {
-          type:'refer_supply',
-          reason:'Individual has recurrent problematic or frequently recurrent cold sores. An initial limited supply of treatment may be prescribed if clinically appropriate, while referring the individual to the GP to ensure there is no underlying immunocompromise or alternative diagnosis.',
-          rx:[selectedTreatment],
-          instructions:csInstructions,
-          extra:csExtra,
-          safety:csSafety
-        };
-      }
-
       return {
         type:'treat',
         reason:'Presentation is consistent with recurrent herpes labialis (cold sores) with no exclusion criteria present. Treatment can be supplied under the Common Conditions Service.',
@@ -1435,7 +1421,7 @@ uti: {
     overview:{
       description:'Acute infective conjunctivitis is inflammation of the conjunctiva caused by bacterial or viral infection. Bacterial conjunctivitis is more often unilateral with purulent or mucopurulent discharge. Viral conjunctivitis is often watery, gritty, and may spread from one eye to the other. Most cases are self-limiting, but red flag features require urgent referral.',
       symptoms:['Diffuse red eye with injected conjunctival vessels across the white of the eye','Pink mild swelling of the eyelid','Purulent or mucopurulent discharge with eye often stuck closed in the morning','Watery or mucoserous discharge with grittiness, burning, or irritation','Crusting on the lid margin in the morning','Associated viral symptoms such as a common cold or sore throat'],
-      exclusions:['Patient under 6 months old','Contact lens wearer','Blurred vision, halos, or loss of visual acuity','Severe photophobia or severe foreign body sensation','Moderate to severe eye pain','Visible corneal opacity or haze','Recent ocular trauma or eye surgery','Rash or vesicles around the eye, eyelid, or nose','Suspected ocular herpes, irregular pupil, or ciliary flush','Suspected scleritis','Suspected adenoviral conjunctivitis with severe hyperaemia and pain or light sensitivity','Suspected Chlamydia trachomatis infection in the first month of life']
+      exclusions:['Patient under 6 months old','Contact lens wearer','Blurred vision, halos, or loss of visual acuity','Severe photophobia or severe foreign body sensation','<u>Moderate to severe</u> eye pain','Visible corneal opacity or haze','Recent ocular trauma or eye surgery','Rash or vesicles around the eye, eyelid, or nose','Suspected ocular herpes, irregular pupil, or ciliary flush','Suspected scleritis','Suspected adenoviral conjunctivitis with severe hyperaemia and pain or light sensitivity','Suspected Chlamydia trachomatis infection in the first month of life']
     },
     steps:[
       {id:'patient',section:'Patient details',type:'patient',progress:4},
@@ -1482,7 +1468,7 @@ uti: {
       if(ans.contact_lens===CJ.YES) return{type:'emergency',reason:'Contact lens wearer with suspected infective conjunctivitis. Emergency referral to hospital Emergency Department or emergency eye service is required. Advise the patient to remove contact lenses while awaiting referral.'};
       if(ans.vision_change===CJ.YES) return{type:'emergency',reason:'Change or loss of vision or visual acuity, including blurred vision or halos. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
       if(ans.photophobia===CJ.YES) return{type:'emergency',reason:'Severe photophobia or severe foreign body sensation. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.eye_pain===CJ.YES) return{type:'emergency',reason:'Moderate to severe eye pain. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
+      if(ans.eye_pain===CJ.YES) return{type:'emergency',reason:'<u>Moderate to severe</u> eye pain. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
       if(ans.corneal_opacity===CJ.YES) return{type:'emergency',reason:'Visible corneal opacity or haze. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
       if(ans.significant_trauma===CJ.YES) return{type:'emergency',reason:'Recent significant ocular trauma. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
       if(ans.herpes_zoster_features===CJ.YES) return{type:'emergency',reason:'Rash or vesicles around the eye, eyelid, or nose. Herpes zoster ophthalmicus must be considered. Emergency referral is required.'};
@@ -1580,7 +1566,7 @@ uti: {
       exclusions: [
         'Systemically very unwell, severe/life-threatening infection, or systemic sepsis',
         'Spreading redness, purple patches on skin, pain, pus, area warm to touch, or large blisters forming',
-        'Moderate to severe immunocompromise, or complications (cellulitis, deeper soft tissue infection, scarlet fever)',
+        '<u>Moderate to severe</u> immunocompromise, or complications (cellulitis, deeper soft tissue infection, scarlet fever)',
         'Bullous impetigo, or widespread non-bullous impetigo (4 or more lesions/clusters)',
         'Recurrent impetigo (2+ episodes in past 12 months), failed previous treatment, or fusidic acid use in past 12 months',
         'Active underlying skin condition (Contact Dermatitis, Atopic Dermatitis, Scabies)',
@@ -1596,7 +1582,7 @@ uti: {
 
       {id:'imp_urgent_checks', section:'Exclusion criteria - urgent referral required', type:'single', progress:28,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>Signs and symptoms of a more serious condition or illness e.g. affected area appears swollen and red, spreading redness, purple patches on the skin, pain, pus, area is warm to touch, or large blisters forming</li><li>The patient is immunocompromised (moderate to severe)</li><li>Complications suspected: secondary infection of wounds, cellulitis, deeper soft tissue infection, or scarlet fever</li></ul>',
+       sub:'<ul><li>Signs and symptoms of a more serious condition or illness e.g. affected area appears swollen and red, spreading redness, purple patches on the skin, pain, pus, area is warm to touch, or large blisters forming</li><li>The patient is immunocompromised (<u>moderate to severe</u>)</li><li>Complications suspected: secondary infection of wounds, cellulitis, deeper soft tissue infection, or scarlet fever</li></ul>',
        opts:['No', 'Yes']},
 
       {id:'imp_lesion_site', section:'Exclusion criteria - non-urgent referral', type:'single', progress:30,
@@ -1712,7 +1698,7 @@ uti: {
 
       if(ans.imp_emergency === 'Yes') return {type:'emergency', reason:'Individual is systemically very unwell, or showing symptoms of severe/life-threatening infection, or systemic sepsis. Call 999 or refer to Emergency Department via ambulance immediately.'};
 
-      if(ans.imp_urgent_checks === 'Yes') return {type:'urgent', reason:'One or more urgent referral criteria are present: signs and symptoms of a more serious condition or illness, moderate to severe immunocompromise, or complications suspected (secondary infection, cellulitis, deeper soft tissue infection, or scarlet fever).<br><br>Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
+      if(ans.imp_urgent_checks === 'Yes') return {type:'urgent', reason:'One or more urgent referral criteria are present: signs and symptoms of a more serious condition or illness, <u>moderate to severe</u> immunocompromise, or complications suspected (secondary infection, cellulitis, deeper soft tissue infection, or scarlet fever).<br><br>Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
 
       if(ans.imp_lesion_site === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: widespread impetigo (four or more lesions/clusters present) or open wounds present in the area to be treated.<br><br>Refer to GP at next available appointment.'};
 
@@ -1912,12 +1898,21 @@ function goToOverview(){
 }
 
 
+function updateDobAge() {
+  var dob = document.getElementById('pt-dob').value;
+  var span = document.getElementById('pt-dob-age');
+  if (!span) return;
+  if (!dob) { span.textContent = '—'; return; }
+  var m = calcAgeMonths(dob), y = calcAgeYears(dob);
+  span.textContent = m < 1 ? (calcAgeDays(dob) + ' days') : y < 2 ? (m + ' mth' + (m === 1 ? '' : 's')) : (y + ' yrs');
+}
+
 function updatePtBar(){
   document.getElementById('ptbar-pill').textContent=CONDITIONS[activeCond].name;
   if(!answers.pt_name||!answers.pt_dob)return;
   var months=calcAgeMonths(answers.pt_dob);
   var years=calcAgeYears(answers.pt_dob);
-  var ageStr=years<2?(months+' mth'+(months===1?'':'s')):(years+' yrs');
+  var ageStr=months<1?(calcAgeDays(answers.pt_dob)+' days'):years<2?(months+' mth'+(months===1?'':'s')):(years+' yrs');
   var d=new Date(answers.pt_dob);
   var dobFormatted=(('0'+d.getDate()).slice(-2))+'/'+(('0'+(d.getMonth()+1)).slice(-2))+'/'+String(d.getFullYear()).slice(-2);
   document.getElementById('ptbar-name').textContent=answers.pt_name;
@@ -1971,14 +1966,20 @@ function renderPatientForm(ans) {
   html += '<div class="ptfields">';
   html += '<div class="ptfield" style="grid-column:1 / -1;"><label>Name <span class="req">*</span></label>'
         + '<input id="pt-name" type="text" placeholder="Required" value="' + escapeHtml(ans.pt_name || '') + '" /></div>';
-  html += '<div class="ptfield"><label>Date of birth <span class="req">*</span></label>'
-        + '<input id="pt-dob" type="date" value="' + escapeHtml(ans.pt_dob || '') + '" style="width:100%;" /></div>';
-  html += '<div class="ptfield"><label>Sex assigned at birth <span class="req">*</span></label>'
+  var _dobAge = '—';
+  if (ans.pt_dob) { var _dm=calcAgeMonths(ans.pt_dob),_dy=calcAgeYears(ans.pt_dob); _dobAge=_dm<1?(calcAgeDays(ans.pt_dob)+' days'):_dy<2?(_dm+' mth'+(_dm===1?'':'s')):(_dy+' yrs'); }
+  html += '<div style="grid-column:1 / -1;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;">'
+        + '<div class="ptfield"><label>Date of birth <span class="req">*</span></label>'
+        + '<input id="pt-dob" type="date" value="' + escapeHtml(ans.pt_dob || '') + '" oninput="updateDobAge()" /></div>'
+        + '<div class="ptfield"><label>Age</label>'
+        + '<span id="pt-dob-age" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.2);border-radius:8px;font-size:13px;color:#666;background:white;white-space:nowrap;">' + _dobAge + '</span></div>'
+        + '<div class="ptfield"><label>Sex assigned at birth <span class="req">*</span></label>'
         + '<select id="pt-sex" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.2);border-radius:8px;font-size:13px;background:white;color:#111;font-family:inherit;width:100%;">'
         + '<option value=""' + (ans.pt_sex ? '' : ' selected') + '>Select...</option>'
         + '<option value="Female"' + sel(ans.pt_sex, 'Female') + '>Female</option>'
         + '<option value="Male"'   + sel(ans.pt_sex, 'Male')   + '>Male</option>'
-        + '</select></div>';
+        + '</select></div>'
+        + '</div>';
   html += '<div class="ptfield" style="grid-column:1 / -1;"><label>Address <span class="req">*</span></label>'
         + '<input id="pt-address" type="text" placeholder="Required" value="' + escapeHtml(ans.pt_address || '') + '" /></div>';
   html += '<div class="ptfield"><label>Phone <span class="req">*</span></label>'
@@ -2077,6 +2078,7 @@ function renderStep() {
   }
 
   document.getElementById('qcard').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
 
@@ -2129,7 +2131,7 @@ function buildRecord(answers, outcome) {
       dobShort:  fmtDateShort(dobDate),
       ageMonths: ageMonths,
       ageYears:  ageYears,
-      ageStr:    ageYears < 2 ? (ageMonths + ' mth' + (ageMonths === 1 ? '' : 's')) : (ageYears + ' yrs'),
+      ageStr:    ageMonths < 1 ? (calcAgeDays(answers.pt_dob) + ' days') : ageYears < 2 ? (ageMonths + ' mth' + (ageMonths === 1 ? '' : 's')) : (ageYears + ' yrs'),
       ageRx:     ageForRx(),
       sex:       escapeHtml(answers.pt_sex       || ''),
       address:   escapeHtml(answers.pt_address   || ''),
@@ -2533,7 +2535,7 @@ function devShortcut() {
   };
   document.getElementById('username-display').textContent = 'Test Pharmacist';
   document.getElementById('userwrap').style.display = 'flex';
-  activeCond = 'impetigo';
+  activeCond = 'cold_sores';
   answers = {
     ph_name:'Test Pharmacist', ph_psi:'00000', ph_contract:'CCS00000',
     ph_pharmacy:'Test Pharmacy', ph_address:'1 Test Street, Dublin', ph_phone:'000 0000000',
@@ -2613,6 +2615,7 @@ window.addEventListener('load', syncBars);
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
   document.getElementById('s-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
   // Patient bar only visible during consultation and on result screen
   var hasPtbar = (id==='dash'||id==='overview'||id==='consult'||id==='result');
   document.getElementById('ptbar').style.display = hasPtbar ? 'flex' : 'none';
