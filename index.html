@@ -387,7 +387,7 @@ var VISUALS = {
 };
 VISUALS.herpes_simplex = 'images/herpes-simplex.jpg';
 VISUALS.adenoviral = 'images/adenoviral.jpg';
-VISUALS.chlamydiaNeonate = 'images/chlamydia-neonate.jpg';
+VISUALS.chlamydiaNeonate = 'images/chlamydial-conjunctivitis.png';
 VISUALS.scleritis = 'images/scleritis.jpg';
 VISUALS.ciliaryFlush = 'images/ciliary-flush.jpg';
 
@@ -1425,76 +1425,93 @@ uti: {
     },
     steps:[
       {id:'patient',section:'Patient details',type:'patient',progress:4},
-      {id:'contact_lens',section:'Exclusion criteria - emergency referral required',type:'single',progress:10,q:'Does the patient wear contact lenses?',sub:'Any contact lens wearer with suspected infective conjunctivitis requires emergency referral. Advise removal of lenses while awaiting referral.',opts:[CJ.NO,CJ.YES]},
-      {id:'vision_change',section:'Exclusion criteria - emergency referral required',type:'single',progress:15,q:'Are there changes or loss in vision or visual acuity?',sub:'Includes blurred vision or seeing halos.',opts:[CJ.NO,CJ.YES]},
-      {id:'photophobia',section:'Exclusion criteria - emergency referral required',type:'single',progress:20,q:'Is there severe photophobia or severe foreign body sensation?',sub:'Red flags include intense light sensitivity, avoiding light, sitting in a darkened room, pain on reading, or inability to hold the eye open.',opts:[CJ.NO,CJ.YES]},
-      {id:'eye_pain',section:'Exclusion criteria - emergency referral required',type:'single',progress:25,q:'Is there moderate to severe eye pain?',opts:[CJ.NO,CJ.YES]},
-      {id:'corneal_opacity',section:'Exclusion criteria - emergency referral required',type:'single',progress:30,q:'Is there a visible corneal opacity or haze?',sub:'This is a red flag and is not typical of simple conjunctivitis.'+visualAid(VISUALS.cornealOpacity,'Example of corneal opacity','Show example image','Example image showing marked corneal opacity in one eye. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 4.0).'),opts:[CJ.NO,CJ.YES]},
-      {id:'significant_trauma',section:'Exclusion criteria - emergency referral required',type:'single',progress:35,q:'Is there a history of recent significant ocular trauma?',sub:'Examples include recent eye surgery, welding flashes, or high velocity power tools.',opts:[CJ.NO,CJ.YES]},
-      {id:'herpes_zoster_features',section:'Exclusion criteria - emergency referral required',type:'single',progress:40,q:'Is there a rash or vesicles around the eye, eyelid, or nose?',sub:'Consider herpes zoster ophthalmicus.'+visualAid(VISUALS.herpesZoster,'Example of herpes zoster ophthalmicus around the eye','Show example image','Example image showing vesicular rash and eyelid involvement. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0 / GFDL).'),opts:[CJ.NO,CJ.YES]},
-      {id:'herpes_simplex_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:45,q:'Is ocular herpes simplex suspected?',sub:'Typical clues include one eye affected with watery discharge, blurred vision, lid swelling, or light sensitivity.'+visualAid(VISUALS.herpes_simplex,'Example of ocular herpes simplex','Example image','Clinical photo showing grouped vesicles on an erythematous eyelid. Use as a visual cue only and refer if suspected.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
-      {id:'irregular_pupil',section:'Exclusion criteria - emergency referral required',type:'single',progress:50,q:'Is the pupil irregular, fixed, unusually small or large, or sluggish to light?',opts:[CJ.NO,CJ.YES]},
-      {id:'ciliary_flush',section:'Exclusion criteria - emergency referral required',type:'single',progress:55,q:'Is there ciliary flush, especially if unilateral?',sub:'This is redness in a circular pattern around the junction of the cornea and sclera.'+visualAid(VISUALS.ciliaryFlush,'Clinical photo of ciliary flush','Show example image','Clinical photo showing circumcorneal redness around the cornea. This is a red flag and is not typical of uncomplicated conjunctivitis.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
-      {id:'scleritis_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:58,q:'Is scleritis suspected?',sub:'Consider a deeply red eye with tortuous vessels and deep or intense pain. This is not typical of simple conjunctivitis and requires emergency referral.'+visualAid(VISUALS.scleritis,'Example of scleritis','Example image','Clinical photo showing deep scleral redness. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
-      {id:'adenoviral_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:59,q:'Is severe adenoviral conjunctivitis suspected?',sub:'Consider intensely injected conjunctiva with pain or light sensitivity, without mucopurulent discharge. This requires emergency referral under the protocol.'+visualAid(VISUALS.adenoviral,'Example of adenoviral conjunctivitis','Example image','Clinical photo showing diffuse hyperaemia. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.'),opts:[CJ.NO,CJ.YES]},
+      {id:'cj_emergency_a',section:'Exclusion criteria - emergency referral required',type:'single',progress:16,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Suspected scleritis — deeply red eye with tortuous vessels and intense pain'+visualAid(VISUALS.scleritis,'Example of scleritis','Example image','Clinical photo showing deep scleral redness. Use as a visual cue only.','')+'</li><li>Rash or vesicles around the eye, eyelid, or nose (suspect herpes zoster ophthalmicus)'+visualAid(VISUALS.herpesZoster,'Example of herpes zoster ophthalmicus around the eye','Show example image','Example image showing vesicular rash and eyelid involvement. Use as a visual cue only and refer if suspected.','')+'</li><li>Suspected ocular herpes simplex — typically one eye, watery discharge, blurred vision, lid swelling, or light sensitivity'+visualAid(VISUALS.herpes_simplex,'Example of ocular herpes simplex','Example image','Clinical photo showing grouped vesicles on an erythematous eyelid. Use as a visual cue only and refer if suspected.','')+'</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
 
-      {id:'chlamydia_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:60,q:'Is Chlamydia trachomatis conjunctivitis suspected?',sub:'In the first month of life this requires emergency referral. '+visualAid(VISUALS.chlamydiaNeonate,'Example of neonatal conjunctivitis','Example image','Clinical photo showing neonatal conjunctivitis. Use as a visual cue only.','Clinical photo provided by user for internal visual reference.') + ' In individuals aged 1 month and older, immediate GP or other relevant medical practitioner referral is required. Consider chronic low-grade irritation with mucous discharge, especially if there has been no response to standard topical therapy.',opts:[CJ.NO,CJ.YES]},
-      {id:'ocular_history',section:'Exclusion criteria - urgent referral required',type:'single',progress:64,q:'Is there a history of ocular disease such as keratitis, scleritis, or iritis?',opts:[CJ.NO,CJ.YES]},
-      {id:'hyperpurulent_rapid',section:'Exclusion criteria - urgent referral required',type:'single',progress:68,q:'Is there hyper-purulent yellow or green discharge with very rapid onset?',sub:'This may suggest Neisseria gonorrhoeae eye infection.',opts:[CJ.NO,CJ.YES]},
-      {id:'lid_swelling_closed',section:'Exclusion criteria - urgent referral required',type:'single',progress:72,q:'Are both upper and lower lids intensely swollen or closed and difficult to open, with no palpable lesion?',sub:'This raises concern for preseptal or orbital cellulitis.'+visualAid(VISUALS.preseptalCellulitis,'Example of periorbital / preseptal cellulitis','Show example image','Example image showing marked eyelid swelling and erythema. Use as a visual cue only and refer if suspected.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0).'),opts:[CJ.NO,CJ.YES]},
-      {id:'localised_cellulitis',section:'Exclusion criteria - urgent referral required',type:'single',progress:76,q:'Is the entire lid swollen with a dark red appearance around a localised initial lump or swelling?',sub:'This raises concern for a meibomian cyst with localised cellulitis.'+visualAid(VISUALS.preseptalCellulitis,'Example of marked eyelid swelling / cellulitis','Show example image','Use this as a rough visual cue for significant lid swelling and surrounding erythema. Refer if this pattern is present.','Example image from Wikimedia Commons, freely licensed (CC BY-SA 3.0).'),opts:[CJ.NO,CJ.YES]},
-      {id:'minor_trauma',section:'Exclusion criteria - urgent referral required',type:'single',progress:80,q:'Is there minor ocular trauma such as a fingernail or branch injury?',opts:[CJ.NO,CJ.YES]},
-      {id:'headache_nausea',section:'Exclusion criteria - urgent referral required',type:'single',progress:84,q:'Is there a severe headache with or without nausea?',opts:[CJ.NO,CJ.YES]},
-      {id:'focal_redness',section:'Exclusion criteria - urgent referral required',type:'single',progress:88,q:'Is the redness focal rather than diffuse across the conjunctiva?',opts:[CJ.NO,CJ.YES]},
-      {id:'recent_reinfection',section:'Exclusion criteria - urgent referral required',type:'single',progress:92,q:'Has there been recent reinfection with relapse within the last 2 weeks?',opts:[CJ.NO,CJ.YES]},
-      {id:'not_improving_2_days',section:'Exclusion criteria - urgent referral required',type:'single',progress:95,q:'Has treatment already been started and there has been no improvement after 2 days?',opts:[CJ.NO,CJ.YES]},
-      {id:'symptoms',section:'Symptom assessment',type:'checkbox',progress:96,q:'Which features are present?',sub:'Select all that apply.',opts:[CJ.DIFFUSE_RED_EYE,CJ.PURULENT_DISCHARGE_FEATURE,'Watery or mucoserous discharge','Grittiness, burning, or irritation','Crusting on lid margin in morning','Eye stuck closed in the morning','Associated viral symptoms such as common cold or sore throat']},
-      {id:'conjunctival_hyperaemia',section:'Symptom assessment',type:'single',progress:97,q:'Is there diffuse conjunctival hyperaemia across the white of the eye?',opts:[CJ.NO,CJ.YES]},
-      {id:'discharge_type',section:'Symptom assessment',type:'single',progress:98,q:'What best describes the discharge?',opts:[CJ.NONE,CJ.WATERY_OR_MUCOSEROUS,CJ.PURULENT_OR_MUCOPURULENT]},
-      {id:'pregnant_breastfeeding',section:'Treatment screening',type:'single',progress:99,femaleOnly:true,
+      {id:'chlamydia_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:24,
+       q:'Is Chlamydia trachomatis conjunctivitis suspected?',
+       sub:'In the first month of life this requires emergency referral. In individuals aged 1 month and older, immediate GP or other relevant medical practitioner referral is required. Consider chronic low-grade irritation with mucous discharge, especially if there has been no response to standard topical therapy.'+visualAid(VISUALS.chlamydiaNeonate,'Example of neonatal conjunctivitis','Example image','',''),
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'cj_emergency_b',section:'Exclusion criteria - emergency referral required',type:'single',progress:32,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Suspected adenoviral conjunctivitis due to the severity of the hyperaemia (often associated with pain and light sensitivity)</li><li>Changes or loss of vision or visual acuity, including blurred vision or halos</li><li>Severe photophobia or severe foreign body sensation</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'cj_emergency_c',section:'Exclusion criteria - emergency referral required',type:'single',progress:40,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Patient wears contact lenses — advise removal while awaiting referral</li><li>Irregular, fixed, unusually small or large, or sluggish pupil</li><li>Ciliary flush — circular redness at the junction of the cornea and sclera'+visualAid(VISUALS.ciliaryFlush,'Clinical photo of ciliary flush','Show example image','Diagram showing circumcorneal redness around the cornea. This is a red flag and is not typical of uncomplicated conjunctivitis.','')+'</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'cj_emergency_d',section:'Exclusion criteria - emergency referral required',type:'single',progress:48,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Moderate to severe eye pain</li><li>Visible corneal opacity or haze'+visualAid(VISUALS.cornealOpacity,'Example of corneal opacity','Show example image','Example image showing marked corneal opacity in one eye. Use as a visual cue only and refer if suspected.','')+'</li><li>History of recent significant ocular trauma (e.g. recent eye surgery, welding flashes, high-velocity power tools)</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'cj_urgent_a',section:'Exclusion criteria - urgent referral required',type:'single',progress:57,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>History of ocular disease such as keratitis, scleritis, or iritis</li><li>Hyper-purulent yellow or green discharge with very rapid onset (may suggest Neisseria gonorrhoeae)</li><li>Both upper and lower lids intensely swollen or closed and difficult to open, with no palpable lesion (suspect preseptal or orbital cellulitis)'+visualAid(VISUALS.preseptalCellulitis,'Example of periorbital / preseptal cellulitis','Show example image','Example image showing marked eyelid swelling and erythema. Use as a visual cue only and refer if suspected.','')+'</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'cj_urgent_b',section:'Exclusion criteria - urgent referral required',type:'single',progress:64,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Entire lid swollen with a dark red appearance around a localised lump or swelling (suspect meibomian cyst with cellulitis)</li><li>Minor ocular trauma such as a fingernail or branch injury</li><li>Severe headache with or without nausea</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'cj_urgent_c',section:'Exclusion criteria - urgent referral required',type:'single',progress:71,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>Redness is focal rather than diffuse across the conjunctiva</li><li>Recent reinfection or relapse within the past two weeks</li><li>Treatment has been initiated and is not improving after 2 days</li></ul>',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'conjunctival_hyperaemia',section:'Symptom assessment',type:'single',progress:85,
+       q:'Is there diffuse conjunctival hyperaemia across the white of the eye?',
+       opts:[CJ.NO,CJ.YES]},
+
+      {id:'discharge_type',section:'Symptom assessment',type:'single',progress:92,
+       q:'What best describes the discharge?',
+       opts:[CJ.NONE,CJ.WATERY_OR_MUCOSEROUS,CJ.PURULENT_OR_MUCOPURULENT]},
+
+      {id:'pregnant_breastfeeding',section:'Treatment screening',type:'single',progress:96,femaleOnly:true,
         skip:function(ans){return !(ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT);},
         q:'Is the patient pregnant or breastfeeding?',opts:[CJ.NO,CJ.YES]},
-      {id:'chloramphenicol_ci',section:'Treatment screening',type:'single',progress:99,
+      {id:'chloramphenicol_ci',section:'Treatment screening',type:'single',progress:98,
         skip:function(ans){return !(ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT);},
         q:'Is chloramphenicol unsuitable due to hypersensitivity, contraindication, or another clinically relevant concern?',opts:[CJ.NO,CJ.YES]},
       {id:'fusidic_ci',section:'Treatment screening',type:'single',progress:100,
         skip:function(ans){return !(ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT);},
         q:'Is fusidic acid unsuitable due to hypersensitivity, contraindication, or another clinically relevant concern?',opts:[CJ.NO,CJ.YES]}
     ],
+    // Decision logic documented in conjunctivitis-decision-logic.md
     getOutcome:function(ans){
       var ageMonths=calcAgeMonths(ans.pt_dob);
+
+      // Inclusion gate: protocol requires age ≥6 months
       if(ageMonths<6) return{type:'urgent',reason:'Patient is under 6 months old. Immediate referral to GP or other relevant medical practitioner is required under the protocol.'};
 
-      if(ans.contact_lens===CJ.YES) return{type:'emergency',reason:'Contact lens wearer with suspected infective conjunctivitis. Emergency referral to hospital Emergency Department or emergency eye service is required. Advise the patient to remove contact lenses while awaiting referral.'};
-      if(ans.vision_change===CJ.YES) return{type:'emergency',reason:'Change or loss of vision or visual acuity, including blurred vision or halos. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.photophobia===CJ.YES) return{type:'emergency',reason:'Severe photophobia or severe foreign body sensation. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.eye_pain===CJ.YES) return{type:'emergency',reason:'<u>Moderate to severe</u> eye pain. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.corneal_opacity===CJ.YES) return{type:'emergency',reason:'Visible corneal opacity or haze. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.significant_trauma===CJ.YES) return{type:'emergency',reason:'Recent significant ocular trauma. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.herpes_zoster_features===CJ.YES) return{type:'emergency',reason:'Rash or vesicles around the eye, eyelid, or nose. Herpes zoster ophthalmicus must be considered. Emergency referral is required.'};
-      if(ans.herpes_simplex_suspected===CJ.YES) return{type:'emergency',reason:'Ocular herpes simplex is suspected. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.irregular_pupil===CJ.YES) return{type:'emergency',reason:'Irregular or abnormal pupil. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.ciliary_flush===CJ.YES) return{type:'emergency',reason:'Ciliary flush is present. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.scleritis_suspected===CJ.YES) return{type:'emergency',reason:'Scleritis is suspected. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
-      if(ans.adenoviral_suspected===CJ.YES) return{type:'emergency',reason:'Severe adenoviral conjunctivitis is suspected due to marked hyperaemia with pain or light sensitivity. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
+      // Emergency criteria (protocol s.2.4.1) — checked in protocol order across four bundled steps.
+      // Chlamydia is a separate step: age <1 month → emergency, ≥1 month → urgent (checked below).
+      if(ans.cj_emergency_a===CJ.YES) return{type:'emergency',reason:'One or more emergency referral criteria are present: suspected scleritis, suspected herpes zoster ophthalmicus, or suspected ocular herpes simplex. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
       if(ans.chlamydia_suspected===CJ.YES && ageMonths<1) return{type:'emergency',reason:'Chlamydia trachomatis conjunctivitis is suspected in the first month of life. Emergency referral to the appropriate Emergency Department is required.'};
+      if(ans.cj_emergency_b===CJ.YES) return{type:'emergency',reason:'One or more emergency referral criteria are present: suspected adenoviral conjunctivitis, changes or loss of vision, or severe photophobia. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
+      if(ans.cj_emergency_c===CJ.YES) return{type:'emergency',reason:'One or more emergency referral criteria are present: contact lens wearer, irregular pupil, or ciliary flush. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
+      if(ans.cj_emergency_d===CJ.YES) return{type:'emergency',reason:'One or more emergency referral criteria are present: moderate to severe eye pain, visible corneal opacity or haze, or recent significant ocular trauma. Emergency referral to hospital Emergency Department or emergency eye service is required.'};
 
-      if(ans.ocular_history===CJ.YES) return{type:'urgent',reason:'History of ocular disease such as keratitis, scleritis, or iritis. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.hyperpurulent_rapid===CJ.YES) return{type:'urgent',reason:'Hyper-purulent discharge with very rapid onset may indicate Neisseria gonorrhoeae eye infection. Immediate referral to GP or other relevant medical practitioner is required.'};
+      // Urgent criteria (protocol s.2.4.2) — age <6 months and contraindications handled separately.
       if(ans.chlamydia_suspected===CJ.YES) return{type:'urgent',reason:'Chlamydia trachomatis conjunctivitis is suspected in an individual aged 1 month or older. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.lid_swelling_closed===CJ.YES) return{type:'urgent',reason:'Both lids are intensely swollen or closed and difficult to open. Preseptal or orbital cellulitis must be considered. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.localised_cellulitis===CJ.YES) return{type:'urgent',reason:'Entire lid is swollen with a dark red appearance around a localised lump or swelling. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.minor_trauma===CJ.YES) return{type:'urgent',reason:'Minor ocular trauma is present. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.headache_nausea===CJ.YES) return{type:'urgent',reason:'Severe headache with or without nausea. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.focal_redness===CJ.YES) return{type:'urgent',reason:'Redness is focal rather than diffuse. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.recent_reinfection===CJ.YES) return{type:'urgent',reason:'Recent reinfection with relapse within the last 2 weeks. Immediate referral to GP or other relevant medical practitioner is required.'};
-      if(ans.not_improving_2_days===CJ.YES) return{type:'urgent',reason:'Treatment has already been started and there has been no improvement after 2 days. Immediate referral to GP or other relevant medical practitioner is required.'};
+      if(ans.cj_urgent_a===CJ.YES) return{type:'urgent',reason:'One or more urgent referral criteria are present: history of ocular disease, hyper-purulent discharge suggesting gonococcal infection, or eyelid swelling suggesting preseptal or orbital cellulitis. Immediate referral to GP or other relevant medical practitioner is required.'};
+      if(ans.cj_urgent_b===CJ.YES) return{type:'urgent',reason:'One or more urgent referral criteria are present: meibomian cyst with cellulitis, minor ocular trauma, or severe headache. Immediate referral to GP or other relevant medical practitioner is required.'};
+      if(ans.cj_urgent_c===CJ.YES) return{type:'urgent',reason:'One or more urgent referral criteria are present: focal redness, recent reinfection or relapse within two weeks, or treatment not improving after 2 days. Immediate referral to GP or other relevant medical practitioner is required.'};
 
+      // Bacterial candidate: both diffuse hyperaemia AND purulent/mucopurulent discharge required.
       var bacterialCandidate = ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT;
       var rx=[],instructions=[],extra=[],safety=[],breastRx=[];
 
       if(bacterialCandidate){
+        // Treatment selection: pregnant/breastfeeding → fusidic acid; chloramphenicol CI → fusidic acid; default → chloramphenicol.
         if(ans.pregnant_breastfeeding===CJ.YES){
+          // Chloramphenicol not recommended in pregnancy/breastfeeding; fusidic acid is safe.
           if(ans.fusidic_ci===CJ.YES){
             return{type:'urgent',reason:'Bacterial conjunctivitis is present but chloramphenicol is not recommended in pregnancy or breastfeeding and fusidic acid is unsuitable. Refer to GP or other relevant medical practitioner.'};
           }
@@ -1524,11 +1541,14 @@ uti: {
         }
         extra.push('A topical antibiotic should only be used where both conjunctival hyperaemia and purulent or mucopurulent discharge are present');
       } else {
+        // Non-bacterial: no antibiotic. Message varies by which criterion was not met.
         extra.push('No topical antibiotic is indicated under the protocol');
         if(ans.discharge_type===CJ.WATERY_OR_MUCOSEROUS){
           extra.push('Viral conjunctivitis is often self-limiting');
+        } else if(ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT && ans.conjunctival_hyperaemia!==CJ.YES){
+          extra.push('Purulent discharge is present but diffuse conjunctival hyperaemia is absent. Both features must be present for antibiotic treatment under the protocol. Reassess for an alternative diagnosis.');
         } else {
-          extra.push('Most acute bacterial conjunctivitis is self-limiting and usually resolves within 5 to 7 days without antibiotic treatment');
+          extra.push('Clinical features do not meet the criteria for antibiotic treatment under the protocol.');
         }
         extra.push('A topical lubricant may provide symptom relief and can be applied up to 4 times daily to the affected eye(s)');
         extra.push('Use a preservative-free lubricant where possible, particularly if longer-term use is needed');
@@ -2531,7 +2551,7 @@ function devShortcut() {
   };
   document.getElementById('username-display').textContent = 'Test Pharmacist';
   document.getElementById('userwrap').style.display = 'flex';
-  activeCond = 'impetigo';
+  activeCond = 'conjunctivitis';
   answers = {
     ph_name:'Test Pharmacist', ph_psi:'00000', ph_contract:'CCS00000',
     ph_pharmacy:'Test Pharmacy', ph_address:'1 Test Street, Dublin', ph_phone:'000 0000000',
@@ -2823,11 +2843,17 @@ function nextStep() {
 
   if(outcome.type!=='treat'){showResult();return;}
   if (currentStep < steps().length - 1) {
+    var lastVisible = currentStep;
     currentStep++;
     while (currentStep < steps().length - 1 && isStepSkipped(steps()[currentStep])) {
       currentStep++;
     }
-    renderStep();
+    if (isStepSkipped(steps()[currentStep])) {
+      currentStep = lastVisible;
+      showResult();
+    } else {
+      renderStep();
+    }
   } else {
     showResult();
   }
