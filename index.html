@@ -1585,37 +1585,33 @@ uti: {
        sub:'<ul><li>Signs and symptoms of a more serious condition or illness e.g. affected area appears swollen and red, spreading redness, purple patches on the skin, pain, pus, area is warm to touch, or large blisters forming</li><li>The patient is immunocompromised (<u>moderate to severe</u>)</li><li>Complications suspected: secondary infection of wounds, cellulitis, deeper soft tissue infection, or scarlet fever</li></ul>',
        opts:['No', 'Yes']},
 
-      {id:'imp_lesion_site', section:'Exclusion criteria - non-urgent referral', type:'single', progress:30,
+      {id:'imp_lesion_site', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:30,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>4 or more impetigo lesions or clusters are present (widespread)</li><li>There are open wounds present in the area to be treated</li></ul>',
+       sub:'<ul><li>Contraindications as specified in the medication Summary of Product Characteristics</li><li>The individual is currently breastfeeding with impetigo lesion(s) present on the breast</li><li>4 or more impetigo lesions or clusters are present (widespread)</li></ul>',
        opts:['No', 'Yes']},
 
-      {id:'imp_breastfeeding_breast', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:32, femaleOnly:true,
-       q:'Is the individual currently breastfeeding with impetigo lesion(s) present on the breast?',
+      {id:'imp_treatment_history', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:34,
+       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
+       sub:'<ul><li>The individual has had 2 or more prior episodes of impetigo in the previous 12 months</li><li>Currently active underlying skin condition is present (e.g. atopic dermatitis, contact dermatitis, psoriasis)</li><li>There are open wounds present in the area to be treated</li><li>Previous topical or oral treatment (including antimicrobials) has failed for this episode of impetigo</li></ul>',
        opts:['No', 'Yes']},
 
-      {id:'imp_treatment_history', section:'Exclusion criteria - non-urgent referral', type:'single', progress:34,
+      {id:'imp_contraindications', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:36,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>The individual has had 2 or more prior episodes of impetigo in the previous 12 months</li><li>Previous topical or oral treatment (including antimicrobials) has failed for this episode of impetigo</li><li>Fusidic acid has been used within the previous 12 months (extended, recurrent, or any use)</li></ul>',
-       opts:['No', 'Yes']},
-
-      {id:'imp_contraindications', section:'Exclusion criteria - non-urgent referral', type:'single', progress:36,
-       q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'Topical preparations containing paraffin (including Sodium Fusidate ointment) present a fire hazard if the treated area cannot be protected from open or naked flames.<ul><li>Contraindications as specified in the medication Summary of Product Characteristics</li><li>The affected area(s) cannot be protected from open or naked flames (e.g. the individual smokes)</li><li>Known hypersensitivity or adverse reaction to Fusidic Acid 20mg/g cream, Sodium Fusidate 20mg/g ointment, or any components of the formulations</li></ul>',
+       sub:'<ul><li>The individual has already been prescribed oral antibiotics for this episode of impetigo — combined use of topical and oral antibiotics should be avoided</li><li>Fusidic acid has been used within the previous 12 months (extended, recurrent, or any use)</li><li>The affected area(s) cannot be protected from open or naked flames (e.g. the individual smokes). Topical preparations containing paraffin (including Sodium Fusidate ointment) present a fire hazard if the treated area cannot be protected from open or naked flames</li><li>Known hypersensitivity or adverse reaction to Fusidic Acid (Fucidin) 20mg/g cream, Sodium Fusidate (Fucidin) 20mg/g ointment, or any components of the formulations</li></ul>',
        opts:['No', 'Yes']},
 
       {id:'imp_mild_immuno', section:'Exclusion criteria - non-urgent referral required', type:'single', progress:38,
-       q:'Is the patient <u>mildly to moderately</u> immunocompromised?',
-       sub:'For mildly to moderately immunocompromised individuals, an initial limited supply of treatment may be prescribed if clinically appropriate, while the individual is awaiting referral. Treatment of <u>moderately to severely</u> immunocompromised individuals is outside the scope of this service and they must be referred as a matter of urgency.',
-       opts:['No', 'Yes - initial limited supply', 'Yes - refer']},
+       q:'Do any of the following apply?',
+       sub:'<ul><li>The individual is <u>mildly to moderately</u> immunocompromised</li></ul>',
+       opts:['No', 'Yes - provide initial limited supply and refer', 'Yes - refer without supply']},
 
       {id:'imp_dd_gate', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'dd_gate', progress:75},
 
       {id:'imp_bullous', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:78,
-       q:'Is bullous impetigo suspected rather than non-bullous impetigo?',
+       q:'Is bullous impetigo suspected as an alternative diagnosis?',
        sub:'Non-bullous impetigo (in scope): small vesicles (<0.5cm) bursting to form thick honey-coloured crusts (~2cm). Lesions not painful. Usually around nose and mouth, or on limbs and flexures.\n\nBullous impetigo (not in scope): large flaccid blisters (1\u20132cm), yellow/clear fluid, spreading rapidly. Affects trunk, neck, arms and legs. More likely to cause fever and swollen glands.' +
          visualAid('images/bullous impetigo 1.png', 'Bullous impetigo', '', 'Bullous impetigo', 'Source: HSE Antibiotic Prescribing / UpToDate.'),
-       opts:['No - presentation is consistent with non-bullous impetigo', 'Yes - bullous impetigo is suspected'],
+       opts:['No', 'Yes - bullous impetigo is suspected'],
        skip:function(ans){return ans.imp_dd_gate!=='check';}},
 
       {id:'imp_dd_shingles', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:80,
@@ -1658,11 +1654,11 @@ uti: {
        skip:function(ans){return ans.imp_dd_gate!=='check';}},
 
       {id:'imp_dd_eczema', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:90,
-       q:'Is Atopic Dermatitis (Eczema) suspected as an alternative or co-existing diagnosis?',
+       q:'Is Atopic Dermatitis (Eczema) suspected as an alternative diagnosis?',
        sub:'Atopic dermatitis: chronic or relapsing dry, itchy, inflamed skin. Often affects flexures (inside elbows, behind knees, neck). Family history of atopy (asthma, hay fever) common. May be associated with weeping or crusting but typically widespread and symmetrical rather than focal crusted lesions.' +
          visualAid('images/eczema 1.webp', 'Eczema on the ankle', '', 'Eczema on the ankle', 'Source: HSE A-Z / DermNetNZ.') +
          visualAid('images/eczema 2.jpg', 'Eczema on the back of the knees', '', 'Eczema on the back of the knees', 'Source: UpToDate.'),
-       opts:['No - atopic dermatitis is not suspected', 'Yes - atopic dermatitis (eczema) is suspected'],
+       opts:['No', 'Yes - atopic dermatitis (eczema) is suspected'],
        skip:function(ans){return ans.imp_dd_gate!=='check';}},
 
       {id:'imp_dd_contact_dermatitis', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:92,
@@ -1670,7 +1666,7 @@ uti: {
        sub:'Contact dermatitis: redness, itching, stinging, or blistered skin strictly localised to the site of allergen or irritant exposure. Onset typically within hours to days of contact. Geometric or distribution-matching pattern (e.g. under a watch strap, waistband, or jewellery).' +
          visualAid('images/contact dermatitis 1.jpg', 'Allergic contact dermatitis', '', 'Allergic contact dermatitis', 'Source: UpToDate.') +
          visualAid('images/contact dermatitis 2.png', 'Allergic contact dermatitis', '', 'Allergic contact dermatitis', 'Source: DermNetNZ.'),
-       opts:['No - contact dermatitis is not suspected', 'Yes - contact dermatitis is suspected'],
+       opts:['No', 'Yes - contact dermatitis is suspected'],
        skip:function(ans){return ans.imp_dd_gate!=='check';}},
 
       {id:'imp_dd_scabies', section:'Differential diagnosis', isDifferentialDiagnosis:true, type:'single', progress:94,
@@ -1678,7 +1674,7 @@ uti: {
        sub:'Scabies (Sarcoptes scabiei): intensely itchy eruption typically in web spaces between fingers, wrists, axilla, belt line, and genitalia. Symptoms are markedly worse at night or after a hot bath. Household contacts or close contacts often report a similar itch or rash.' +
          visualAid('images/scabies 1.jpg', 'Scabies', '', 'Scabies', 'Source: DermNetNZ.org.') +
          visualAid('images/scabies 2.jpg', 'Interdigital lesions of scabies', '', 'Interdigital lesions of scabies', 'Source: UpToDate.'),
-       opts:['No - scabies is not suspected', 'Yes - scabies is suspected'],
+       opts:['No', 'Yes - scabies is suspected'],
        skip:function(ans){return ans.imp_dd_gate!=='check';}},
 
       {id:'imp_selected_formulation', section:'Select treatment', type:'single', progress:96,
@@ -1686,10 +1682,10 @@ uti: {
        q:'Which formulation would you like to prescribe?',
        sub:'Both options contain the same active ingredient (fusidic acid). Select based on patient preference and product availability. A 15g tube should be supplied; a 30g tube may be used only if the 15g is unavailable.',
        opts:[
-         'Fusidic Acid 20mg/g cream - apply topically to affected areas every 8 hours for 5\u20137 days (15g tube)',
-         'Sodium Fusidate 20mg/g ointment - apply topically to affected areas every 8 hours for 5\u20137 days (15g tube)'
+         'Fusidic Acid (Fucidin) 20mg/g cream - apply topically to affected areas every 8 hours for 5\u20137 days (15g tube)',
+         'Sodium Fusidate (Fucidin) 20mg/g ointment - apply topically to affected areas every 8 hours for 5\u20137 days (15g tube)'
        ],
-       skip: function(ans) { return ans.imp_mild_immuno === 'Yes - refer'; }}
+       skip: function(ans) { return ans.imp_mild_immuno === 'Yes - refer without supply'; }}
     ],
     getOutcome: function(ans) {
       // Age check: under 2 months corrected age
@@ -1700,12 +1696,10 @@ uti: {
 
       if(ans.imp_urgent_checks === 'Yes') return {type:'urgent', reason:'One or more urgent referral criteria are present: signs and symptoms of a more serious condition or illness, <u>moderate to severe</u> immunocompromise, or complications suspected (secondary infection, cellulitis, deeper soft tissue infection, or scarlet fever).<br><br>Refer urgently to GP, GP out-of-hours, or Emergency Department as appropriate.'};
 
-      if(ans.imp_lesion_site === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: widespread impetigo (four or more lesions/clusters present) or open wounds present in the area to be treated.<br><br>Refer to GP at next available appointment.'};
+      if(ans.imp_lesion_site === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: widespread impetigo (four or more lesions/clusters present), breastfeeding with impetigo lesion(s) on the breast, or contraindications as per the Summary of Product Characteristics.<br><br>Refer to GP at next available appointment.'};
 
-      if(ans.imp_breastfeeding_breast === 'Yes') return {type:'refer', reason:'Individual is currently breastfeeding with impetigo lesion(s) present on the breast. Refer to GP at next available appointment.'};
-
-      if(ans.imp_treatment_history === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: recurrent impetigo (two or more episodes in the previous 12 months), previous treatment failure, or fusidic acid use within the previous 12 months.<br><br>Refer to GP at next available appointment.'};
-      if(ans.imp_contraindications === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: contraindications as per the SPC, inability to protect the affected area from open or naked flames (fire hazard with paraffin-containing preparations), or known hypersensitivity to Fusidic Acid 20mg/g cream or Sodium Fusidate 20mg/g ointment.<br><br>Refer to GP at next available appointment.'};
+      if(ans.imp_treatment_history === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: recurrent impetigo (two or more episodes in the previous 12 months), currently active underlying skin condition, open wounds present in the area to be treated, or previous treatment failure.<br><br>Refer to GP at next available appointment.'};
+      if(ans.imp_contraindications === 'Yes') return {type:'refer', reason:'One or more non-urgent referral criteria are present: already prescribed oral antibiotics for this episode, fusidic acid use within the previous 12 months, inability to protect the affected area from open or naked flames (fire hazard with paraffin-containing preparations), or known hypersensitivity to Fusidic Acid (Fucidin) 20mg/g cream or Sodium Fusidate (Fucidin) 20mg/g ointment.<br><br>Refer to GP at next available appointment.'};
 
       var impInstructions = [
         'Apply a small amount of cream or ointment to each affected lesion every 8 hours (three times daily) for 5 to 7 days.',
@@ -1724,12 +1718,14 @@ uti: {
         'Avoid: touching or scratching sores (this also helps prevent scarring); close contact with children, or individuals with diabetes or a weakened immune system; preparing food for others; going to the gym; playing contact sports.'
       ];
       var impSafety = [
+        'Symptoms usually resolve in 7–10 days with treatment, or 2–3 weeks without treatment.',
         'If symptoms do not improve within 72 hours of commencing treatment, seek further advice from a GP or other relevant medical practitioner.',
         'Seek immediate medical advice if symptoms worsen, the rash spreads, or signs of serious infection develop (spreading redness, fever, swollen glands, or purple patches on the skin).',
-        'Impetigo is highly contagious until treated. Follow the infection control measures provided carefully.'
+        'Impetigo is highly contagious until treated. Follow the infection control measures provided carefully.',
+        'If persistent or recurrent pustules, carbuncles, or cellulitis develop, this may indicate a Panton-Valentine Leukocidin (PVL)-associated infection. Refer to GP — swabs for culture sensitivity may be required.'
       ];
 
-      if(ans.imp_mild_immuno === 'Yes - refer') {
+      if(ans.imp_mild_immuno === 'Yes - refer without supply') {
         return {type:'refer', reason:'Individual is immunocompromised (mild to moderate). Pharmacist prescribing is not clinically appropriate. Refer to GP at next available appointment.'};
       }
 
@@ -1745,7 +1741,7 @@ uti: {
       var selectedFormulation = ans.imp_selected_formulation || '';
       if(!selectedFormulation) return {type:'treat', reason:null};
 
-      if(ans.imp_mild_immuno === 'Yes - initial limited supply') {
+      if(ans.imp_mild_immuno === 'Yes - provide initial limited supply and refer') {
         return {
           type:'refer_supply',
           reason:'Individual is immunocompromised (mild to moderate). An initial limited supply of treatment may be prescribed if clinically appropriate, while referring the individual to the GP.',
@@ -2535,7 +2531,7 @@ function devShortcut() {
   };
   document.getElementById('username-display').textContent = 'Test Pharmacist';
   document.getElementById('userwrap').style.display = 'flex';
-  activeCond = 'cold_sores';
+  activeCond = 'impetigo';
   answers = {
     ph_name:'Test Pharmacist', ph_psi:'00000', ph_contract:'CCS00000',
     ph_pharmacy:'Test Pharmacy', ph_address:'1 Test Street, Dublin', ph_phone:'000 0000000',
