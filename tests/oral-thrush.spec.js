@@ -164,7 +164,7 @@ test.describe('Oral Thrush', () => {
     await pickOpt(page, 'Yes, recurrence');                               // recurrent → exit
 
     await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer_supply');
-    await expect(page.getByTestId('outcome-alert')).toContainText('Refer: initial limited supply may be considered');
+    await expect(page.getByTestId('outcome-alert')).toContainText('initial limited supply may be considered');
   });
 
   // ── Drug interaction ──────────────────────────────────────────────────────

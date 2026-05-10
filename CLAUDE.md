@@ -1,5 +1,11 @@
 # QuickCCS — Claude Code Context
 
+## Clinical Protocols — Source of Truth
+
+The HSE CCS protocol PDFs are in the `protocols/` folder. These are the **sole source of truth** for all clinical content — question text, exclusion criteria, referral pathways, treatment options, dosing, and safety netting. Do not rely on general clinical knowledge or external sources. When verifying or implementing any clinical logic, read the relevant protocol PDF first.
+
+---
+
 ## What This Project Is
 
 QuickCCS is a single-file HTML clinical decision support tool for HSE Common Conditions Service (CCS) pharmacy consultations in Ireland. It guides pharmacists through structured question pathways to determine whether a patient is suitable for treatment under the CCS, needs referral, or requires emergency assessment.

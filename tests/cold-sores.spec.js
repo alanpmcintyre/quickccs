@@ -120,6 +120,7 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'Yes');                                           // cs_urgent_checks → exit
 
     await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'urgent');
+    await expect(page.getByTestId('outcome-alert')).toContainText('urgent referral criteria identified');
   });
 
   // ── Refer ─────────────────────────────────────────────────────────────────
@@ -131,6 +132,7 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'Yes');                                           // cs_nourgent_checks → exit
 
     await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer');
+    await expect(page.getByTestId('outcome-alert')).toContainText('non-urgent referral criteria identified');
   });
 
   test('6. refer: secondary infection / hypersensitivity to Aciclovir', async ({ page }) => {
@@ -141,6 +143,7 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'Yes');                                           // cs_nourgent_checks_b → exit
 
     await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer');
+    await expect(page.getByTestId('outcome-alert')).toContainText('non-urgent referral criteria identified');
   });
 
   test('7. refer: suspected gingivostomatitis', async ({ page }) => {
@@ -215,7 +218,7 @@ test.describe('Cold Sores', () => {
     await expect(page.getByTestId('outcome-alert')).toContainText('Impetigo');
   });
 
-  test('12. refer: squamous cell carcinoma suspected via differential diagnosis review', async ({ page }) => {
+  test('12. urgent: squamous cell carcinoma suspected via differential diagnosis review', async ({ page }) => {
     await fillPatient(page, { dob: dobOf(30) });
     await pickOpt(page, 'No');                                            // cs_emergency
     await pickOpt(page, 'No');                                            // cs_urgent_checks
@@ -229,7 +232,7 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'No');                                            // cs_dd_impetigo
     await pickOpt(page, 'Yes - Squamous cell carcinoma of the lip is suspected'); // cs_dd_scc → exit
 
-    await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer');
+    await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'urgent');
     await expect(page.getByTestId('outcome-alert')).toContainText('Squamous cell carcinoma');
   });
 
@@ -248,30 +251,13 @@ test.describe('Cold Sores', () => {
     await pickOpt(page, 'Aciclovir');
 
     await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer_supply');
-    await expect(page.getByTestId('outcome-alert')).toContainText('Refer: initial limited supply may be considered');
-    await expect(page.getByTestId('section-treatment')).toContainText('Aciclovir 5% w/w cream');
-  });
-
-  test('14. refer_supply: recurrent problematic cold sores → treatment supplied while referring', async ({ page }) => {
-    await fillPatient(page, { dob: dobOf(30) });
-    await pickOpt(page, 'No');                                            // cs_emergency
-    await pickOpt(page, 'No');                                            // cs_urgent_checks
-    await pickOpt(page, 'No');                                            // cs_nourgent_checks
-    await pickOpt(page, 'No');                                            // cs_nourgent_checks_b
-    await pickOpt(page, 'No');                                            // cs_gingivostomatitis
-    await pickOpt(page, 'No');                                            // cs_erythema_multiforme
-    await pickOpt(page, 'Yes - provide initial limited supply and refer'); // cs_mild_immuno / recurrent
-    await proceedToTreatment(page);
-    await pickOpt(page, 'Aciclovir');
-
-    await expect(page.getByTestId('outcome-alert')).toHaveAttribute('data-outcome', 'refer_supply');
-    await expect(page.getByTestId('outcome-alert')).toContainText('Refer: initial limited supply may be considered');
+    await expect(page.getByTestId('outcome-alert')).toContainText('initial limited supply may be considered');
     await expect(page.getByTestId('section-treatment')).toContainText('Aciclovir 5% w/w cream');
   });
 
   // ── Treat via full differential review ───────────────────────────────────
 
-  test('15. treat: all differentials reviewed and cleared → Aciclovir cream', async ({ page }) => {
+  test('14. treat: all differentials reviewed and cleared → Aciclovir cream', async ({ page }) => {
     await fillPatient(page, { dob: dobOf(30) });
     await pickOpt(page, 'No');                                            // cs_emergency
     await pickOpt(page, 'No');                                            // cs_urgent_checks

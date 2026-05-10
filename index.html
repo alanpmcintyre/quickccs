@@ -1367,7 +1367,7 @@ uti: {
 
       if(ans.cs_dd_shingles === 'Yes - Shingles (Herpes Zoster) is suspected') return {type:'refer', reason:'Shingles (Herpes Zoster) suspected as an alternative diagnosis. Refer to GP at next available appointment for assessment and appropriate antiviral treatment.'};
       if(ans.cs_dd_impetigo === 'Yes - Impetigo is suspected') return {type:'refer', reason:'Impetigo suspected as an alternative diagnosis. Refer to the CCS Impetigo pathway if appropriate, or to GP at next available appointment.'};
-      if(ans.cs_dd_scc === 'Yes - Squamous cell carcinoma of the lip is suspected') return {type:'refer', reason:'Squamous cell carcinoma of the lip suspected as an alternative diagnosis. Refer urgently to GP or Dental Practitioner for further assessment.'};
+      if(ans.cs_dd_scc === 'Yes - Squamous cell carcinoma of the lip is suspected') return {type:'urgent', reason:'Squamous cell carcinoma of the lip suspected as an alternative diagnosis. Refer urgently to GP or Dental Practitioner for further assessment.'};
 
       var selectedTreatment = ans.cs_selected_treatment || '';
       if(!selectedTreatment) return {type:'treat', reason:null};
@@ -2375,10 +2375,10 @@ function showResult() {
   logUsage(activeCond, outcome.type);
 
   var alertTitles = {
-    emergency:    'Emergency referral required',
-    urgent:       'Urgent medical assessment required',
-    refer:        'Refer: outside service scope',
-    refer_supply: 'Refer: initial limited supply may be considered',
+    emergency:    'Emergency referral required — call 999 or refer to Emergency Department via ambulance',
+    urgent:       'Urgent medical assessment required — refer to GP, GP out-of-hours, or Emergency Department',
+    refer:        'Referral to GP or other relevant medical practitioner required — pharmacist prescribing not permitted',
+    refer_supply: 'Referral to GP required — initial limited supply may be considered',
     treat:        'Suitable for treatment under the Common Conditions Service',
     wait_see:     'Wait-and-see approach recommended'
   };
