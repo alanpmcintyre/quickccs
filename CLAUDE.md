@@ -24,7 +24,7 @@ All CSS, HTML, and JavaScript live in `index.html`. Do not introduce external de
 
 ## File Structure
 
-The file is ~2,300 lines divided into logical sections:
+The file is ~4,000 lines divided into logical sections:
 
 ```
 <style>            — All CSS (responsive, print styles included)
@@ -96,8 +96,8 @@ CONDITIONS = {
 Conditions must also be registered in one of two arrays in `ccs-conditions`:
 
 ```js
-var AVAILABLE_CONDITIONS  = ['oral_thrush', 'conjunctivitis', 'uti'];   // Live, selectable
-var COMING_SOON_CONDITIONS = ['vv_thrush', 'impetigo', 'allergic_rhinitis', 'shingles']; // Greyed out
+var AVAILABLE_CONDITIONS  = ['oral_thrush', 'conjunctivitis', 'uti', 'vv_thrush', 'impetigo', 'cold_sores'];   // Live, selectable
+var COMING_SOON_CONDITIONS = ['allergic_rhinitis', 'shingles']; // Greyed out
 ```
 
 And in `CONDITION_CARDS` for display metadata:
@@ -225,14 +225,38 @@ Each step in a condition's `steps` array follows this shape:
 - Differential diagnosis flags: urethritis, GSM, cauda equina, acute pyelonephritis, STI
 - `seedUtiChecklistState` pre-ticks pyelonephritis symptom if already confirmed
 
+### VV Thrush
+- Female aged 16–60 only (femaleOnly flag on pregnancy step)
+- 19 steps; 6 differential diagnoses gated by `vvt_dd_gate` skip logic
+- Recurrent/pharmacist discretion three-way branch
+- Dual-product treatment: Clotrimazole pessary + adjunct cream (hydrocortisone or plain, severity-dependent)
+- Latex condom/diaphragm damage warning
+- Outcome types: emergency, urgent, refer, refer_supply, treat
+
+### Impetigo
+- Age minimum 2 months (corrected age for pre-term infants)
+- 21 steps; 9 differential diagnoses (most extensive of any module)
+- 4-part non-urgent exclusion block: lesion site (breastfeeding), treatment history, contraindications (fire hazard/paraffin check), immunocompromise
+- 12-month fusidic acid history lookback
+- Immunocompromise tiering: mild-moderate → refer_supply + refer; moderate-severe → urgent refer
+- Formulation choice (cream vs ointment, same active ingredient)
+- Outcome types: emergency, urgent, refer, refer_supply, treat
+
+### Cold Sores (Herpes Labialis)
+- Age minimum 1 month (corrected age for pre-term infants)
+- 15 steps; 3 differential diagnoses (shingles, impetigo, squamous cell carcinoma)
+- Eye/periocular lesion → urgent referral
+- Immunocompromise two-way branch (supply + refer vs. refer only)
+- Visual aids for erythema multiforme and gingivostomatitis
+- Single treatment: Aciclovir 5% cream
+- Outcome types: emergency, urgent, refer, refer_supply, treat
+
 ---
 
 ## Stub Modules (Coming Soon)
 
 These are registered in `CONDITIONS` as stubs and listed in `COMING_SOON_CONDITIONS`:
 
-- `vv_thrush` — Vulvovaginal Thrush
-- `impetigo` — Impetigo
 - `allergic_rhinitis` — Allergic Rhinitis
 - `shingles` — Shingles
 
