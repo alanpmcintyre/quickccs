@@ -626,7 +626,9 @@ var CJ = {
   PURULENT_DISCHARGE_FEATURE: 'Purulent or mucopurulent discharge',
   NONE: 'None',
   WATERY_OR_MUCOSEROUS: 'Watery or mucoserous',
-  PURULENT_OR_MUCOPURULENT: 'Purulent or mucopurulent (yellow-white / sticky)'
+  PURULENT_OR_MUCOPURULENT: 'Purulent or mucopurulent (yellow-white / sticky)',
+  CHLO_DROPS: 'Chloramphenicol 0.5% eye drops',
+  CHLO_OINTMENT: 'Chloramphenicol 1% ointment (unlicensed)'
 };
 
 // ── Condition modules ─────────────────────────────────────────────────────────
@@ -1432,17 +1434,17 @@ uti: {
 
       {id:'chlamydia_suspected',section:'Exclusion criteria - emergency referral required',type:'single',progress:24,
        q:'Is Chlamydia trachomatis conjunctivitis suspected?',
-       sub:'In the first month of life this requires emergency referral. In individuals aged 1 month and older, immediate GP or other relevant medical practitioner referral is required. Consider chronic low-grade irritation with mucous discharge, especially if there has been no response to standard topical therapy.'+visualAid(VISUALS.chlamydiaNeonate,'Example of neonatal conjunctivitis','Example image','',''),
+       sub:'In the first month of life this requires emergency referral. In individuals aged 1 month and older, immediate GP or other relevant medical practitioner referral is required. Consider chronic low-grade irritation with mucous discharge in a sexually active person, especially if there has been no response to standard topical therapy. Pre-auricular lymphadenopathy (swelling of the lymph nodes in front of the ears) may be present.'+visualAid(VISUALS.chlamydiaNeonate,'Example of neonatal conjunctivitis','Example image','',''),
        opts:[CJ.NO,CJ.YES]},
 
       {id:'cj_emergency_b',section:'Exclusion criteria - emergency referral required',type:'single',progress:32,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>Suspected adenoviral conjunctivitis due to the severity of the hyperaemia (often associated with pain and light sensitivity)</li><li>Changes or loss of vision or visual acuity, including blurred vision or halos</li><li>Severe photophobia or severe foreign body sensation</li></ul>',
+       sub:'<ul><li>Suspected adenoviral conjunctivitis due to the severity of the hyperaemia (often associated with pain and light sensitivity)</li><li>Changes or loss of vision or visual acuity, including blurred vision or halos</li><li>Severe photophobia and/or severe foreign body sensation (cannot hold eye open)</li></ul>',
        opts:[CJ.NO,CJ.YES]},
 
       {id:'cj_emergency_c',section:'Exclusion criteria - emergency referral required',type:'single',progress:40,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>Patient wears contact lenses — advise removal while awaiting referral</li><li>Irregular, fixed, unusually small or large, or sluggish pupil</li><li>Ciliary flush — circular redness at the junction of the cornea and sclera'+visualAid(VISUALS.ciliaryFlush,'Clinical photo of ciliary flush','Show example image','Diagram showing circumcorneal redness around the cornea. This is a red flag and is not typical of uncomplicated conjunctivitis.','')+'</li></ul>',
+       sub:'<ul><li>Patient wears contact lenses — advise removal while awaiting referral</li><li>Irregular, fixed, unusually small or large, or sluggish pupil</li><li>Ciliary flush, especially if unilateral — circular redness at the junction of the cornea and sclera'+visualAid(VISUALS.ciliaryFlush,'Clinical photo of ciliary flush','Show example image','Diagram showing circumcorneal redness around the cornea. This is a red flag and is not typical of uncomplicated conjunctivitis.','')+'</li></ul>',
        opts:[CJ.NO,CJ.YES]},
 
       {id:'cj_emergency_d',section:'Exclusion criteria - emergency referral required',type:'single',progress:48,
@@ -1452,7 +1454,7 @@ uti: {
 
       {id:'cj_urgent_a',section:'Exclusion criteria - urgent referral required',type:'single',progress:57,
        q:'Do any of the following apply? If so, the patient is not suitable for treatment under the protocol and must be referred appropriately.',
-       sub:'<ul><li>History of ocular disease such as keratitis, scleritis, or iritis</li><li>Hyper-purulent yellow or green discharge with very rapid onset (may suggest Neisseria gonorrhoeae)</li><li>Both upper and lower lids intensely swollen or closed and difficult to open, with no palpable lesion (suspect preseptal or orbital cellulitis)'+visualAid(VISUALS.preseptalCellulitis,'Example of periorbital / preseptal cellulitis','Show example image','Example image showing marked eyelid swelling and erythema. Use as a visual cue only and refer if suspected.','')+'</li></ul>',
+       sub:'<ul><li>History of ocular disease such as keratitis, scleritis, or iritis — <em>note: use of topical glaucoma eye drops alone is not a reason for referral under this criterion unless there is no improvement after 2 days of treatment</em></li><li>Hyper-purulent yellow or green discharge with very rapid onset (may suggest Neisseria gonorrhoeae)</li><li>Both upper and lower lids intensely swollen or closed and difficult to open, with no palpable lesion (suspect preseptal or orbital cellulitis)'+visualAid(VISUALS.preseptalCellulitis,'Example of periorbital / preseptal cellulitis','Show example image','Example image showing marked eyelid swelling and erythema. Use as a visual cue only and refer if suspected.','')+'</li></ul>',
        opts:[CJ.NO,CJ.YES]},
 
       {id:'cj_urgent_b',section:'Exclusion criteria - urgent referral required',type:'single',progress:64,
@@ -1479,9 +1481,16 @@ uti: {
       {id:'chloramphenicol_ci',section:'Treatment screening',type:'single',progress:98,
         skip:function(ans){return !(ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT);},
         q:'Is chloramphenicol unsuitable due to hypersensitivity, contraindication, or another clinically relevant concern?',opts:[CJ.NO,CJ.YES]},
-      {id:'fusidic_ci',section:'Treatment screening',type:'single',progress:100,
+      {id:'fusidic_ci',section:'Treatment screening',type:'single',progress:98,
         skip:function(ans){return !(ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT);},
-        q:'Is fusidic acid unsuitable due to hypersensitivity, contraindication, or another clinically relevant concern?',opts:[CJ.NO,CJ.YES]}
+        q:'Is fusidic acid unsuitable due to hypersensitivity, contraindication, or another clinically relevant concern?',opts:[CJ.NO,CJ.YES]},
+      {id:'chloramphenicol_formulation',section:'Treatment selection',type:'single',progress:100,
+        skip:function(ans){
+          return !(ans.conjunctival_hyperaemia===CJ.YES && ans.discharge_type===CJ.PURULENT_OR_MUCOPURULENT && ans.pregnant_breastfeeding!==CJ.YES && ans.chloramphenicol_ci!==CJ.YES);
+        },
+        q:'Which chloramphenicol formulation will you prescribe?',
+        sub:'<ul><li><strong>Chloramphenicol 0.5% eye drops</strong> — 1 or 2 drops to infected eye(s), 4 times daily. Note: Minims Chloramphenicol 0.5% Eye Drops are indicated in adults and children above 2 years only.</li><li><strong>Chloramphenicol 1% ointment (unlicensed)</strong> — apply to infected eye(s), 3 to 4 times daily. May be preferred where the patient is likely to find the frequency of drops difficult to comply with. Note: ointment may blur vision when used during the day.</li></ul>',
+        opts:[CJ.CHLO_DROPS,CJ.CHLO_OINTMENT]}
     ],
     // Decision logic documented in conjunctivitis-decision-logic.md
     getOutcome:function(ans){
@@ -1530,13 +1539,19 @@ uti: {
           extra.push('Used as a 2nd choice option because chloramphenicol is unsuitable');
           extra.push('Fusidic acid has minimal Gram-negative activity');
         } else {
-          rx.push('Chloramphenicol 0.5% w/v eye drops, solution');
-          rx.push('Apply 1 or 2 drops to the infected eye(s) 4 times daily, spaced evenly during waking hours');
-          instructions.push('Continue treatment for 48 hours after resolution of symptoms, in general for a maximum of 1 week');
-          extra.push('Chloramphenicol 1% ointment may be preferred if the frequency of drops would be difficult to comply with');
-          extra.push('Chloramphenicol 1% ointment can blur vision if used during the day');
-          if(ageMonths<24){
-            extra.push('Chloramphenicol eye drops should be used with caution in children under 2 years');
+          if(ans.chloramphenicol_formulation===CJ.CHLO_OINTMENT){
+            rx.push('Chloramphenicol 1% w/w eye ointment (unlicensed)');
+            rx.push('Apply to the infected eye(s) 3 to 4 times daily, spaced evenly during waking hours');
+            instructions.push('Continue treatment for 48 hours after resolution of symptoms, in general for a maximum of 1 week');
+            extra.push('This is an unlicensed medication');
+            extra.push('Ointment may blur vision when used during the day');
+          } else {
+            rx.push('Chloramphenicol 0.5% w/v eye drops, solution');
+            rx.push('Apply 1 or 2 drops to the infected eye(s) 4 times daily, spaced evenly during waking hours');
+            instructions.push('Continue treatment for 48 hours after resolution of symptoms, in general for a maximum of 1 week');
+            if(ageMonths<24){
+              extra.push('Chloramphenicol eye drops should be used with caution in children under 2 years');
+            }
           }
         }
         extra.push('A topical antibiotic should only be used where both conjunctival hyperaemia and purulent or mucopurulent discharge are present');
@@ -1555,8 +1570,12 @@ uti: {
         extra.push('Simple OTC analgesia such as paracetamol or ibuprofen may be used if required');
       }
 
-      safety.push('Seek medical advice if there is no improvement after 48 hours of treatment');
-      safety.push('If symptoms persist for more than 1 week of treatment, seek GP review as ophthalmology referral may be required');
+      if(bacterialCandidate){
+        safety.push('Seek medical advice if there is no improvement after 48 hours of treatment');
+        safety.push('If symptoms persist for more than 1 week of treatment, seek GP review as ophthalmology referral may be required');
+      } else {
+        safety.push('Seek medical advice if symptoms worsen or have not resolved within 7–10 days');
+      }
       safety.push('Wash hands often with warm soapy water');
       safety.push('Wash hands immediately after touching the eyes and after applying eye drops or eye ointment');
       safety.push('Do not touch or rub the eyes');
