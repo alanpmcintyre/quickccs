@@ -2353,7 +2353,7 @@ function renderActionButtons(feedbackUrl) {
   var html = '<hr class="divider divider-btns">';
   html += '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px;">';
   html += '<button class="btnback" onclick="goBackToConsult()">← Back</button>';
-  html += '<button class="btnout" onclick="doLogout()">New consultation</button>';
+  html += '<button class="btnout" onclick="newConsultation()">New consultation</button>';
   html += '<button class="btnsave" onclick="window.print()">Print record</button>';
   html += '</div>';
   if (FEEDBACK_FORM_ID !== 'YOUR_FORM_ID_HERE') {
@@ -2577,6 +2577,7 @@ function selectCond(key,el){
 
 
 function startConsult(){answers={ph_name:pharmacist.name,ph_psi:pharmacist.psi,ph_contract:pharmacist.contract,ph_pharmacy:pharmacist.pharmacy,ph_address:pharmacist.address,ph_phone:pharmacist.phone};cbState={};currentStep=0;showScreen('consult');updatePtBar();renderStep();}
+function newConsultation(){answers={ph_name:pharmacist.name,ph_psi:pharmacist.psi,ph_contract:pharmacist.contract,ph_pharmacy:pharmacist.pharmacy,ph_address:pharmacist.address,ph_phone:pharmacist.phone};cbState={};currentStep=0;showScreen('dash');}
 function selectDdGate(val){answers[steps()[currentStep].id]=val;nextStep();}
 function toggleStartBtn(){
   var cb=document.getElementById('disclaimerCb');
